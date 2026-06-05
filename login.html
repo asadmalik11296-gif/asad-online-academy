@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Login</title>
+<style>
+body{
+font-family:Arial;
+background:#f4f4f4;
+}
+
+.login{
+max-width:400px;
+margin:100px auto;
+background:white;
+padding:25px;
+border-radius:10px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+
+button{
+padding:10px 20px;
+background:#1e3a8a;
+color:white;
+border:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login">
+
+<h2>Student Login</h2>
+
+<input id="user" placeholder="Username">
+
+<input id="pass"
+type="password"
+placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+<p id="msg"></p>
+
+</div>
+
+<script>
+function login(){
+
+let u=document.getElementById("user").value;
+let p=document.getElementById("pass").value;
+
+if(u==="student" && p==="1234"){
+window.location="notes.html";
+}
+else{
+document.getElementById("msg").innerHTML=
+"Invalid Login";
+}
+
+}
+</script>
+
+</body>
+</html>
