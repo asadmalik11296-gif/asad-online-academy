@@ -64,33 +64,27 @@
 <script>
 async function fetchAndRenderLeaderboard() {
     try {
-        // Fetch real-time global leaderboard data records directly from JSONBin API 
-        const response = await fetch('https://jsonbin.io', {
-            headers: { 'X-Master-Key': '$2a$10$PWA.EXAM.TRACKER.DATA.KEY.DUMMY' }
-        });
+        // Fetch the global history payload array cleanly from our dedicated bucket
+        const response = await fetch('https://kvdb.io');
+        const textData = await response.text();
         
-        if (!response.ok) throw new Error("Database reading error execution check.");
-        const resData = await response.json();
-        
-        // Handle database schema array records extraction parameters safely
-        let studentsList = [];
-        if (resData.record) {
-            if (Array.isArray(resData.record)) {
-                studentsList = resData.record;
-            } else if (typeof resData.record === 'object' && resData.record.name) {
-                studentsList = [resData.record]; // Fallback if data is a single object
-            }
+        let rawEntries = [];
+        if (textData.trim()) {
+            // Parses bulk line stream contents cleanly into readable rows
+            rawEntries = textData.trim().split('\n').map(line => {
+                try { return JSON.parse(line); } catch(e) { return null; }
+            }).filter(item => item !== null);
         }
-
+        
         // Sort students list based on highest calculated score thresholds
-        studentsList.sort((a, b) => b.score - a.score);
+        rawEntries.sort((a, b) => b.score - a.score);
 
         // Slice array down to retain strictly the Top 10 high-achievers
-        const topTen = studentsList.slice(0, 10);
+        const topTen = rawEntries.slice(0, 10);
 
         renderTableUi(topTen);
     } catch (error) {
-        console.error("Error reading database rows:", error);
+        console.error("Error pulling live score matrices lists:", error);
         document.getElementById("loading-view").innerText = "No student test submittals recorded yet in this cycle.";
     }
 }
