@@ -282,10 +282,11 @@
         }
 
         function submitQuiz(isAuto = false) {
-    // 1. Confirm Pop-up in English
-    if(!isAuto && !confirm("Are you sure you want to submit the test?")) return;
-    clearInterval(timerInterval);
-    
+// 1. Confirm Pop-up in English
+if(!isAuto && !confirm("Are you sure you want to submit the test?")) return;
+clearInterval(timerInterval);
+stopExamRecording(); // <-- Paste this exactly here on line 288
+
     let correct = 0;
     let wrong = 0;
 
