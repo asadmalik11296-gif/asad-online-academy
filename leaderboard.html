@@ -64,24 +64,36 @@
 <script>
 async function fetchAndRenderLeaderboard() {
     try {
-        // Fetching exclusively from your private data stream
-        const response = await fetch('https://kvdb.io');
-        const textData = await response.text();
+        // Fetch raw log details cleanly from the dedicated open-source channel
+        const response = await fetch('https://countapi.xyz');
+        if (!response.ok) throw new Error("Channel payload trace context missing.");
+        const resData = await response.json();
         
         let rawEntries = [];
-        if (textData.trim()) {
-            rawEntries = textData.trim().split('\n').map(line => {
-                try { return JSON.parse(line); } catch(e) { return null; }
+        // Extract note records history string structures natively
+        if (resData && resData.notes && Array.isArray(resData.notes)) {
+            rawEntries = resData.notes.map(noteText => {
+                let parts = noteText.split('___');
+                if (parts.length >= 3) {
+                    return {
+                        name: parts[0],
+                        score: parseFloat(parts[1]),
+                        test: parts[2]
+                    };
+                }
+                return null;
             }).filter(item => item !== null);
         }
         
         // Sort students list based on highest calculated score thresholds
         rawEntries.sort((a, b) => b.score - a.score);
 
+        // Slice array down to retain strictly the Top 10 high-achievers
         const topTen = rawEntries.slice(0, 10);
+
         renderTableUi(topTen);
     } catch (error) {
-        console.error("Error pulling live score matrices lists:", error);
+        console.error("Error evaluating live ranking logs array indices:", error);
         document.getElementById("loading-view").innerText = "No student test submittals recorded yet in this cycle.";
     }
 }
