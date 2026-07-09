@@ -359,7 +359,8 @@ formData.append('upload_preset', 'quiz_preset');
 formData.append('resource_type', 'video');
 
 try {
-    const response = await fetch('https://cloudinary.com', {  
+    // लिंक के पीछे ?v=2.0 जोड़ें ताकि ब्राउज़र नया रिस्पॉन्स लोड करे
+const response = await fetch('https://cloudinary.com', {  
                     method: 'POST',
                     body: formData
                 });
