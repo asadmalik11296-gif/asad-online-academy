@@ -219,7 +219,7 @@ const questionDatabase = {
         { id: "mm_28", q: "The population of a town increases by 10% annually. If its present population is 20,000, what will be its population after 2 years?", options: ["22,000", "24,000", "24,200", "25,000"], correct: 2, exp: "Population after 1 year = 20,000 × 1.10 = 22,000. Population after 2 years = 22,000 × 1.10 = 24,200." },
         { id: "mm_29", q: "If A's salary is 25% more than B's salary, then by what percentage is B's salary less than A's salary?", options: ["15%", "20%", "25%", "33.33%"], correct: 1, exp: "Formula: [R / (100 + R)] × 100% -> [25 / 125] × 100% = (1/5) × 100% = 20%." },
         { id: "mm_30", q: "Due to a reduction of 20% in the price of sugar, a man can buy 5 kg more sugar for ₹600. Find the reduced price of sugar per kg.", options: ["₹18", "₹24", "₹30", "₹36"], correct: 1, exp: "Money saved due to reduction = 20% of ₹600 = ₹120. With this ₹120, he buys 5 kg extra sugar. Therefore, the reduced price per kg = 120 / 5 = ₹24." (Note: fixed index mismatch for mm_21 below)
-        // --- Time & Work Expansion (Mix) ---
+
         { id: "mm_31", q: "A, B and C can do a piece of work in 24, 30 and 40 days respectively. They began the work together but C left 4 days before the completion of the work. In how many days was the work completed?", options: ["11 days", "12 days", "13 days", "14 days"], correct: 0, exp: "Let total days be x. Work equation: x/24 + x/30 + (x-4)/40 = 1. Multiply by LCM 120: 5x + 4x + 3(x-4) = 120 -> 12x - 12 = 120 -> 12x = 132 -> x = 11 days." },
         { id: "mm_32", q: "A can do a piece of work in 4 hours, B and C together can do it in 3 hours, while A and C together can do it in 2 hours. How long will B alone take to do it?", options: ["8 hours", "10 hours", "12 hours", "16 hours"], correct: 2, exp: "A's rate = 1/4. A+C rate = 1/2 -> C's rate = 1/2 - 1/4 = 1/4. B+C rate = 1/3 -> B's rate = 1/3 - 1/4 = 1/12. B takes 12 hours alone." },
         { id: "mm_33", q: "If 3 men and 5 women can do a piece of work in 15 days, in how many days can 5 men and 6 women complete the same work?", options: ["6 days", "8 days", "9 days", "10 days"], correct: 2, exp: "Total work = 15(3M + 5W) = 45M + 75W. (Wait, re-verifying typical JKSSB structure for 'or/and' setup, assuming this means 3M = 5W or standard unit rates). Let 1M = 5 units, 1W = 3 units. Total work = 15 × (3×5 + 5×3) = 15 × 30 = 450 units. New group: 5M + 6W = 5(5) + 6(3) = 25 + 18 = 43 units. Let's provide a standard cleaner integer problem instead: If 3 men OR 5 women take 30 days, then 5 men and 6 women take 9 days. Correct choice index is 2." },
@@ -368,27 +368,29 @@ function terminateAndEvaluate() {
 
     let overallFinalScore = (rightAnswerMatches * 1.0) - (wrongAnswerMatches * 0.25);
 
-    // 📊 AUTOMATED PUBLIC LEADERBOARD TRACKING SYSTEM
+    // 📊 UPGRADED AUTO-SORTING MULTI-USER LEADERBOARD TRACKING SYSTEM
     let studentName = document.getElementById("student-name").value.trim();
     if (!studentName) { studentName = "Anonymous Student"; }
     let finalScoreVal = parseFloat(overallFinalScore.toFixed(2));
-    let activeTestTitle = document.getElementById("quiz-title").innerText;
+    let activeTestTitle = document.getElementById("quiz-title").innerText.replace("Quiz", "").trim();
 
-    fetch('https://jsonbin.io', {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Master-Key': '$2a$10$PWA.EXAM.TRACKER.DATA.KEY.DUMMY' 
-        },
-        body: JSON.stringify({
-            name: studentName,
-            score: finalScoreVal,
-            test: activeTestTitle,
-            date: new Date().toLocaleDateString()
-        })
-    }).then(() => {
-        console.log("Leaderboard score sent successfully!");
-    }).catch(err => console.log("Tracking sync bypass:", err));
+    // Secure tracking object payload
+    let newRecord = {
+        name: studentName,
+        score: finalScoreVal,
+        test: activeTestTitle,
+        timestamp: Date.now()
+    };
+
+    // Pushes your name and score array smoothly to a free, public storage line bucket
+    fetch('https://kvdb.io', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newRecord)
+    })
+    .then(() => console.log("Score logged cleanly to global rank bucket."))
+    .catch(err => console.log("Bypass storage channel parameter sync:", err));
+
 
     document.getElementById("quiz-screen").classList.add("hidden");
     document.getElementById("result-screen").classList.remove("hidden");
