@@ -233,10 +233,12 @@ const questionDatabase = {
     ]
 };
 
-// 20 और 50 सवालों को बिना क्रैश के ऑटो-लोड करने का सेफ सिस्टम
+// 🔄 यह फंक्शन कम सवालों को ऑटोमैटिकली बढ़ाकर पूरे 20 और 50 सवाल कर देगा!
 function generateFullMixArray(baseArray, targetSize, topicLabel) {
     let output = baseArray ? [...baseArray] : [];
     let currentCount = output.length;
+    
+    // जब तक टारगेट (20 या 50) पूरा नहीं होता, यह नए सवाल जोड़ता रहेगा
     while(output.length < targetSize) {
         currentCount++;
         output.push({
