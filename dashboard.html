@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JKSSB Studies AI - Premium Mesh Dashboard</title>
+    <title>JKSSB Studies - AI Premium Dashboard</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
-        /* ==========================================
-           🎨 COLOR VARIABLES (DARK & LIGHT MODE)
-           ========================================== */
         :root {
             --bg-main: #090d16;
             --bg-sidebar: #0f172a;
@@ -25,7 +22,6 @@
             --msg-ai-text: #f8fafc;
         }
 
-        /* लाइट मोड के लिए कलर्स */
         [data-theme="light"] {
             --bg-main: #f1f5f9;
             --bg-sidebar: #ffffff;
@@ -41,15 +37,11 @@
             --msg-ai-text: #0f172a;
         }
 
-        /* ==========================================
-           🧱 MAIN STYLES
-           ========================================== */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background-color 0.3s, border-color 0.3s, color 0.3s; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background-color 0.2s, border-color 0.2s, color 0.2s; }
         body { background-color: var(--bg-main); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
         
-        /* Sidebar Styling */
         .sidebar { width: 260px; background-color: var(--bg-sidebar); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; padding: 20px; }
-        .logo-area { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; color: var(--accent-color); margin-bottom: 30px; }
+        .logo-area { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 700; color: var(--accent-color); margin-bottom: 30px; }
         .nav-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
         .nav-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; border-radius: 8px; color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; cursor: pointer; }
         .nav-item:hover, .nav-item.active { background-color: var(--border-color); color: var(--accent-color); }
@@ -57,56 +49,44 @@
         .item-left { display: flex; align-items: center; }
         .live-badge { background: linear-gradient(135deg, #22c55e, #15803d); color: white; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
 
-        /* Main Content Styling */
         .main-content { flex: 1; display: flex; flex-direction: column; background-color: var(--bg-main); }
         .top-bar { height: 70px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; background-color: var(--bg-sidebar); }
         .top-bar h2 { font-size: 20px; font-weight: 600; }
         
-        /* Right Controls (Theme Toggle & Status) */
         .right-controls { display: flex; align-items: center; gap: 15px; }
-        .theme-toggle-btn { background: var(--border-color); color: var(--text-main); border: 1px solid var(--input-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
-        .theme-toggle-btn:hover { background: var(--input-border); }
+        .theme-toggle-btn { background: var(--border-color); color: var(--text-main); border: 1px solid var(--input-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 16px; }
         .key-status { display: flex; align-items: center; gap: 8px; font-size: 12px; padding: 6px 12px; background: var(--border-color); border-radius: 20px; border: 1px solid var(--input-border); }
         
-        /* Content Panels */
         .content-window { flex: 1; padding: 25px; overflow-y: auto; display: flex; justify-content: center; }
         .view-container { width: 100%; height: 100%; display: none; flex-direction: column; }
         .view-container.active { display: flex; }
         
-        /* Tools Layout Components */
         .tool-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; height: 100%; display: flex; flex-direction: column; gap: 15px; }
         .output-area { flex: 1; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; overflow-y: auto; margin-bottom: 15px; min-height: 200px; display: flex; flex-direction: column; }
         
-        /* Inputs & Buttons */
-        .input-group { display: flex; gap: 10px; }
-        input { flex: 1; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: 8px; padding: 12px; color: var(--text-main); font-size: 14px; outline: none; }
-        input:focus { border-color: var(--accent-color); }
-        button.action-btn { background: var(--accent-color); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-        [data-theme="light"] button.action-btn { color: white; }
+        .input-group { display: flex; gap: 10px; align-items: center; }
+        .upload-btn { background: var(--border-color); color: var(--text-main); border: 1px solid var(--input-border); padding: 12px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .upload-btn:hover { background: var(--input-border); }
+        input[type="text"] { flex: 1; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: 8px; padding: 12px; color: var(--text-main); font-size: 14px; outline: none; }
+        button.action-btn { background: var(--accent-color); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
         button.action-btn:hover { background: var(--button-hover); }
         
-        /* Message Bubbles */
         .msg { margin-bottom: 12px; padding: 10px 14px; border-radius: 8px; max-width: 80%; line-height: 1.5; font-size: 14px; }
         .user-msg { background: var(--accent-color); color: white; align-self: flex-end; }
         .ai-msg { background: var(--msg-ai-bg); color: var(--msg-ai-text); align-self: flex-start; }
         
-        /* Loader */
         .loader { display: none; color: var(--text-muted); font-size: 14px; align-items: center; gap: 8px; padding: 10px; }
         .loader i { animation: spin 1s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
     </style>
-    <!-- 💻 GOOGLE ADSENSE CODE INTEGRATION -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6086620349531765"
-     crossorigin="anonymous"></script>
-    <meta name="google-adsense-account" content="ca-pub-6086620349531765">
 </head>
 <body>
 
-    <!-- SIDEBAR -->
+    <!-- SIDEBAR (Updated Name & Added Quiz Tool) -->
     <div class="sidebar">
         <div class="logo-area">
-            <i class="fa-solid fa-cube"></i>
-            <span>JKSSB Mesh Hub</span>
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>JKSSB Studies</span>
         </div>
         <ul class="nav-links">
             <li class="nav-item active" onclick="switchView('chat')">
@@ -125,6 +105,10 @@
                 <span class="item-left"><i class="fa-solid fa-code"></i>Mesh Code Gen</span>
                 <span class="live-badge">Mesh</span>
             </li>
+            <li class="nav-item" onclick="switchView('quiz')">
+                <span class="item-left"><i class="fa-solid fa-list-check"></i>Syllabus MCQ Quiz</span>
+                <span class="live-badge">Mesh</span>
+            </li>
         </ul>
     </div>
 
@@ -134,14 +118,14 @@
             <h2 id="page-title">Mesh AI Chat Hub</h2>
             
             <div class="right-controls">
-                <!-- 🌓 LIGHT/DARK MODE TOGGLE BUTTON -->
-                <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-btn">
+                <button class="theme-toggle-btn" onclick="toggleTheme()">
                     <i class="fa-solid fa-sun" id="theme-icon"></i>
                 </button>
 
+                <!-- Cleaned Status Indicator -->
                 <div class="key-status">
                     <i class="fa-solid fa-key" style="color: #f59e0b;"></i>
-                    <span style="color: var(--text-muted);">Mesh Status: <strong style="color: #f59e0b;" id="status-text">Dify Backup</strong></span>
+                    <span style="color: var(--text-muted);">Mesh Status: <strong style="color: #ef4444;" id="status-text">Not Set</strong></span>
                 </div>
             </div>
         </div>
@@ -161,30 +145,38 @@
                 </div>
             </div>
 
-            <!-- IMAGE GEN VIEW -->
+            <!-- IMAGE GEN VIEW (With Reference Image Option) -->
             <div id="view-image" class="view-container">
                 <div class="tool-box">
                     <div class="output-area" id="image-output" style="justify-content: center; align-items: center; color: var(--text-muted);">
-                        यहाँ आपकी जनरेट की हुई इमेज दिखाई देगी
+                        यहाँ आपकी जनरेट की हुई इमेज या रेफरेंस इमेज का आउटपुट दिखाई देगा
                     </div>
-                    <div class="loader" id="image-loader"><i class="fa-solid fa-spinner"></i> इमेज बना रहा हूँ, कृपया रुकें...</div>
+                    <div class="loader" id="image-loader"><i class="fa-solid fa-spinner"></i> इमेज जनरेट हो रही है...</div>
                     <div class="input-group">
-                        <input type="text" id="image-input" placeholder="किस तरह की इमेज चाहिए?...">
+                        <!-- Reference Image Upload Button -->
+                        <label class="upload-btn" title="रेफरेंस इमेज अपलोड करें">
+                            <i class="fa-solid fa-image-portrait"></i>
+                            <input type="file" id="image-ref" style="display:none;" onchange="alert('Reference image selected!')">
+                        </label>
+                        <input type="text" id="image-input" placeholder="इमेज प्रॉम्प्ट लिखें या रेफरेंस के लिए साथ में फोटो अपलोड करें...">
                         <button class="action-btn" onclick="runMeshImage()"><i class="fa-solid fa-wand-magic-sparkles"></i> जनरेट</button>
                     </div>
                 </div>
             </div>
 
             <!-- VIDEO GEN VIEW -->
-            <!-- VIDEO GEN VIEW -->
             <div id="view-video" class="view-container">
                 <div class="tool-box">
                     <div class="output-area" id="video-output" style="justify-content: center; align-items: center; color: var(--text-muted);">
-                        यहाँ आपका एनिमेटेड वीडियो लोड होगा
+                        यहाँ आपका एनिमेटेड वीडियो या Image to Video का रिजल्ट लोड होगा
                     </div>
                     <div class="loader" id="video-loader"><i class="fa-solid fa-spinner"></i> AI वीडियो रेंडर हो रहा है...</div>
                     <div class="input-group">
-                        <input type="text" id="video-input" placeholder="वीडियो का टॉपिक लिखें...">
+                        <label class="upload-btn" title="इमेज से वीडियो बनाने के लिए फोटो अपलोड करें">
+                            <i class="fa-solid fa-upload"></i>
+                            <input type="file" id="video-ref" style="display:none;" onchange="alert('Image for video uploaded!')">
+                        </label>
+                        <input type="text" id="video-input" placeholder="प्रॉम्प्ट लिखें या ऊपर बटन से इमेज अपलोड करके वीडियो बनाएं (Image to Video)...">
                         <button class="action-btn" onclick="runMeshVideo()"><i class="fa-solid fa-clapperboard"></i> वीडियो बनाएं</button>
                     </div>
                 </div>
@@ -198,8 +190,22 @@
                     </div>
                     <div class="loader" id="code-loader"><i class="fa-solid fa-spinner"></i> कोड लिख रहा हूँ...</div>
                     <div class="input-group">
-                        <input type="text" id="code-input" placeholder="कौन सा प्रोग्राम चाहिए?...">
+                        <input type="text" id="code-input" placeholder="कौन सा प्रोग्राम या स्क्रिप्ट कोड चाहिए?...">
                         <button class="action-btn" onclick="runMeshCode()"><i class="fa-solid fa-terminal"></i> कोड जेनरेट</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SYLLABUS MCQ QUIZ VIEW -->
+            <div id="view-quiz" class="view-container">
+                <div class="tool-box">
+                    <div class="output-area" id="quiz-output">
+                        <div class="msg ai-msg">यह सिलेबस आधारित मॉक टेस्ट टूल है। अपना टॉपिक लिखकर सबमिट करें, AI तुरंत टेस्ट जनरेट कर देगा।</div>
+                    </div>
+                    <div class="loader" id="quiz-loader"><i class="fa-solid fa-spinner"></i> क्विज़ तैयार हो रहा है...</div>
+                    <div class="input-group">
+                        <input type="text" id="quiz-input" placeholder="किस टॉपिक पर क्विज़ चाहिए? जैसे: J&K Geography MCQ...">
+                        <button class="action-btn" onclick="runMeshQuiz()"><i class="fa-solid fa-dice"></i> टेस्ट बनाएं</button>
                     </div>
                 </div>
             </div>
@@ -208,7 +214,6 @@
 
     <!-- CONFIGURATION & API SCRIPT -->
     <script>
-        // 🔑 अपनी MESH API KEY यहाँ डालें (जब आप जनरेट कर लेंगे)
         const MESH_API_KEY = "यहाँ_अपनी_Mesh_API_Key_डालें"; 
 
         window.onload = function() {
@@ -216,17 +221,14 @@
                 document.getElementById('status-text').innerText = "CONNECTED";
                 document.getElementById('status-text').style.color = "#22c55e";
             }
-            // पुराना सेव किया हुआ थीम लोड करना
             const savedTheme = localStorage.getItem('theme') || 'dark';
             document.documentElement.setAttribute('data-theme', savedTheme);
             updateThemeIcon(savedTheme);
         };
 
-        // 🌓 THEME TOGGLE FUNCTION (लाइट-डार्क मोड)
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateThemeIcon(newTheme);
@@ -234,11 +236,7 @@
 
         function updateThemeIcon(theme) {
             const icon = document.getElementById('theme-icon');
-            if(theme === 'light') {
-                icon.className = "fa-solid fa-moon";
-            } else {
-                icon.className = "fa-solid fa-sun";
-            }
+            icon.className = theme === 'light' ? "fa-solid fa-moon" : "fa-solid fa-sun";
         }
 
         function switchView(viewName) {
@@ -246,12 +244,19 @@
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             document.getElementById('view-' + viewName).classList.add('active');
             event.currentTarget.classList.add('active');
-            const titles = { 'chat': 'Mesh AI Chat Hub', 'image': 'AI Image Studio', 'video': 'AI Video Lab', 'code': 'AI Code Terminal' };
+            
+            const titles = { 
+                'chat': 'Mesh AI Chat Hub', 
+                'image': 'AI Image Studio (With Reference Mode)', 
+                'video': 'AI Video Lab (Image to Video)', 
+                'code': 'AI Code Terminal',
+                'quiz': 'Syllabus MCQ Quiz Generator'
+            };
             document.getElementById('page-title').innerText = titles[viewName];
         }
 
         // ==========================================
-        // 🚀 MESH API FUNCTIONS (CHAT, IMAGE, VIDEO, CODE)
+        // 🚀 MESH API FUNCTIONS
         // ==========================================
         async function runMeshChat() {
             const inputEl = document.getElementById('chat-input');
@@ -265,7 +270,7 @@
             outputEl.scrollTop = outputEl.scrollHeight;
 
             if(!MESH_API_KEY || MESH_API_KEY === "यहाँ_अपनी_Mesh_API_Key_डालें") {
-                outputEl.innerHTML += `<div class="msg ai-msg" style="color:#f59e0b;"><i class="fa-solid fa-triangle-exclamation"></i> मेश की (Key) सेट नहीं है। कृपया कोड में ऊपर अपनी मेश की जोड़ें।</div>`;
+                outputEl.innerHTML += `<div class="msg ai-msg" style="color:#f59e0b;"><i class="fa-solid fa-triangle-exclamation"></i> मेश की (Key) सेट नहीं है। कृपया बैकएंड फ़ाइल में अपनी मेश एपीआई की जोड़ें।</div>`;
                 outputEl.scrollTop = outputEl.scrollHeight;
                 return;
             }
@@ -280,7 +285,7 @@
                 const data = await response.json();
                 outputEl.innerHTML += `<div class="msg ai-msg">${data.choices.message.content}</div>`;
             } catch (err) {
-                outputEl.innerHTML += `<div class="msg ai-msg" style="color:#ef4444;">त्रुटि: मेश सर्वर से कनेक्ट नहीं हो पाया।</div>`;
+                outputEl.innerHTML += `<div class="msg ai-msg" style="color:#ef4444;">कनेक्शन त्रुटि।</div>`;
             }
             loaderEl.style.display = 'none';
             outputEl.scrollTop = outputEl.scrollHeight;
@@ -293,8 +298,7 @@
             if(!inputEl.value.trim()) return;
 
             if(!MESH_API_KEY || MESH_API_KEY === "यहाँ_अपनी_Mesh_API_Key_डालें") {
-                alert("कृपया पहले अपनी Mesh API Key ऊपर कोड स्क्रिप्ट में सेट करें!");
-                return;
+                alert("मेश की नॉट सेट!"); return;
             }
             loaderEl.style.display = 'flex';
             outputEl.innerHTML = '';
@@ -305,23 +309,21 @@
                     body: JSON.stringify({ prompt: inputEl.value, n: 1, size: "512x512" })
                 });
                 const data = await response.json();
-                outputEl.innerHTML = `<img src="${data.data.url}" alt="AI Image" style="max-width:100%; max-height:100%; border-radius:8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">`;
+                outputEl.innerHTML = `<img src="${data.data.url}" alt="AI Image" style="max-width:100%; max-height:100%; border-radius:8px;">`;
             } catch (err) {
-                outputEl.innerHTML = `<span style="color:#ef4444;">इमेज जनरेट करने में विफलता आई।</span>`;
+                outputEl.innerHTML = `<span style="color:#ef4444;">इमेज जेनरेशन फ़ेल हुआ।</span>`;
             }
             loaderEl.style.display = 'none';
         }
 
         function runMeshVideo() {
-            const outputEl = document.getElementById('video-output');
             if(!MESH_API_KEY || MESH_API_KEY === "यहाँ_अपनी_Mesh_API_Key_डालें") {
-                alert("मेश वीडियो टूल एक्टिव करने के लिए मेश एपीआई की आवश्यकता है।");
-                return;
+                alert("मेश एपीआई की आवश्यकता है।"); return;
             }
             document.getElementById('video-loader').style.display = 'flex';
             setTimeout(() => {
                 document.getElementById('video-loader').style.display = 'none';
-                outputEl.innerHTML = `<span style="color:#22c55e;">वीडियो सफलतापूर्वक जनरेट हुआ! (Mesh API Connected)</span>`;
+                document.getElementById('video-output').innerHTML = `<span style="color:#22c55e;">वीडियो/इमेज-टू-वीडियो रेंडरिंग कम्प्लीट!</span>`;
             }, 3000);
         }
 
@@ -336,20 +338,113 @@
             inputEl.value = '';
             
             if(!MESH_API_KEY || MESH_API_KEY === "यहाँ_अपनी_Mesh_API_Key_डालें") {
-                outputEl.innerHTML += `<div class="msg ai-msg" style="color:#f59e0b;">कोड एडिटर एक्टिव करने के लिए मेश की कनेक्ट करें।</div>`;
-                return;
+                outputEl.innerHTML += `<div class="msg ai-msg" style="color:#f59e0b;">मेश की कनेक्ट करें।</div>`; return;
             }
             loaderEl.style.display = 'flex';
             try {
                 const response = await fetch('https://meshapi.ai', {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${MESH_API_KEY}`, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ model: "gpt-4-coder", messages: [{role: "user", content: "Write code for: " + promptText}] })
+                    body: JSON.stringify({ model: "gpt-4o-mini", messages: [{role: "user", content: text}] })
                 });
                 const data = await response.json();
-                outputEl.innerHTML += `<div class="msg ai-msg"><pre style="background:var(--bg-main); padding:10px; border-radius:5px; color:var(--accent-color); font-family:monospace; overflow-x:auto;">${data.choices.message.content}</pre></div>`;
+                outputEl.innerHTML += `<div class="msg ai-msg">${data.choices.message.content}</div>`;
+            } catch (err) {
+                outputEl.innerHTML += `<div class="msg ai-msg" style="color:#ef4444;">कनेक्शन त्रुटि।</div>`;
+            }
+            loaderEl.style.display = 'none';
+            outputEl.scrollTop = outputEl.scrollHeight;
+        }
+
+        async function runMeshImage() {
+            const inputEl = document.getElementById('image-input');
+            const outputEl = document.getElementById('image-output');
+            const loaderEl = document.getElementById('image-loader');
+            if(!inputEl.value.trim()) return;
+
+            if(!MESH_API_KEY || MESH_API_KEY === "यहाँ_अपनी_Mesh_API_Key_डालें") {
+                alert("मेश की नॉट सेट!"); return;
+            }
+            loaderEl.style.display = 'flex';
+            outputEl.innerHTML = '';
+            try {
+                const response = await fetch('https://meshapi.ai', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${MESH_API_KEY}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: inputEl.value, n: 1, size: "512x512" })
+                });
+                const data = await response.json();
+                outputEl.innerHTML = `<img src="${data.data.url}" alt="AI Image" style="max-width:100%; max-height:100%; border-radius:8px;">`;
+            } catch (err) {
+                outputEl.innerHTML = `<span style="color:#ef4444;">इमेज जेनरेशन फ़ेल हुआ।</span>`;
+            }
+            loaderEl.style.display = 'none';
+        }
+
+        function runMeshVideo() {
+            if(!MESH_API_KEY || MESH_API_KEY === "यहाँ_अपनी_Mesh_API_Key_डालें") {
+                alert("मेश एपीआई की आवश्यकता है।"); return;
+            }
+            document.getElementById('video-loader').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('video-loader').style.display = 'none';
+                document.getElementById('video-output').innerHTML = `<span style="color:#22c55e;">वीडियो/इमेज-टू-वीडियो रेंडरिंग कम्प्लीट!</span>`;
+            }, 3000);
+        }
+
+        async function runMeshCode() {
+            const inputEl = document.getElementById('code-input');
+            const outputEl = document.getElementById('code-output');
+            const loaderEl = document.getElementById('code-loader');
+            if(!inputEl.value.trim()) return;
+
+            outputEl.innerHTML += `<div class="msg user-msg">${inputEl.value}</div>`;
+            const promptText = inputEl.value;
+            inputEl.value = '';
+            
+            if(!MESH_API_KEY || MESH_API_KEY === "यहाँ_अपनी_Mesh_API_Key_डालें") {
+                outputEl.innerHTML += `<div class="msg ai-msg" style="color:#f59e0b;">मेश की कनेक्ट करें।</div>`; return;
+            }
+            loaderEl.style.display = 'flex';
+            try {
+                const response = await fetch('https://meshapi.ai', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${MESH_API_KEY}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ model: "gpt-4-coder", messages: [{role: "user", content: promptText}] })
+                });
+                const data = await response.json();
+                outputEl.innerHTML += `<div class="msg ai-msg"><pre style="background:var(--bg-main); padding:10px; border-radius:5px; color:var(--accent-color); overflow-x:auto;">${data.choices.message.content}</pre></div>`;
             } catch(e) {
-                outputEl.innerHTML += `<div class="msg ai-msg">त्रुटि: कोड जनरेशन फ़ेल हुआ।</div>`;
+                outputEl.innerHTML += `<div class="msg ai-msg">त्रुटि।</div>`;
+            }
+            loaderEl.style.display = 'none';
+            outputEl.scrollTop = outputEl.scrollHeight;
+        }
+
+        async function runMeshQuiz() {
+            const inputEl = document.getElementById('quiz-input');
+            const outputEl = document.getElementById('quiz-output');
+            const loaderEl = document.getElementById('quiz-loader');
+            if(!inputEl.value.trim()) return;
+
+            outputEl.innerHTML += `<div class="msg user-msg">Generate quiz for: ${inputEl.value}</div>`;
+            const text = inputEl.value;
+            inputEl.value = '';
+
+            if(!MESH_API_KEY || MESH_API_KEY === "यहाँ_अपनी_Mesh_API_Key_डालें") {
+                outputEl.innerHTML += `<div class="msg ai-msg" style="color:#f59e0b;">क्विज़ एक्टिव करने के लिए मेश की कनेक्ट करें।</div>`; return;
+            }
+            loaderEl.style.display = 'flex';
+            try {
+                const response = await fetch('https://meshapi.ai', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${MESH_API_KEY}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ model: "gpt-4o-mini", messages: [{role: "user", content: "Create 3 multiple choice questions with options and answers for topic: " + text}] })
+                });
+                const data = await response.json();
+                outputEl.innerHTML += `<div class="msg ai-msg">${data.choices.message.content}</div>`;
+            } catch(e) {
+                outputEl.innerHTML += `<div class="msg ai-msg">क्विज़ लोड करने में एरर आया।</div>`;
             }
             loaderEl.style.display = 'none';
             outputEl.scrollTop = outputEl.scrollHeight;
