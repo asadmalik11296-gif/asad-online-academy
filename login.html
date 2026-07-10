@@ -47,13 +47,13 @@
         </div>
     </div>
 
-    <!-- 🔥 FIREBASE MODULES WITH YOUR ACTUAL KEYS -->
+    <!-- 🔥 FIREBASE MODULES WITH FIXED CLICKABLE LOGIC -->
     <script type="module">
         import { initializeApp } from "https://gstatic.com";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://gstatic.com";
         import { getFirestore, doc, setDoc } from "https://gstatic.com";
 
-        // ✅ आपकी बिल्कुल असली फ़ायरबेस चाबियाँ यहाँ सेट हैं:
+        // ✅ आपकी फ़ायरबेस चाबियाँ
         const firebaseConfig = {
             apiKey: "AIzaSyBIYbXqDcnVz0ptRYiByS2EmvCHNMLK9QA",
             authDomain: "://firebaseapp.com",
@@ -70,18 +70,18 @@
 
         let isSignUpMode = false;
 
-        // साइन-इन और साइन-अप के बीच स्विच करने के लिए
+        // 🔄 क्लिक को एक्टिव करने के लिए इसे window ऑब्जेक्ट पर बाइंड किया
         window.toggleMode = function(signUp) {
             isSignUpMode = signUp;
             document.getElementById('auth-title').innerText = signUp ? "Create Account" : "Login to JKSSB Studies";
             document.getElementById('auth-subtitle').innerText = signUp ? "Sign up to start learning with AI" : "Access your AI exam preparation workspace";
             document.getElementById('auth-btn').innerText = signUp ? "Sign Up" : "Sign In";
+            
             document.getElementById('toggle-area').innerHTML = signUp ? 
-    `Already have an account? <span onclick="toggleMode(false)" style="color: #38bdf8; cursor: pointer; text-decoration: underline; font-weight: 600;">Sign In</span>` : 
-    `Don't have an account? <span onclick="toggleMode(true)" style="color: #38bdf8; cursor: pointer; text-decoration: underline; font-weight: 600;">Create Account</span>`;
+                `Already have an account? <span onclick="window.toggleMode(false)" style="color: #38bdf8; cursor: pointer; text-decoration: underline; font-weight: 600;">Sign In</span>` : 
+                `Don't have an account? <span onclick="window.toggleMode(true)" style="color: #38bdf8; cursor: pointer; text-decoration: underline; font-weight: 600;">Create Account</span>`;
         }
 
-        // लॉगिन और रजिस्ट्रेशन का मुख्य लॉजिक
         window.handleAuth = async function() {
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
@@ -90,11 +90,9 @@
 
             try {
                 if (isSignUpMode) {
-                    // 1. नया फ़ायरबेस अकाउंट बनाना
                     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                     const user = userCredential.user;
                     
-                    // 2. डेटाबेस में नया रिकॉर्ड बनाना (डिफ़ॉल्ट प्लान: free)
                     await setDoc(doc(db, "users", user.uid), {
                         email: email,
                         plan: "free",
@@ -103,11 +101,9 @@
                     
                     alert("Account created successfully!");
                 } else {
-                    // पुराना अकाउंट लॉगिन करना
                     await signInWithEmailAndPassword(auth, email, password);
                 }
                 
-                // लॉगिन सफल होने पर सीधे डैशबोर्ड पेज पर भेजें
                 window.location.href = "dashboard.html";
                 
             } catch (error) {
