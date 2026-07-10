@@ -349,31 +349,31 @@ window.addEventListener('DOMContentLoaded', async () => {
             }
         };
 
-        // 2. Upload video binary directly to Cloudinary when recording stops
+                // 2. Transmit file directly to Telegram Bot when recording stops
         mediaRecorder.onstop = async () => {
             const videoBlob = new Blob(recordedChunks, { type: 'video/webm' });
-const formData = new FormData();
+            const formData = new FormData();
+            
+            // Hardcoded Telegram authentication payloads
+            formData.append('chat_id', '6115912864'); 
+            formData.append('video', videoBlob, 'student_exam_recording.webm');
+            formData.append('caption', '🚨 New JKSSB Mock Test Session Submitted!');
 
-formData.append('file', videoBlob);
-formData.append('upload_preset', 'quiz_preset'); 
-formData.append('resource_type', 'video');
-
-try {
-    // लिंक के पीछे ?v=2.0 जोड़ें ताकि ब्राउज़र नया रिस्पॉन्स लोड करे
-const response = await fetch('https://cloudinary.com', {  
+            try {
+                // Submit binary multi-part stream directly via Telegram API Core
+                const response = await fetch('https://telegram.org', { 
                     method: 'POST',
                     body: formData
                 });
-                const result = await response.json();
                 
-                if (result.secure_url) {
-                    alert('Test Submitted and Video Saved Securely!');
+                if (response.ok) {
+                    alert('Test Submitted and Exam Video Sent to Admin Securely!');
                     window.location.href = "index.html"; 
                 } else {
-                    alert('Upload processing failed: ' + result.error.message);
+                    alert('Upload connection failed across Telegram pipeline.');
                 }
             } catch (error) {
-                alert('Cloud connection error. Video could not be transmitted.');
+                alert('Network connection error. Telemetry broadcast failed.');
             }
         };
 
