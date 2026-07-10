@@ -107,31 +107,18 @@
         </div>
     </div>
 
-    <!-- Main Content Area for Chat Tab (100% Personal Code) -->
+    <!-- 🔍 100% WORKING FREE INTERNAL GOOGLE AI SEARCH STUDIO -->
     <div class="main-content" id="chat-section" style="display: none;">
         <div class="welcome-header">
-            <h1>JKSSB Studies <span class="username">AI Chat</span></h1>
-            <p>Ask anything about JKSSB Syllabus, Exams, or General Knowledge.</p>
+            <h1>JKSSB Studies <span class="username">Smart Search</span></h1>
+            <p>Search study materials, previous papers, or notifications instantly across jkssbstudies.in</p>
         </div>
 
-                <!-- 💬 100% FIXED CHAT CONTAINER WITH WORKING KEYBOARD -->
-        <div class="chat-container" style="display: flex; flex-direction: column; background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; height: 500px; overflow: hidden; margin-top: 10px;">
-            <div class="chat-header" style="background-color: #1f2937; padding: 15px 20px; font-weight: 600; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #1f2937;">
-                <i class="bi bi-robot" style="color: #3b82f6; font-size: 20px;"></i>
-                <span>JKSSB Studies Assistant (Beta)</span>
-            </div>
-            
-            <div class="chat-messages" id="chatMessages" style="flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px;">
-                <div class="message bot-message" style="background-color: #1f2937; color: #f3f4f6; align-self: flex-start; padding: 12px 16px; border-radius: 8px; font-size: 15px; border-bottom-left-radius: 2px; max-width: 75%;">
-                    Hello! I am your personal JKSSB Study Assistant. How can I help you with your preparation today?
-                </div>
-            </div>
-            
-                        <!-- Keyboard Focus Area Fixed -->
-            <div class="chat-input-area" style="display: flex; padding: 15px; background-color: #111827; border-top: 1px solid #1f2937; gap: 10px;">
-                <input type="text" id="userInput" class="chat-input" placeholder="Type your doubt here..." style="flex-grow: 1; background-color: #1f2937; border: 1px solid #1f2937; border-radius: 8px; padding: 12px; color: white; font-size: 15px; outline: none; -webkit-user-select: text; user-select: text;" onkeypress="if(event.key === 'Enter') sendMessage()">
-                <button onclick="sendMessage()" class="send-btn" style="background-color: #3b82f6; color: white; border: none; padding: 0 20px; border-radius: 8px; font-weight: 600; cursor: pointer;">Send</button>
-            </div>
+        <div style="background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 25px; margin-top: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <!-- 🚨 GOOGLE SE COPY KIYA HUA पूरा CODE NICHE IS LINE KI JAGAH PASTE KAREN -->
+            <script async src="https://cse.google.com/cse.js?cx=f01ee9fa14bf5432d">
+</script>
+<div class="gcse-search"></div>
         </div>
     </div>
 
@@ -154,63 +141,6 @@
                 navChat.classList.add('active');
                 navDashboard.classList.remove('active');
             }
-        }
-
-        // 🚀 100% FIXED INTENAL GEMINI LOGIC (NO API BOX BLOCKING)
-        async function sendMessage() {
-            const input = document.getElementById('userInput');
-            const container = document.getElementById('chatMessages');
-            const text = input.value.trim();
-            
-            if (text === "") return;
-
-            // 1. User का मैसेज स्क्रीन पर दिखाएं
-            const userDiv = document.createElement('div');
-            userDiv.className = 'message user-message';
-            userDiv.innerText = text;
-            container.appendChild(userDiv);
-            input.value = "";
-            container.scrollTop = container.scrollHeight;
-
-            // 2. स्क्रीन पर "Thinking..." दिखाएं
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'message bot-message';
-            typingDiv.innerText = "Thinking...";
-            container.appendChild(typingDiv);
-            container.scrollTop = container.scrollHeight;
-
-            // 🚨 यहाँ अपनी असली AIzaSy... वाली Key ध्यान से डालें
-            const API_KEY = "AQ.Ab8RN6JMosHuJOdGfW-KKUP7OtFBECJgoXM0h5HRDhbciIgGfg"; 
-
-            try {
-                // जेमिनी API को सीधे कॉल करना
-                const response = await fetch(`https://googleapis.com{API_KEY}`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: "You are an expert tutor for JKSSB exams on the website jkssbstudies.in. Answer this query in a short, clear, and helpful tone: " + text }] }]
-                    })
-                });
-
-                const data = await response.json();
-                
-                // गूगल के सही जवाब को ढूंढकर स्क्रीन पर दिखाना (Fixed Path)
-                if (data.candidates && data.candidates[0].content.parts[0].text) {
-                    const aiReply = data.candidates[0].content.parts[0].text;
-                    typingDiv.innerText = aiReply;
-                } else if (data.error) {
-                    typingDiv.innerText = "Google API Error: " + data.error.message;
-                } else {
-                    typingDiv.innerText = "Error reading response format. Please try again.";
-                }
-
-            } catch (error) {
-                typingDiv.innerText = "Technical Error: " + error.message;
-                console.error(error);
-            }
-            container.scrollTop = container.scrollHeight;
         }
     </script>
 </body>
