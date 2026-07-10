@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JKSSB Studies - AI Gateway Login</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: #090d16; color: #f8fafc; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .auth-container { background-color: #0f172a; border: 1px solid #1e293b; padding: 40px; border-radius: 16px; width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        h2 { font-size: 24px; color: #38bdf8; margin-bottom: 8px; text-align: center; }
+        p { color: #94a3b8; font-size: 14px; text-align: center; margin-bottom: 24px; }
+        .input-group { margin-bottom: 16px; }
+        label { display: block; font-size: 12px; color: #94a3b8; margin-bottom: 6px; font-weight: 500; }
+        input { width: 100%; background: #090d16; border: 1px solid #334155; border-radius: 8px; padding: 12px; color: white; font-size: 14px; outline: none; }
+        input:focus { border-color: #38bdf8; }
+        button { background: #38bdf8; color: #0f172a; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; margin-top: 10px; font-size: 15px; }
+        button:hover { background: #0ea5e9; }
+        .toggle-link { text-align: center; margin-top: 20px; font-size: 13px; color: #94a3b8; }
+        .toggle-link span { color: #38bdf8; cursor: pointer; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <h2 id="auth-title">Login to JKSSB Studies</h2>
+        <p id="auth-subtitle">Access your AI exam preparation workspace</p>
+        
+        <div class="input-group">
+            <label>Email Address</label>
+            <input type="email" id="email" placeholder="student@example.com">
+        </div>
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="••••••••">
+        </div>
+
+        <button id="auth-btn" onclick="handleAuth()">Sign In</button>
+        
+        <div class="toggle-link" id="toggle-area">
+            Don't have an account? <span onclick="toggleMode(true)">Create Account</span>
+        </div>
+    </div>
+
+    <!-- 🔥 FIREBASE MODULES WITH YOUR ACTUAL KEYS -->
+    <script type="module">
+        import { initializeApp } from "https://gstatic.com";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://gstatic.com";
+        import { getFirestore, doc, setDoc } from "https://gstatic.com";
+
+        // ✅ आपकी बिल्कुल असली फ़ायरबेस चाबियाँ यहाँ सेट हैं:
+        const firebaseConfig = {
+            apiKey: "AIzaSyBIYbXqDcnVz0ptRYiByS2EmvCHNMLK9QA",
+            authDomain: "://firebaseapp.com",
+            projectId: "jkssb-studies-ai",
+            storageBucket: "jkssb-studies-ai.firebasestorage.app",
+            messagingSenderId: "73749425646",
+            appId: "1:73749425646:web:878fa8036f6b5b2db4b2ff",
+            measurementId: "G-3TCXTCDST5"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let isSignUpMode = false;
+
+        // साइन-इन और साइन-अप के बीच स्विच करने के लिए
+        window.toggleMode = function(signUp) {
+            isSignUpMode = signUp;
+            document.getElementById('auth-title').innerText = signUp ? "Create Account" : "Login to JKSSB Studies";
+            document.getElementById('auth-subtitle').innerText = signUp ? "Sign up to start learning with AI" : "Access your AI exam preparation workspace";
+            document.getElementById('auth-btn').innerText = signUp ? "Sign Up" : "Sign In";
+            document.getElementById('toggle-area').innerHTML = signUp ? 
+                `Already have an account? <span onclick="toggleMode(false)">Sign In</span>` : 
+                `Don't have an account? <span onclick="toggleMode(true)">Create Account</span>`;
+        }
+
+        // लॉगिन और रजिस्ट्रेशन का मुख्य लॉजिक
+        window.handleAuth = async function() {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            if(!email || !password) { alert("Please fill all fields."); return; }
+
+            try {
+                if (isSignUpMode) {
+                    // 1. नया फ़ायरबेस अकाउंट बनाना
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+                    
+                    // 2. डेटाबेस में नया रिकॉर्ड बनाना (डिफ़ॉल्ट प्लान: free)
+                    await setDoc(doc(db, "users", user.uid), {
+                        email: email,
+                        plan: "free",
+                        createdAt: new Date().toISOString()
+                    });
+                    
+                    alert("Account created successfully!");
+                } else {
+                    // पुराना अकाउंट लॉगिन करना
+                    await signInWithEmailAndPassword(auth, email, password);
+                }
+                
+                // लॉगिन सफल होने पर सीधे डैशबोर्ड पेज पर भेजें
+                window.location.href = "dashboard.html";
+                
+            } catch (error) {
+                alert("Error: " + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
