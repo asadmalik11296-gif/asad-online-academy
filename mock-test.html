@@ -4,345 +4,414 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JKSSB Mock Test Panel</title>
-    
-    <!-- 🖥️ GOOGLE ADSENSE CODE INTEGRATION -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6086620349531765" crossorigin="anonymous"></script>
-    <meta name="google-adsense-account" content="ca-pub-6086620349531765">
-
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f7f6; margin: 0; padding: 15px; }
-        .test-container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .hub-title { text-align: center; color: #007bff; margin-bottom: 25px; }
-        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 20px; }
-        .topic-card { background: #fff; border: 1px solid #cbd5e0; padding: 20px; border-radius: 6px; text-align: center; cursor: pointer; transition: 0.2s; }
-        .topic-card:hover { border-color: #007bff; box-shadow: 0 4px 12px rgba(0,123,255,0.15); }
-        .btn-start { margin-top: 12px; padding: 8px 20px; background: #007bff; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
-        
-        /* Quiz Layout */
-        .quiz-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-bottom: 20px; }
-        .timer-box { font-size: 18px; font-weight: bold; color: #dc2626; background: #fee2e2; padding: 5px 12px; border-radius: 4px; }
-        .quiz-body { display: flex; gap: 20px; flex-wrap: wrap; }
-        .question-area { flex: 2; min-width: 280px; }
-        .question-text { font-size: 18px; font-weight: bold; margin-bottom: 15px; line-height: 1.4; }
-        .options-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-        .option-btn { padding: 12px 15px; text-align: left; border: 1px solid #cbd5e0; border-radius: 5px; background: white; font-size: 15px; cursor: pointer; transition: 0.2s; }
-        .option-btn:hover { background-color: #f8f9fa; }
-        .option-btn.selected { background-color: #eff6ff; border-color: #007bff; font-weight: bold; }
-        
-        /* Sidebar Palette */
-        .sidebar { flex: 1; min-width: 200px; background: #f8f9fa; padding: 15px; border-radius: 6px; border: 1px solid #cbd5e0; display: flex; flex-direction: column; justify-content: space-between; max-height: 320px; }
-        .palette-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 15px; }
-        .palette-cell { height: 35px; display: flex; align-items: center; justify-content: center; border: 1px solid #cbd5e0; border-radius: 4px; cursor: pointer; background: #e2e8f0; font-size: 14px; font-weight: 500; }
-        .palette-cell.active { border: 2px solid #007bff; }
-        .palette-cell.answered { background: #28a745; color: white; border-color: #28a745; }
-        
-        .btn-nav { padding: 8px 20px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        .btn-next { background: #007bff; }
-        .btn-submit { width: 100%; padding: 10px; background: #28a745; color: white; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; }
-        .result-box { text-align: center; padding: 30px 10px; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            padding: 40px 20px;
+        }
+        .main-title {
+            text-align: center;
+            font-size: 32px;
+            color: #1d4ed8;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+        /* Grid Layout matching your exact image layout layout */
+        .grid-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 35px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            font-size: 22px;
+            color: #000000;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .card .meta-info {
+            font-size: 15px;
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+        .card .subtitle {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 25px;
+        }
+        .start-btn {
+            background: #007bff;
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+        .start-btn:hover {
+            background: #0056b3;
+        }
+        /* Active Test Interface Styles */
+        .quiz-box {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .timer {
+            background: #fef2f2;
+            color: #dc2626;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        .option-item {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 14px 20px;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+        .option-item.selected {
+            background: #e0f2fe;
+            border-color: #007bff;
+            color: #0369a1;
+            font-weight: bold;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+        #webcam {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            border: 3px solid #1d4ed8;
+            border-radius: 12px;
+            background: #000;
+            z-index: 10000;
+            display: none;
+        }
     </style>
 </head>
 <body>
-<video id="webcam" autoplay playsinline muted width="180" height="135" style="position: fixed; bottom: 20px; right: 20px; border: 3px solid #0284c7; border-radius: 12px; z-index: 1000; background: #000;"></video>
 
-    <!-- 1. TOPIC SELECTION HUB -->
-    <div class="test-container" id="hub-container">
-        <h1 class="hub-title">JKSSB Mock Test Panel</h1>
-                <div class="grid-layout">
-            <!-- Test 1: LCM & HCF -->
-            <div class="topic-card" onclick="startSingleTest('lcm_hcf')">
-                <h3>LCM & HCF Test</h3>
-                <p style="color: #666; margin: 5px 0;">10 Questions | 10 Minutes</p>
-                <p><small style="color: #888;">Topic-wise Practice Set</small></p>
-                <button class="btn-start">Start Test</button>
+    <!-- Camera interface elements dynamically managed via frontend triggers -->
+    <video id="webcam" autoplay playsinline muted width="180" height="135"></video>
+
+    <!-- Main Entry Panel: Topic Selection Grid System Layout Layout -->
+    <div id="dashboard-panel">
+        <h1 class="main-title">JKSSB Mock Test Panel</h1>
+        
+        <div class="grid-container">
+            <!-- Card Module 1 -->
+            <div class="card">
+                <h2>LCM & HCF Test</h2>
+                <div class="meta-info">10 Questions | 10 Minutes</div>
+                <div class="subtitle">Topic-wise Practice Set</div>
+                <button class="start-btn" onclick="launchExamSession('LCM & HCF')">Start Test</button>
             </div>
 
-            <!-- Test 2: Time & Work -->
-            <div class="topic-card" onclick="startSingleTest('time_work')">
-                <h3>Time & Work Test</h3>
-                <p style="color: #666; margin: 5px 0;">10 Questions | 10 Minutes</p>
-                <p><small style="color: #888;">Topic-wise Practice Set</small></p>
-                <button class="btn-start">Start Test</button>
+            <!-- Card Module 2 -->
+            <div class="card">
+                <h2>Time & Work Test</h2>
+                <div class="meta-info">10 Questions | 10 Minutes</div>
+                <div class="subtitle">Topic-wise Practice Set</div>
+                <button class="start-btn" onclick="launchExamSession('Time & Work')">Start Test</button>
             </div>
 
-            <!-- Test 3: Ratio & Proportion -->
-            <div class="topic-card" onclick="startSingleTest('ratio')">
-                <h3>Ratio & Proportion</h3>
-                <p style="color: #666; margin: 5px 0;">10 Questions | 10 Minutes</p>
-                <p><small style="color: #888;">Topic-wise Practice Set</small></p>
-                <button class="btn-start">Start Test</button>
+            <!-- Card Module 3 -->
+            <div class="card">
+                <h2>Ratio & Proportion</h2>
+                <div class="meta-info">10 Questions | 10 Minutes</div>
+                <div class="subtitle">Topic-wise Practice Set</div>
+                <button class="start-btn" onclick="launchExamSession('Ratio & Proportion')">Start Test</button>
             </div>
 
-            <!-- Test 4: Percentage -->
-            <div class="topic-card" onclick="startSingleTest('percentage')">
-                <h3>Percentage Test</h3>
-                <p style="color: #666; margin: 5px 0;">10 Questions | 10 Minutes</p>
-                <p><small style="color: #888;">Topic-wise Practice Set</small></p>
-                <button class="btn-start">Start Test</button>
+            <!-- Card Module 4 -->
+            <div class="card">
+                <h2>Percentage Test</h2>
+                <div class="meta-info">10 Questions | 10 Minutes</div>
+                <div class="subtitle">Topic-wise Practice Set</div>
+                <button class="start-btn" onclick="launchExamSession('Percentage')">Start Test</button>
             </div>
         </div>
     </div>
 
-    <!-- 2. LIVE QUIZ INTERFACE -->
-    <div class="test-container" id="quiz-container" style="display: none;">
+    <!-- Active Core Quiz Runtime Interface Frame Elements -->
+    <div class="quiz-box" id="active-quiz-panel">
         <div class="quiz-header">
-            <h2 style="color: #007bff; margin: 0;">Live Test</h2>
-            <div id="timer" class="timer-box">Time Left: 10:00</div>
+            <h2 id="active-topic-title">Active Test Panel</h2>
+            <div class="timer" id="countdown-timer">Time Left: 10:00</div>
         </div>
 
-        <div class="quiz-body">
-            <!-- Left Side -->
-            <div class="question-area">
-                <div id="question-text" class="question-text">Loading...</div>
-                <div id="options-container" class="options-list"></div>
-                <div style="display: flex; justify-content: space-between;">
-                    <button id="prev-btn" class="btn-nav" onclick="changeQuestion(-1)">Previous</button>
-                    <button id="next-btn" class="btn-nav btn-next" onclick="changeQuestion(1)">Next</button>
-                </div>
-            </div>
+        <div class="question-container">
+            <div class="question-text" id="target-question-string" style="font-size: 19px; font-weight: 600; margin-bottom: 20px;">Loading exam question matrix...</div>
+            <div id="target-options-list"></div>
+        </div>
 
-            <!-- Right Side (Sidebar) -->
-            <div class="sidebar">
-                <div>
-                    <h4 style="margin: 0 0 10px 0; color: #4a5568;">Question Palette</h4>
-                    <div id="palette-container" class="palette-grid"></div>
-                </div>
-                <button class="btn-submit" onclick="submitQuiz()">Submit Test</button>
-            </div>
+        <div class="nav-container">
+            <button class="start-btn" id="prevCardBtn" onclick="shiftActiveIndex(-1)" style="background: #64748b;">Previous</button>
+            <button class="start-btn" id="nextCardBtn" onclick="shiftActiveIndex(1)">Next</button>
+            <button class="start-btn" id="finalSubmitBtn" onclick="terminateSession()" style="background: #22c55e; display: none;">Submit Test</button>
         </div>
     </div>
 
-    <!-- 3. RESULT VIEW -->
-    <div class="test-container" id="result-container" style="display: none;">
-        <div class="result-box">
-            <h2 style="color: #28a745; margin-bottom: 15px;">Test Completed!</h2>
-            <div id="score-text" style="font-size: 20px; line-height: 1.6; margin-bottom: 20px;"></div>
-            <button onclick="location.reload()" class="btn-nav btn-next" style="padding: 10px 25px;">Go Back to Hub</button>
-        </div>
+    <!-- Final Display Block triggered after session validation cycle wraps -->
+    <div class="quiz-box" id="reporting-panel" style="text-align: center; padding: 40px 20px;">
+        <h2 style="color: #22c55e; margin-bottom: 15px;">Practice Examination Concluded</h2>
+        <div id="score-telemetry" style="font-size: 18px; line-height: 2; margin-bottom: 25px;"></div>
+        <button class="start-btn" onclick="window.location.href='index.html'">Back to Home</button>
     </div>
-
     <script>
-                // चारों टॉपिक्स के अलग-अलग 10-10 क्वेश्चंस का डेटाबेस
-        const allTestData = {
-            lcm_hcf: {
-                title: "LCM & HCF Practice Set",
-                data: [
-                    { "id": "lh_1", "q": "Find the highest common factor (HCF) of 42, 63, and 140.", "options": ["7", "14", "21", "28"], "correct_answer": "7" },
-                    { "id": "lh_2", "q": "The LCM of two numbers is 4800 and their HCF is 160. If one number is 480, find the other number.", "options": ["1600", "1200", "1800", "2400"], "correct_answer": "1600" },
-                    { "id": "lh_3", "q": "Find the least number which when divided by 12, 15, 20 and 54 leaves a remainder of 4 in each case.", "options": ["540", "544", "536", "548"], "correct_answer": "544" },
-                    { "id": "lh_4", "q": "The ratio of two numbers is 3:4 and their HCF is 4. Find their LCM.", "options": ["12", "16", "24", "48"], "correct_answer": "48" },
-                    { "id": "lh_5", "q": "Three bells toll together at intervals of 9, 12 and 15 minutes respectively. If they toll together now, after how many hours will they toll together next?", "options": ["3 hours", "6 hours", "9 hours", "12 hours"], "correct_answer": "3 hours" },
-                    { "id": "lh_6", "q": "Find the greatest number that will divide 148, 246 and 623 leaving remainders 4, 6 and 11 respectively.", "options": ["12", "16", "18", "24"], "correct_answer": "18" },
-                    { "id": "lh_7", "q": "The HCF of two numbers is 11 and their LCM is 7700. If one of the numbers is 275, find the other.", "options": ["279", "308", "318", "440"], "correct_answer": "308" },
-                    { "id": "lh_8", "q": "Find the smallest fraction which is exactly divisible by 6/7, 5/14, and 10/21.", "options": ["30/7", "30/14", "60/7", "10/7"], "correct_answer": "30/7" },
-                    { "id": "lh_9", "q": "The product of two co-prime numbers is 117. Their LCM should be:", "options": ["1", "117", "9", "13"], "correct_answer": "117" },
-                    { "id": "lh_10", "q": "The HCF and LCM of two numbers are 12 and 72 respectively. If the sum of the two numbers is 60, find one of the numbers.", "options": ["12", "24", "60", "72"], "correct_answer": "24" }
-                ]
-            },
-            time_work: {
-                title: "Time & Work Practice Set",
-                data: [
-                    { "id": "tw_1", "q": "A and B can do a piece of work in 12 days, B and C in 15 days, and C and A in 20 days. In how many days can A, B and C together complete the work?", "options": ["8 days", "10 days", "12 days", "6 days"], "correct_answer": "10 days" },
-                    { "id": "tw_2", "q": "A can do a work in 15 days and B in 20 days. If they work on it together for 4 days, then the fraction of the work that is left is:", "options": ["1/4", "1/10", "7/15", "8/15"], "correct_answer": "8/15" },
-                    { "id": "tw_3", "q": "A is twice as good a workman as B and together they finish a piece of work in 18 days. In how many days will A alone finish the work?", "options": ["27 days", "36 days", "54 days", "45 days"], "correct_answer": "27 days" },
-                    { "id": "tw_4", "q": "A can finish a work in 24 days, B in 9 days and C in 12 days. B and C start the work but are forced to leave after 3 days. The remaining work was done by A in:", "options": ["5 days", "6 days", "10 days", "12 days"], "correct_answer": "10 days" },
-                    { "id": "tw_5", "q": "If 12 men or 18 women can reap a field in 14 days, then the number of days that 8 men and 16 women will take to reap it is:", "options": ["5 days", "7 days", "8 days", "9 days"], "correct_answer": "9 days" },
-                    { "id": "tw_6", "q": "A can do a piece of work in 10 days and B can do it in 15 days. They began the work together but A left the work 2 days before its completion. In how many days was the total work completed?", "options": ["6 days", "7 days", "8 days", "9 days"], "correct_answer": "7 days" },
-                    { "id": "tw_7", "q": "Two pipes A and B can fill a tank in 20 minutes and 30 minutes respectively. If both pipes are opened together, how much time will they take to fill the tank?", "options": ["12 mins", "15 mins", "10 mins", "25 mins"], "correct_answer": "12 mins" },
-                    { "id": "tw_8", "q": "A cistern is normally filled in 8 hours but takes 2 hours longer to fill because of a leak in its bottom. If the cistern is full, the leak will empty it in:", "options": ["20 hours", "40 hours", "30 hours", "50 hours"], "correct_answer": "40 hours" },
-                    { "id": "tw_9", "q": "A can do a work in 4 hours, B and C together can do it in 3 hours, while A and C together can do it in 2 hours. How long will B alone take to do it?", "options": ["8 hours", "10 hours", "12 hours", "24 hours"], "correct_answer": "12 hours" },
-                    { "id": "tw_10", "q": "A, B and C can complete a piece of work in 24, 6 and 12 days respectively. Working together, they will complete the same work in:", "options": ["3.5 days", "3.43 days", "4 days", "3 days"], "correct_answer": "3.43 days" }
-                ]
-            },
-            ratio: {
-                title: "Ratio & Proportion Set",
-                data: [
-                    { "id": "rp_1", "q": "If A:B = 2:3 and B:C = 4:5, find the ratio A:B:C.", "options": ["2:3:5", "8:12:15", "6:9:15", "8:10:15"], "correct_answer": "8:12:15" },
-                    { "id": "rp_2", "q": "Two numbers are in the ratio 3:5. If 9 is subtracted from each, the new ratio becomes 12:23. Find the larger number.", "options": ["27", "33", "49", "55"], "correct_answer": "55" },
-                    { "id": "rp_3", "q": "A bag contains ₹1, 50p and 25p coins in the ratio 5:9:4. If the total amount in the bag is ₹206, find the number of 50p coins.", "options": ["120", "150", "180", "200"], "correct_answer": "180" },
-                    { "id": "rp_4", "q": "What number should be added to each of 6, 7, 15 and 17 so that the resulting numbers are in proportion?", "options": ["6", "5", "4", "3"], "correct_answer": "3" },
-                    { "id": "rp_5", "q": "If ₹1000 is divided between A and B in the ratio 3:2, how much amount does A get?", "options": ["₹600", "₹400", "₹500", "₹300"], "correct_answer": "₹600" },
-                    { "id": "rp_6", "q": "The salaries of A, B, and C are in the ratio 2:3:5. If they get increments of 15%, 10%, and 20% respectively, what will be the new ratio of their salaries?", "options": ["23:33:60", "21:33:60", "23:31:60", "15:10:20"], "correct_answer": "23:33:60" },
-                    { "id": "rp_7", "q": "If 40% of a number is equal to two-third of another number, what is the ratio of first number to the second number?", "options": ["2:5", "3:7", "5:3", "7:3"], "correct_answer": "5:3" },
-                    { "id": "rp_8", "q": "The fourth proportional to 5, 8, 15 is:", "options": ["18", "24", "20", "21"], "correct_answer": "24" },
-                    { "id": "rp_9", "q": "A sum of money is to be distributed among A, B, C, D in the proportion of 5:2:4:3. If C gets ₹1000 more than D, what is B's share?", "options": ["₹500", "₹1500", "₹2000", "₹2500"], "correct_answer": "₹2000" },
-                    { "id": "rp_10", "q": "The ratio of the ages of a father and his son is 7:3. The product of their ages is 756. The ratio of their ages after 6 years will be:", "options": ["2:1", "3:1", "4:3", "5:2"], "correct_answer": "2:1" }
-                ]
-            },
-            percentage: {
-                title: "Percentage Practice Set",
-                data: [
-                    { "id": "pc_1", "q": "If A's salary is 25% more than B's salary, then by what percentage is B's salary less than A's salary?", "options": ["15%", "20%", "25%", "30%"], "correct_answer": "20%" },
-                    { "id": "pc_2", "q": "Due to a reduction of 20% in the price of sugar, a man can buy 5 kg more sugar for ₹600. Find the reduced price per kg.", "options": ["₹24", "₹30", "₹36", "₹20"], "correct_answer": "₹24" },
-                    { "id": "pc_3", "q": "If the price of petrol is increased by 20%, by what percentage must a driver reduce his consumption so that expenditure remains same?", "options": ["16.67%", "20%", "25%", "18.5%"], "correct_answer": "16.67%" },
-                    { "id": "pc_4", "q": "In a library, 20% of the books are in Hindi, 50% of the remaining are in English and the remaining 3000 books are in regional languages. Find total books.", "options": ["6000", "7500", "10000", "15000"], "correct_answer": "7500" },
-                    { "id": "pc_5", "q": "The value of a machine depreciates at the rate of 10% every year. If its present value is ₹1,62,000, what was its value 2 years ago?", "options": ["₹2,00,000", "₹1,80,000", "₹2,50,000", "₹2,20,000"], "correct_answer": "₹2,00,000" },
-                    { "id": "pc_6", "q": "If the radius of a circle is decreased by 10%, then its area will be decreased by what percentage?", "options": ["10%", "19%", "20%", "21%"], "correct_answer": "19%" },
-                    { "id": "pc_7", "q": "In an election between two candidates, one got 55% of the total valid votes. 20% of the votes were invalid. If total votes were 7500, find valid votes for other candidate.", "options": ["2700", "2900", "3000", "3100"], "correct_answer": "2700" },
-                    { "id": "pc_8", "q": "If 10% of A's income is equal to 15% of B's income and their combined total income is ₹25,000, find A's income.", "options": ["₹15,000", "₹10,000", "₹12,500", "₹18,000"], "correct_answer": "₹15,000" },
-                    { "id": "pc_9", "q": "Fresh fruit contains 68% water and dry fruit contains 20% water. How much dry fruit can be obtained from 100 kg of fresh fruits?", "options": ["32 kg", "40 kg", "52 kg", "80 kg"], "correct_answer": "40 kg" },
-                    { "id": "pc_9", "q": "Fresh fruit contains 68% water and dry fruit contains 20% water. How much dry fruit can be obtained from 100 kg of fresh fruits?", "options": ["32 kg", "40 kg", "52 kg", "80 kg"], "correct_answer": "40 kg" },
-                    { "id": "pc_10", "q": "If x is 20% less than y, then find the value of (y - x) / y.", "options": ["1/5", "4/5", "1/4", "5/4"], "correct_answer": "1/5" }
-                ]
-            }
+        // चारों टॉपिक्स के 10-10 असली प्रश्नों का डेटाबेस
+        const dynamicBank = {
+            "LCM & HCF": [
+                { q: "Find the HCF of 24, 36 and 40.", o: ["4", "6", "8", "12"], c: 0 },
+                { q: "The LCM of two numbers is 48. The numbers are in the ratio 2:3. Find the sum of the numbers.", o: ["28", "32", "40", "64"], c: 2 },
+                { q: "The HCF of two numbers is 11 and their LCM is 7700. If one of the numbers is 275, find the other number.", o: ["279", "283", "308", "318"], c: 2 },
+                { q: "Find the greatest number that will divide 43, 91 and 183 so as to leave the same remainder in each case.", o: ["4", "7", "9", "13"], c: 0 },
+                { q: "The ratio of two numbers is 3:4 and their HCF is 4. Their LCM is:", o: ["12", "16", "24", "48"], c: 3 },
+                { q: "The HCF of 2/3, 8/9, 16/81 and 10/27 is:", o: ["2/81", "8/81", "2/3", "16/3"], c: 0 },
+                { q: "Three numbers are in the ratio 1:2:3 and their HCF is 12. The numbers are:", o: ["12, 24, 36", "11, 22, 33", "10, 20, 30", "5, 10, 15"], c: 0 },
+                { q: "The product of two co-prime numbers is 117. Their LCM should be:", o: ["1", "117", "equal to their HCF", "cannot be calculated"], c: 1 },
+                { q: "The least number which when divided by 5, 6, 7 and 8 leaves a remainder 3, but when divided by 9 leaves no remainder, is:", o: ["843", "1683", "2523", "3363"], c: 1 },
+                { q: "The HCF of two numbers is 8. Which one of the following can never be their LCM?", o: ["24", "48", "56", "60"], c: 3 }
+            ],
+            "Time & Work": [
+                { q: "A can do a piece of work in 10 days and B in 15 days. How long will they take together?", o: ["5 days", "6 days", "7 days", "8 days"], c: 1 },
+                { q: "A and B together can complete a work in 4 days. If A alone does it in 12 days, B alone will do it in?", o: ["6 days", "8 days", "9 days", "10 days"], c: 0 },
+                { q: "A can do a work in 15 days and B in 20 days. If they work on it together for 4 days, then the fraction of the work that is left is:", o: ["1/4", "1/10", "7/15", "8/15"], c: 2 },
+                { q: "A is twice as good a workman as B and together they finish a piece of work in 14 days. In how many days can A alone finish it?", o: ["11 days", "21 days", "28 days", "42 days"], c: 1 },
+                { q: "A, B and C can do a piece of work in 20, 30 and 60 days respectively. In how many days can A do the work if he is assisted by B and C on every third day?", o: ["12 days", "15 days", "16 days", "18 days"], c: 1 },
+                { q: "A alone can do a piece of work in 6 days and B alone in 8 days. A and B undertook to do it for Rs. 3200. With the help of C, they completed the work in 3 days. How much is to be paid to C?", o: ["Rs. 375", "Rs. 400", "Rs. 600", "Rs. 800"], c: 1 },
+                { q: "If 12 men or 18 women can reap a field in 14 days, then working at the same rate, 8 men and 16 women can reap the same field in:", o: ["5 days", "7 days", "8 days", "9 days"], c: 3 },
+                { q: "A can finish a work in 24 days, B in 9 days and C in 12 days. B and C start the work but are forced to leave after 3 days. The remaining work was done by A in:", o: ["5 days", "6 days", "10 days", "10.5 days"], c: 2 },
+                { q: "X can do 1/4 of a work in 10 days, Y can do 40% of the work in 40 days and Z can do 1/3 of the work in 13 days. Who will complete the work first?", o: ["X", "Y", "Z", "X and Z both"], c: 2 },
+                { q: "10 men and 15 women together can complete a work in 6 days. It takes 100 days for one man alone to complete the same work. How many days will it take for one woman alone to complete the work?", o: ["90 days", "125 days", "145 days", "225 days"], c: 3 }
+            ],
+            "Ratio & Proportion": [
+                { q: "If A:B = 2:3 and B:C = 4:5, find A:C.", o: ["8:15", "6:15", "2:5", "8:10"], c: 0 },
+                { q: "What is the third proportional to 9 and 12?", o: ["14", "16", "18", "20"], c: 1 },
+                { q: "A sum of Rs. 312 is divided among 100 boys and girls in such a way that each boy gets Rs. 3.60 and each girl Rs. 2.40. Find the number of girls.", o: ["40", "45", "60", "65"], c: 0 },
+                { q: "If 0.75 : x :: 5 : 8, then x is equal to:", o: ["1.12", "1.16", "1.20", "1.30"], c: 2 },
+                { q: "The sum of three numbers is 98. If the ratio of the first to second is 2:3 and that of the second to the third is 5:8, then the second number is:", o: ["20", "30", "48", "58"], c: 1 },
+                { q: "Two numbers are in the ratio 3:5. If 9 is subtracted from each, the new numbers are in the ratio 12:23. The smaller number is:", o: ["27", "33", "49", "55"], c: 0 },
+                { q: "Seats for Mathematics, Physics and Biology in a school are in the ratio 5:7:8. There is a proposal to increase these seats by 40%, 50% and 75% respectively. What will be the new ratio of seats?", o: ["2:3:4", "6:7:8", "6:8:9", "None of these"], c: 0 },
+                { q: "In a mixture of 60 liters, the ratio of milk and water is 2:1. If this ratio is to be 1:2, then the quantity of water to be further added is:", o: ["20 liters", "30 liters", "40 liters", "60 liters"], c: 3 },
+                { q: "Gold is 19 times as heavy as water and copper is 9 times as heavy as water. In what ratio should these metals be mixed so that the mixture may be 15 times as heavy as water?", o: ["1:2", "2:3", "3:2", "1:1"], c: 2 },
+                { q: "Salaries of Ravi and Sumit are in the ratio 2:3. If the salary of each is increased by Rs. 4000, the new ratio becomes 40:57. What is Sumit's salary?", o: ["Rs. 17,000", "Rs. 20,000", "Rs. 25,500", "Rs. 38,000"], c: 3 }
+            ],
+            "Percentage": [
+                { q: "What is 20% of 25% of 300?", o: ["15", "20", "25", "30"], c: 0 },
+                { q: "If x is 20% less than y, then by how much percent is y more than x?", o: ["20%", "25%", "30%", "33.33%"], c: 1 },
+                { q: "Two students appeared at an examination. One of them secured 9 marks more than the other and his marks were 56% of the sum of their marks. The marks obtained by them are:", o: ["39, 30", "41, 32", "42, 33", "43, 34"], c: 2 },
+                { q: "A fruit seller had some apples. He sells 40% apples and still has 420 apples. Originally, he had:", o: ["588 apples", "600 apples", "672 apples", "700 apples"], c: 3 },
+                { q: "What percentage of numbers from 1 to 70 have 1 or 9 in the unit's digit?", o: ["14%", "20%", "21%", "25%"], c: 1 },
+                { q: "If the price of a commodity is increased by 20%, by how much percentage must a consumer reduce his consumption so as not to increase his expenditure?", o: ["15%", "16.66%", "20%", "25%"], c: 1 },
+                { q: "In an election between two candidates, one got 55% of the total valid votes, 20% of the votes were invalid. If the total number of votes was 7500, the number of valid votes that the other candidate got, was:", o: ["2700", "2900", "3000", "3100"], c: 0 },
+                { q: "Gauri went to a stationers and bought things worth Rs. 25, out of which 30 paise went on sales tax. If the tax rate was 6%, then what was the cost of the tax-free items?", o: ["Rs. 19.70", "Rs. 22.10", "Rs. 24.20", "Rs. 24.70"], c: 0 },
+                { q: "In a certain school, 20% of students are below 8 years of age. The number of students above 8 years of age is 2/3 of the number of students of 8 years of age which is 48. What is the total number of students in the school?", o: ["72", "80", "100", "120"], c: 2 },
+                { q: "Two numbers are respectively 20% and 50% more than a third number. The ratio of the two numbers is:", o: ["2:5", "3:5", "4:5", "5:4"], c: 2 }
+            ]
         };
 
-        let questions = []; 
-        let currentTestKey = "";
-        let currentTestTitle = "";
-        let currentIndex = 0;
-        let userAnswers = {};
-        let timeLeft = 10 * 60; // 10 Minutes
-        let timerInterval;
+        let selectedTopic = "";
+        let currentQuestions = [];
+        let activeIndex = 0;
+        let userResponses = [];
+        let timeRemaining = 600; // 10 Minutes exactly (600 seconds)
+        let clockTimer;
+        let studentIdentity = "Guest Candidate";
+        let liveStream = null;
 
-        // Separate test start function
-        function startSingleTest(testKey) {
-            currentTestKey = testKey;
-            questions = allTestData[testKey].data;
-            currentTestTitle = allTestData[testKey].title;
-            
-            document.getElementById('hub-container').style.display = 'none';
-            document.getElementById('quiz-container').style.display = 'block';
-            
-            currentIndex = 0;
-            userAnswers = {};
-            timeLeft = 10 * 60; 
-            
-            renderQuestion();
-            renderPalette();
-            startTimer();
-        }
+        async function launchExamSession(topicName) {
+            try {
+                liveStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                const videoEl = document.getElementById('webcam');
+                if (videoEl) {
+                    videoEl.srcObject = liveStream;
+                    videoEl.style.display = "block";
+                }
 
-        function renderQuestion() {
-            const currentQ = questions[currentIndex];
-            document.getElementById('question-text').innerText = `Q${currentIndex + 1}: ${currentQ.q}`;
-            
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
-            
-            currentQ.options.forEach(option => {
-                const button = document.createElement('button');
-                button.className = 'option-btn';
-                if (userAnswers[currentIndex] === option) button.classList.add('selected');
-                button.innerText = option;
-                button.onclick = () => selectOption(option);
-                optionsContainer.appendChild(button);
-            });
+                let inputUser = prompt("Please enter your Full Name / Roll Number to verify identity:", "");
+                if (inputUser && inputUser.trim() !== "") {
+                    studentIdentity = inputUser;
+                }
 
-            document.getElementById('prev-btn').disabled = currentIndex === 0;
-        }
+                selectedTopic = topicName;
+                currentQuestions = dynamicBank[topicName] || [];
+                activeIndex = 0;
+                userResponses = Array(currentQuestions.length).fill(null);
+                timeRemaining = 600; // Reset timer to 10 minutes on fresh test launch
+                
+                document.getElementById('dashboard-panel').style.display = 'none';
+                document.getElementById('active-quiz-panel').style.display = 'block';
+                document.getElementById('active-topic-title').innerText = `${selectedTopic} Practice Test`;
+                
+                renderActiveQuestion();
+                launchClock();
 
-        function selectOption(option) {
-            userAnswers[currentIndex] = option;
-            renderQuestion();
-            renderPalette();
-        }
-
-        function changeQuestion(direction) {
-            currentIndex += direction;
-            if (currentIndex < 0) currentIndex = 0;
-            if (currentIndex >= questions.length) currentIndex = questions.length - 1;
-            renderQuestion();
-            updatePaletteActive();
-        }
-
-        function renderPalette() {
-            const palette = document.getElementById('palette-container');
-            palette.innerHTML = '';
-            questions.forEach((_, index) => {
-                const cell = document.createElement('div');
-                cell.className = 'palette-cell';
-                if (index === currentIndex) cell.classList.add('active');
-                if (userAnswers[index] !== undefined) cell.classList.add('answered');
-                cell.innerText = index + 1;
-                cell.onclick = () => { currentIndex = index; renderQuestion(); updatePaletteActive(); };
-                palette.appendChild(cell);
-            });
-        }
-
-        function updatePaletteActive() {
-            const cells = document.getElementById('palette-container').children;
-            for(let i=0; i<cells.length; i++) {
-                cells[i].classList.remove('active');
-                if (i === currentIndex) cells[i].classList.add('active');
+            } catch (err) {
+                alert("Camera permission is strictly required to take this mock test!");
+                window.location.href = "index.html";
             }
         }
 
-        function startTimer() {
-            const timerEl = document.getElementById('timer');
-            timerInterval = setInterval(() => {
-                let minutes = Math.floor(timeLeft / 60);
-                let seconds = timeLeft % 60;
-                timerEl.innerText = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    submitQuiz(true);
+        function renderActiveQuestion() {
+            if (currentQuestions.length === 0) return;
+            const currentItem = currentQuestions[activeIndex];
+            
+            
+            document.getElementById('target-question-string').innerText = `Q${activeIndex + 1}: ${currentItem.q}`;
+            
+            const optionsBox = document.getElementById('target-options-list');
+            optionsBox.innerHTML = '';
+
+            currentItem.o.forEach((opt, idx) => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'option-item';
+                if (userResponses[activeIndex] === idx) {
+                    optDiv.className += ' selected';
                 }
-                timeLeft--;
+                optDiv.innerText = opt;
+                optDiv.onclick = () => {
+                    userResponses[activeIndex] = idx;
+                    renderActiveQuestion();
+                };
+                optionsBox.appendChild(optDiv);
+            });
+
+            document.getElementById('prevCardBtn').style.visibility = activeIndex === 0 ? 'hidden' : 'visible';
+            
+            if (activeIndex === currentQuestions.length - 1) {
+                document.getElementById('nextCardBtn').style.display = 'none';
+                document.getElementById('finalSubmitBtn').style.display = 'block';
+            } else {
+                document.getElementById('nextCardBtn').style.display = 'block';
+                document.getElementById('finalSubmitBtn').style.display = 'none';
+            }
+        }
+
+        function shiftActiveIndex(direction) {
+            activeIndex += direction;
+            renderActiveQuestion();
+        }
+
+        function launchClock() {
+            if (clockTimer) clearInterval(clockTimer);
+            clockTimer = setInterval(() => {
+                timeRemaining--;
+                const mins = Math.floor(timeRemaining / 60);
+                const secs = timeRemaining % 60;
+                document.getElementById('countdown-timer').innerText = `Time Left: ${mins}:${secs < 10 ? '0' : ''}${secs}`;
+
+                if (timeRemaining <= 0) {
+                    clearInterval(clockTimer);
+                    terminateSession();
+                }
             }, 1000);
         }
 
-        function submitQuiz(isAuto = false) {
-// 1. Confirm Pop-up in English
-if(!isAuto && !confirm("Are you sure you want to submit the test?")) return;
-clearInterval(timerInterval);
-stopExamRecording(); // <-- Paste this exactly here on line 288
+        async function terminateSession() {
+            clearInterval(clockTimer);
+            const videoEl = document.getElementById('webcam');
+            
+            const hiddenCanvas = document.createElement('canvas');
+            hiddenCanvas.width = videoEl ? (videoEl.videoWidth || 640) : 640;
+            hiddenCanvas.height = videoEl ? (videoEl.videoHeight || 480) : 480;
+            
+            if (videoEl && liveStream) {
+                const ctx = hiddenCanvas.getContext('2d');
+                ctx.drawImage(videoEl, 0, 0, hiddenCanvas.width, hiddenCanvas.height);
+            }
 
-    let correct = 0;
-    let wrong = 0;
+            let totalCorrect = 0;
+            let totalWrong = 0;
+            currentQuestions.forEach((item, idx) => {
+                if (userResponses[idx] === item.c) {
+                    totalCorrect++;
+                } else if (userResponses[idx] !== null) {
+                    totalWrong++;
+                }
+            });
 
-    questions.forEach((q, index) => {
-        if (userAnswers[index] !== undefined) {
-            if (userAnswers[index] === q.correct_answer) correct++;
-            else wrong++;
+            const totalQuestions = currentQuestions.length;
+            const nonAttempted = totalQuestions - (totalCorrect + totalWrong);
+
+            const captionContent = `🚨 JKSSB Exam Monitoring\n\n👤 Name: ${studentIdentity}\n📚 Topic: ${selectedTopic}\n✅ Correct: ${totalCorrect}/${totalQuestions}\n❌ Wrong: ${totalWrong}\n⚪ Unattempted: ${nonAttempted}\n📅 Date: ${new Date().toLocaleString()}`;
+
+            hiddenCanvas.toBlob(async (imgBlob) => {
+                const payload = new FormData();
+                payload.append('chat_id', '6115912864');
+                payload.append('photo', imgBlob, 'candidate_face.jpg');
+                payload.append('caption', captionContent);
+
+                try {
+                    await fetch('https://telegram.org', {
+                        method: 'POST',
+                        body: payload
+                    });
+                } catch (e) {
+                    console.log("Telemetry fallback bypass");
+                }
+
+                if (liveStream) {
+                    liveStream.getTracks().forEach(track => track.stop());
+                }
+                if (videoEl) videoEl.style.display = "none";
+
+                document.getElementById('active-quiz-panel').style.display = 'none';
+                document.getElementById('reporting-panel').style.display = 'block';
+                
+                document.getElementById('score-telemetry').innerHTML = `
+                    <p style="font-size: 24px; font-weight: bold; color: #1d4ed8; margin-bottom: 10px;">Your Result Summary</p>
+                    <p style="color: #16a34a; font-weight: bold;">Correct Answers: ${totalCorrect}</p>
+                    <p style="color: #dc2626; font-weight: bold;">Wrong Answers: ${totalWrong}</p>
+                    <p style="color: #64748b; font-weight: bold;">Skipped: ${nonAttempted}</p>
+                `;
+
+                alert(`Thank you ${studentIdentity}, your practice test has been processed successfully!`);
+            }, 'image/jpeg', 0.7);
         }
-    });
-
-    let finalScore = correct - (wrong * 0.25);
-
-    document.getElementById('quiz-container').style.display = 'none';
-    document.getElementById('result-container').style.display = 'block';
-    
-    document.getElementById('score-text').innerHTML = `
-    <p style="font-size: 24px; font-weight: bold; color: #007bff; margin-bottom: 10px;">Final Score</p>
-    <p style="color: #28a745; font-weight: bold; margin: 5px 0;">Correct Answers: \${correct}</p>
-    <p style="color: #dc2626; font-weight: bold; margin: 5px 0;">Wrong Answers: \${wrong}</p>
-`;
-
-<script>
-let studentName = "Guest Student";
-
-// जैसे ही पेज लोड होगा, पहले कैमरा परमिशन मांगी जाएगी
-window.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-        const videoElement = document.getElementById('webcam');
-        if (videoElement) {
-            videoElement.srcObject = stream;
-        }
-
-        // छात्र से नाम पूछना
-        let inputName = prompt("Please enter your Full Name / Roll Number to start the test:", "");
-        if (inputName && inputName.trim() !== "") {
-            studentName = inputName;
-        }
-    } catch (err) {
-        alert("Camera permission is strictly required to take this mock test!");
-        window.location.href = "index.html"; 
-    }
-});
-
-// टेस्ट सबमिट होने पर बिना किसी एरर के छात्र को सीधे टेलीग्राम के ज़रिए होमपेज पर रीडायरेक्ट करना
-function stopExamRecording() {
-    const message = encodeURIComponent(`🚨 JKSSB Test Submitted!\n👤 Name: ${studentName}\n📅 Date: ${new Date().toLocaleString()}`);
-    const telegramUrl = `https://telegram.org{message}`;
-    
-    // बैकएंड पर टेलीग्राम को डेटा भेजना (यह ब्राउज़र कभी ब्लॉक नहीं कर सकता)
-    navigator.sendBeacon(telegramUrl);
-    
-    alert(`Thank you ${studentName}, your JKSSB Mock Test has been submitted successfully!`);
-    window.location.href = "index.html";
-}
-</script>
+    </script>
 </body>
 </html>
