@@ -350,6 +350,7 @@
         }
 
                 // लीडरबोर्ड और टेलीग्राम हटाकर सिर्फ सीधा सबमिशन और रीडायरेक्ट
+                // टेस्ट सबमिट होने पर सभी प्रश्नों के उत्तर और एक्सप्लेनेशन दिखाना
         async function terminateSession() {
             clearInterval(clockTimer);
 
@@ -360,11 +361,127 @@
             const videoEl = document.getElementById('webcam');
             if (videoEl) videoEl.style.display = "none";
 
-            // सीधे छात्र को सफलता का मैसेज दिखाना
-            alert(`Thank you ${studentIdentity}, your JKSSB practice test has been submitted successfully!`);
+            // स्कोर की गणना करना
+            let totalCorrect = 0;
+            let totalWrong = 0;
+            currentQuestions.forEach((item, idx) => {
+                if (userResponses[idx] === item.c) {
+                    totalCorrect++;
+                } else if (userResponses[idx] !== null) {
+                    totalWrong++;
+                }
+            });
+
+            // मुख्य टेस्ट पैनल को छुपाना और रिजल्ट/एक्सप्लेनेशन बोर्ड को स्क्रीन पर दिखाना
+            document.getElementById('active-quiz-panel').style.display = 'none';
             
-            // सीधा होमपेज या मुख्य डैशबोर्ड पर वापस भेजना
-            window.location.href = "index.html";
+            // नया एक्सप्लेनेशन कंटेनर बनाना
+            const explanationBox = document.createElement('div');
+            explanationBox.className = 'quiz-box';
+            explanationBox.style.display = 'block';
+            explanationBox.style.maxWidth = '800px';
+            explanationBox.style.margin = '0 auto';
+            explanationBox.style.background = 'white';
+            explanationBox.style.padding = '30px';
+            explanationBox.style.borderRadius = '12px';
+            explanationBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.05)';
+
+            // स्कोरकार्ड का हेडर जोड़ना
+            let explanationHTML = `
+                <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px;">
+                    <h2 style="color: #22c55e; margin-bottom: 10px;">Practice Examination Concluded</h2>
+                    <p style="font-size: 22px; font-weight: bold; color: #1d4ed8;">Your Score: ${totalCorrect} / ${currentQuestions.length}</p>
+                    <p style="color: #16a34a; font-weight: bold; display: inline-block; margin-right: 15px;">Correct: ${totalCorrect}</p>
+                    <p style="color: #dc2626; font-weight: bold; display: inline-block;">Wrong: ${totalWrong}</p>
+                </div>
+                <h3 style="font-size: 20px; color: #334155; margin-bottom: 20px; border-left: 4px solid #1d4ed8; padding-left: 10px;">Answer Key & Detailed Explanation:</h3>
+            `;
+
+            // सभी 10 प्रश्नों के जवाब और उनके शॉर्टकट एक्सप्लेनेशन को लूप चलाकर जोड़ना
+            currentQuestions.forEach((item, idx) => {
+                const studentAns = userResponses[idx] !== null ? item.o[userResponses[idx]] : "Not Attempted";
+                const correctAns = item.o[item.c];
+                const isCorrect = userResponses[idx] === item.c;
+
+                // हर चैप्टर के हिसाब से एक्सप्लेनेशन टेक्स्ट सेट करना
+                let explanationText = "";
+                                if (selectedTopic === "LCM & HCF") {
+                    if (idx === 0) explanationText = "HCF of 24, 36, and 40 is 4. Explanation: Factors of 24 (4*6), 36 (4*9), 40 (4*10). The highest common factor among them is 4.";
+                    else if (idx === 1) explanationText = "Let numbers be 2x and 3x. LCM of 2x and 3x is 6x. Given 6x = 48 -> x = 8. Sum of numbers = 2x + 3x = 5x = 5 * 8 = 40.";
+                    else if (idx === 2) explanationText = "Formula: Product of two numbers = HCF * LCM. 275 * First Number = 11 * 7700 -> First Number = (11 * 7700) / 275 = 308.";
+                    else if (idx === 3) explanationText = "Required number = HCF of (91-43), (183-91), and (183-43) -> HCF of 48, 92, and 140 which is 4.";
+                    else if (idx === 4) explanationText = "Formula: LCM = HCF * Product of ratios -> LCM = 4 * 3 * 4 = 48.";
+                    else if (idx === 5) explanationText = "HCF of Fractions = HCF of Numerators / LCM of Denominators -> HCF(2, 8, 16, 10) / LCM(3, 9, 81, 27) = 2 / 81.";
+                    else if (idx === 6) explanationText = "Numbers are obtained by multiplying the ratio terms by HCF (12) -> 1*12 = 12, 2*12 = 24, 3*12 = 36. So numbers are 12, 24, 36.";
+                    else if (idx === 7) explanationText = "LCM of two co-prime numbers is always equal to their product. Given product is 117, so LCM is 117.";
+                    else if (idx === 8) explanationText = "LCM of 5, 6, 7, 8 is 840. The number is of the form 840k + 3. For k=2, number is 1683, which is perfectly divisible by 9.";
+                    else if (idx === 9) explanationText = "LCM must always be a perfect multiple of HCF. Since 60 is not completely divisible by 8, it can never be their LCM.";
+                    else explanationText = "Apply standard factorization or division method to find HCF/LCM.";
+                } 
+                                else if (selectedTopic === "Time & Work") {
+                    if (idx === 0) explanationText = "Formula: (A * B) / (A + B) -> (10 * 15) / (10 + 15) = 150 / 25 = 6 days.";
+                    else if (idx === 1) explanationText = "B's 1 day work = (1/4) - (1/12) = 2/12 = 1/6. Therefore, B alone will complete the work in 6 days.";
+                    else if (idx === 2) explanationText = "Total work = 60 units. A=4 units/day, B=3 units/day. Combined 4-day work = (4+3)*4 = 28 units. Remaining work = 60 - 28 = 32 units. Fraction left = 32/60 = 8/15.";
+                    else if (idx === 3) explanationText = "Efficiency ratio A:B = 2:1. Total work done together in 14 days = (2+1) * 14 = 42 units. A alone will finish it in = 42 / 2 = 21 days.";
+                    else if (idx === 4) explanationText = "Total work = 60 units. Efficiency: A=3, B=2, C=1. Day 1 & 2: A works alone = 3+3 = 6 units. Day 3: A+B+C work together = 3+2+1 = 6 units. Total in 3 days = 12 units. To complete 60 units, it takes (60/12) * 3 = 15 days.";
+                    else if (idx === 5) explanationText = "Total work = 24 units. Efficiency: A=4, B=3, A+B+C = 8 (since completed in 3 days). Thus, C's efficiency = 8 - (4+3) = 1 unit. Share of C = (1/8) * 3200 = Rs. 400.";
+                    else if (idx === 6) explanationText = "12 men = 18 women -> 2 men = 3 women. 8 men + 16 women = 12 women + 16 women = 28 women. Using M1*D1 = M2*D2 -> 18 * 14 = 28 * D2 -> D2 = 9 days.";
+                    else if (idx === 7) explanationText = "Total work = 72 units. Efficiency: A=3, B=8, C=6. B and C's 3-day work = (8+6)*3 = 42 units. Remaining work = 72 - 42 = 30 units. Done by A in = 30 / 3 = 10 days.";
+                    else if (idx === 8) explanationText = "Time taken for full work: X = 10 * 4 = 40 days; Y = 40 * (100/40) = 100 days; Z = 13 * 3 = 39 days. Z takes the least time, so Z finishes first.";
+                    else if (idx === 9) explanationText = "Total work = 600 units (1 man * 100 days -> efficiency of 1 man = 6 units). 10 men's 6-day work = 10 * 6 * 6 = 360 units. Remaining 240 units done by 15 women in 6 days -> 15 women's efficiency = 240/6 = 40 units. 1 woman's efficiency = 40/15 = 8/3. Time for 1 woman = 600 / (8/3) = 225 days.";
+                }
+                                else if (selectedTopic === "Ratio & Proportion") {
+                    if (idx === 0) explanationText = "A:C = (A/B) * (B/C) = (2/3) * (4/5) = 8/15.";
+                    else if (idx === 1) explanationText = "Third proportional formula: b^2 / a -> (12 * 12) / 9 = 144 / 9 = 16.";
+                    else if (idx === 2) explanationText = "Let the number of boys be x. Then girls = 100 - x. Equation: 3.60x + 2.40(100 - x) = 312 -> 1.20x = 72 -> x = 60 boys. Therefore, girls = 100 - 60 = 40.";
+                    else if (idx === 3) explanationText = "Using product of extremes = product of means: 0.75 * 8 = 5 * x -> 6 = 5x -> x = 6/5 = 1.20.";
+                    else if (idx === 4) explanationText = "A:B = 2:3 and B:C = 5:8. Equalize B: Multiply A:B by 5 and B:C by 3 -> A:B:C = 10:15:24. Sum of ratios = 49. Second number (B) = (15/49) * 98 = 30.";
+                    else if (idx === 5) explanationText = "Let numbers be 3x and 5x. (3x - 9) / (5x - 9) = 12 / 23 -> 69x - 207 = 60x - 108 -> 9x = 99 -> x = 11. Smaller number = 3x = 3 * 11 = 33.";
+                    else if (idx === 6) explanationText = "New ratio = (5 * 140%) : (7 * 150%) : (8 * 175%) -> 7 : 10.5 : 14. Multiply by 2 to clear decimals -> 14 : 21 : 28. Divide by 7 -> 2 : 3 : 4.";
+                    else if (idx === 7) explanationText = "In 60 liters, Milk = 40L, Water = 20L. To make ratio 1:2, Milk stays 40L, so total Water must become 80L. Additional water needed = 80 - 20 = 60 liters.";
+                    else if (idx === 8) explanationText = "Using Allegation Rule: (Gold - Mixture) / (Mixture - Copper) -> (19 - 15) : (15 - 9) -> 4 : 6 = 3 : 2.";
+                    else if (idx === 9) explanationText = "Let salaries be 2x and 3x. (2x + 4000) / (3x + 4000) = 40 / 57 -> 114x + 228000 = 120x + 160000 -> 6x = 68000 -> x = 34000/3. Sumit's salary = 3x = 3 * (34000/3) = Rs. 38,000.";
+                }
+                                else if (selectedTopic === "Percentage") {
+                    if (idx === 0) explanationText = "Calculation: 300 * (25/100) * (20/100) = 300 * 0.25 * 0.20 = 15.";
+                    else if (idx === 1) explanationText = "Formula: [R / (100 - R)] * 100 -> [20 / (100 - 20)] * 100 = (20/80) * 100 = 25%.";
+                    else if (idx === 2) explanationText = "Let marks be x and (x - 9). Sum = 2x - 9. Given x = 56% of (2x - 9) -> 100x = 112x - 504 -> 12x = 504 -> x = 42. Other student gets 42 - 9 = 33. Marks are 42, 33.";
+                    else if (idx === 3) explanationText = "Apples sold = 40%, so remaining apples = 60%. Given 60% of Total = 420 -> Total = (420 * 100) / 60 = 700 apples.";
+                    else if (idx === 4) explanationText = "Numbers from 1 to 70 ending with 1 or 9 are 1,9,11,19,21,29,31,39,41,49,51,59,61,69. Total 14 numbers. Percentage = (14 / 70) * 100 = 20%.";
+                    else if (idx === 5) explanationText = "Formula: [R / (100 + R)] * 100 -> [20 / (100 + 20)] * 100 = (20/120) * 100 = 16.66%.";
+                    else if (idx === 6) explanationText = "Valid votes = 80% of 7500 = 6000. Winner gets 55%, so loser gets 45%. Loser's valid votes = 45% of 6000 = 2700.";
+                    else if (idx === 7) explanationText = "Let cost of taxable items be x. 6% of x = 0.30 Rs -> x = (0.30 * 100) / 6 = 5 Rs. Total cost = 25 Rs. Cost of tax-free items = 25 - (5 + 0.30) = Rs. 19.70.";
+                    else if (idx === 8) explanationText = "Students of 8 years = 48. Students above 8 years = 2/3 of 48 = 32. Total students of 8 and above = 48 + 32 = 80. These represent 80% of total school strength (since 20% are below 8). Total students = (80 / 80%) = 100.";
+                    else if (idx === 9) explanationText = "Let the third number be 100. First number = 120, Second number = 150. Ratio = 120 : 150 = 4 : 5.";
+                }
+
+                explanationHTML += `
+                    <div style="border-bottom: 1px dashed #cbd5e1; padding: 15px 0; margin-bottom: 15px;">
+                        <p style="font-weight: 600; font-size: 16px; margin-bottom: 8px;">Q${idx + 1}: ${item.q}</p>
+                        <p style="color: ${isCorrect ? '#16a34a' : '#dc2626'}; font-weight: 500; font-size: 14px; margin-bottom: 4px;">
+                            ${isCorrect ? '✅ Correct' : '❌ Wrong'} | Your Answer: <span style="font-weight: bold;">${studentAns}</span>
+                        </p>
+                        <p style="color: #16a34a; font-weight: 500; font-size: 14px; margin-bottom: 8px;">
+                            👉 Correct Answer: <span style="font-weight: bold;">${correctAns}</span>
+                        </p>
+                        <div style="background: #f8fafc; border-left: 3px solid #64748b; padding: 10px; font-size: 14px; color: #475569; line-height: 1.4;">
+                            <strong>Explanation:</strong> ${explanationText || "Standard shortcut math validation step applied directly."}
+                        </div>
+                    </div>
+                `;
+            });
+
+            // होमपेज पर वापस जाने का बटन जोड़ना
+            explanationHTML += `
+                <div style="text-align: center; margin-top: 35px;">
+                    <button class="start-btn" onclick="window.location.href='index.html'" style="background: #1d4ed8; padding: 12px 40px; font-size: 16px;">Finish & Exit</button>
+                </div>
+            `;
+
+            explanationBox.innerHTML = explanationHTML;
+            document.body.appendChild(explanationBox);
+
+            alert(`Thank you ${studentIdentity}, your score is calculated. Scroll down to check answers with details!`);
         }
     </script>
 </body>
