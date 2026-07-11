@@ -270,10 +270,25 @@
                     videoEl.style.display = "block";
                 }
 
-                let inputUser = prompt("Please enter your Full Name / Roll Number to verify identity:", "");
-                if (inputUser && inputUser.trim() !== "") {
-                    studentIdentity = inputUser;
-                }
+let inputUser = prompt("Please enter your Full Name / Roll Number to verify identity:", "");
+
+// Agar user Cancel dabaye ya khali chhod de
+if (inputUser === null || inputUser.trim() === "") {
+    alert("Test start karne ke liye Name/Roll Number dalna zaroori hai!");
+    
+    // WebCam ka live stream band karne ke liye (ताकि कैमरा चालू न रह जाए)
+    if (liveStream) {
+        liveStream.getTracks().forEach(track => track.stop());
+    }
+    if (videoEl) {
+        videoEl.style.display = "none";
+    }
+    
+    return; // 🔥 Yeh line test ko aage badhne se yahin ROOK degi!
+}
+
+// Agar naam sahi dala hai toh identity set karo
+studentIdentity = inputUser;
 
                 selectedTopic = topicName;
                 currentQuestions = dynamicBank[topicName] || [];
