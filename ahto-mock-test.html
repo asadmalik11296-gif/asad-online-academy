@@ -44,6 +44,7 @@
 <body>
 
 <div class="test-container">
+    <div class="timer-box">⏱ Time Left: <span id="timeDisplay">120:00</span></div>
     <h1>JKSSB Assistant Handloom Training Officer</h1>
     <h3>Full Length MCQ Mock Test (Negative Marking: 0.25)</h3>
 
@@ -1379,12 +1380,47 @@
     </form>
 
     <script>
-        function calculateJKSSBScore(e) {
-            e.preventDefault();
-            let totalQuestions = 120; 
-            let correct = 0;
-            let wrong = 0;
-            let attempted = 0;
+        let totalTimeInSeconds = 120 * 60; // 120 Minutes mapping in seconds
+let timerInterval;
+
+function startMockTestTimer() {
+    timerInterval = setInterval(function() {
+        let minutes = Math.floor(totalTimeInSeconds / 60);
+        let seconds = totalTimeInSeconds % 60;
+
+        // Formating track for single digits (e.g. 05 instead of 5)
+        if (seconds < 10) seconds = "0" + seconds;
+        if (minutes < 10) minutes = "0" + minutes;
+
+        document.getElementById('timeDisplay').innerText = minutes + ":" + seconds;
+
+        if (totalTimeInSeconds <= 0) {
+            clearInterval(timerInterval);
+            document.getElementById('timeDisplay').innerText = "00:00 - TIME OVER";
+            alert("Bhai, 120 mins poore ho gaye hain! Aapka test automatically submit ho raha hai.");
+            // Form submit trigger mapping
+            document.getElementById('quizForm').dispatchEvent(new Event('submit'));
+        }
+        totalTimeInSeconds--;
+    }, 1000);
+}
+
+// Page load hote hi timer run karne ke liye loop bind
+window.onload = function() {
+    startMockTestTimer();
+};
+    function calculateJKSSBScore(e) {
+        e.preventDefault(); // Sabse pehle form submit event ko roko
+        
+        clearInterval(timerInterval); // Submit hote hi timer stop ho jayega
+        if(document.querySelector('.timer-box')) {
+            document.querySelector('.timer-box').style.display = 'none'; // Timer hide box
+        }
+        
+        let totalQuestions = 120;
+        let correct = 0;
+        let wrong = 0;
+        let attempted = 0;
             
             for(let i = 1; i <= totalQuestions; i++) {
                 let radioGroup = document.getElementsByName('q' + i);
