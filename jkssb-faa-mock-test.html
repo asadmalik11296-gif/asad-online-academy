@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JKSSB FAA Full Mock Test 2026 - Official Pattern</title>
+    <style>
+        :root { --primary: #0c54a3; --success: #28a745; --danger: #dc3545; --gray: #6c757d; --light: #f4f6f9; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: var(--light); margin: 0; padding: 0; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
+        
+        /* Instruction Screen Styling */
+        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1, h2, h3 { color: #333; }
+        .rules-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .rules-table th, .rules-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        .rules-table th { background-color: #f8f9fa; }
+        .checkbox-container { margin: 25px 0; display: flex; align-items: center; gap: 10px; font-weight: bold; }
+        .btn { background: var(--primary); color: white; border: none; padding: 12px 30px; font-size: 16px; font-weight: bold; border-radius: 4px; cursor: pointer; display: inline-block; text-decoration: none; }
+        .btn:disabled { background: #ccc; cursor: not-allowed; }
+
+        /* Main Test Screen Layout */
+        #test-screen { display: none; grid-template-columns: 7fr 3fr; gap: 20px; }
+        .timer-bar { background: #333; color: white; padding: 15px; font-size: 18px; font-weight: bold; border-radius: 4px; display: flex; justify-content: space-between; margin-bottom: 20px; }
+        
+        /* Question Palette */
+        .palette-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 15px; max-height: 400px; overflow-y: auto; padding: 5px; }
+        .palette-btn { padding: 10px; text-align: center; border: 1px solid #ccc; background: #e9ecef; font-weight: bold; border-radius: 4px; cursor: pointer; }
+        .palette-btn.answered { background: var(--success); color: white; border-color: var(--success); }
+        .palette-btn.not-answered { background: var(--danger); color: white; border-color: var(--danger); }
+        .palette-btn.active { border: 2px solid #000; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
+
+        /* Options Area */
+        .options-container { margin: 20px 0; }
+        .option-label { display: flex; align-items: center; gap: 12px; background: #f8f9fa; padding: 15px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #eee; cursor: pointer; transition: 0.2s; }
+        .option-label:hover { background: #f1f3f5; border-color: #ccc; }
+        
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; }
+        .btn-nav { background: #555; padding: 10px 20px; }
+        .btn-next { background: var(--success); }
+        .btn-submit { background: var(--danger); }
+
+        /* Result Screen */
+        #result-screen { display: none; text-align: center; }
+        .score-box { font-size: 48px; font-weight: bold; color: var(--primary); margin: 20px 0; }
+        
+        @media (max-width: 768px) {
+            #test-screen { grid-template-columns: 1fr; }
+        }
+    </style>
+  <!-- 💻 GOOGLE ADSENSE CODE INTEGRATION -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6086620349531765"
+     crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-6086620349531765">
+</head>
+<body>
+
+<div class="container">
+    <!-- 📄 STAGE 1: INSTRUCTIONS PAGE -->
+    <div id="instruction-screen" class="card">
+        <h2>JKSSB Finance Account Assistant (FAA) Full Mock Test 2026</h2>
+        <p style="color: #666;">Please read the following instructions carefully before starting the examination.</p>
+        
+        <table class="rules-table">
+            <tr><th>Parameter</th><th>Details</th></tr>
+            <tr><td><strong>Total Questions</strong></td><td>120 Multiple Choice Questions (MCQs)</td></tr>
+            <tr><td><strong>Time Allowed</strong></td><td>120 Minutes (2 Hours)</td></tr>
+            <tr><td><strong>Maximum Marks</strong></td><td>120 Marks</td></tr>
+            <tr><td><strong>Marking Scheme</strong></td><td>+1.00 Mark for every correct answer</td></tr>
+            <tr><td><strong>Negative Marking</strong></td><td><span style="color: var(--danger); font-weight: bold;">0.25 Marks</span> will be deducted for each wrong answer</td></tr>
+        </table>
+
+        <h3>General Instructions:</h3>
+        <ul>
+            <li>The countdown timer at the top right of the screen will display the remaining time.</li>
+            <li>Clicking on 'Save & Next' will secure your answer and move to the next question.</li>
+            <li>The question palette on the right will display the status of each question using color codes (Green = Answered, Red = Skipped/Unanswered).</li>
+            <li>The test will automatically submit once the 120-minute timer hits zero.</li>
+        </ul>
+
+        <div class="checkbox-container">
+            <input type="checkbox" id="agree-chk" onchange="toggleStartBtn()">
+            <label for="agree-chk">I have read and understood all the above instructions thoroughly.</label>
+        </div>
+
+        <button id="start-btn" class="btn" disabled onclick="startTest()">👉 START MOCK TEST</button>
+    </div>
+
+    <!-- ⏱️ STAGE 2: LIVE TEST DASHBOARD -->
+    <div id="test-screen">
+        <!-- Left Side: Questions Area -->
+        <div>
+            <div class="timer-bar">
+                <span id="section-title">Section: JKSSB Official Pattern 2026</span>
+                <span id="time-left">Time Left: 120:00</span>
+            </div>
+            
+            <div class="card">
+                <h3 id="question-number">Question No. 1</h3>
+                <p id="question-text" style="font-size: 18px; font-weight: 500;"></p>
+                
+                <div class="options-container" id="options-block">
+                    <!-- Dynamic Radio Buttons generate here -->
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn btn-nav" onclick="prevQuestion()">⬅️ Previous</button>
+                    <button class="btn btn-next" onclick="nextQuestion()">Save & Next ➡️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Status Palette -->
+        <div>
+            <div class="card">
+                <h3>Question Palette</h3>
+                <div style="display: flex; gap: 10px; font-size: 12px; margin-bottom: 10px;">
+                    <span>🟢 Answered</span>
+                    <span>🔴 Not Answered</span>
+                </div>
+                <div class="palette-grid" id="palette-box">
+                    <!-- Buttons generate here dynamically -->
+                </div>
+                <br>
+                <button class="btn btn-submit" style="width: 100%;" onclick="confirmSubmit()">🛑 Submit Entire Test</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🛑 STAGE 3: RESULT SCREEN -->
+    <div id="result-screen" class="card">
+        <h2>Performance Scorecard</h2>
+        <p>Your examination has been evaluated successfully according to JKSSB norms.</p>
+        <div class="score-box" id="final-marks">0.00 / 120</div>
+        
+        <table class="rules-table" style="max-width: 500px; margin: 0 auto;">
+            <tr><td>Total Attempted</td><td id="res-attempted" style="font-weight:bold;">0</td></tr>
+            <tr><td>Correct Answers</td><td id="res-correct" style="color:var(--success); font-weight:bold;">0</td></tr>
+            <tr><td>Incorrect Answers</td><td id="res-incorrect" style="color:var(--danger); font-weight:bold;">0</td></tr>
+            <tr><td>Negative Marks deducted</td><td id="res-negative" style="color:var(--danger); font-weight:bold;">0.00</td></tr>
+        </table>
+        <br><br>
+        <a href="index.html" class="btn">⬅️ Back to Homepage</a>
+    </div>
+</div>
+
+<script>
+    // 📊 120 QUESTIONS DATA BASE
+    const questions = [
+        // ======= SECTION 1: GENERAL KNOWLEDGE (J&K SPECIAL REFERENCE) - 30 Qs =======
+        { q: "According to the J&K Reorganisation Act 2019, which section deals with the setting up of a Legislative Assembly for the Union Territory of Jammu and Kashmir?", o: ["Section 14", "Section 32", "Section 45", "Section 53"], a: 0 },
+        { q: "Which river is widely known as the 'Sorrow of Kashmir' due to its historical tendency to cause devastating flash floods in the valley plains?", o: ["Jhelum River", "Chenab River", "Rambi Ara", "Veshaw River"], a: 3 },
+        { q: "Who among the following was the author of 'Rajatarangini', which provides the earliest historical account of Kashmir?", o: ["Kalhana", "Jonaraja", "Bilhana", "Vasugupta"], a: 0 },
+        { q: "The famous Treaty of Amritsar was signed in which year, leading to the creation of the Princely State of Jammu and Kashmir?", o: ["1846", "1857", "1947", "1885"], a: 0 },
+        { q: "Which mountain range separates the Kashmir Valley from the Outer Himalayas/Jammu region?", o: ["Pir Panjal Range", "Zanskar Range", "Karakoram Range", "Ladakh Range"], a: 0 },
+        { q: "Wular Lake, one of the largest freshwater lakes in Asia, is fed primarily by which river?", o: ["Indus River", "Jhelum River", "Tawi River", "Ravi River"], a: 1 },
+        { q: "Who built the famous Shalimar Bagh in Srinagar for his wife Nur Jahan?", o: ["Akbar", "Shah Jahan", "Jahangir", "Aurangzeb"], a: 2 },
+        { q: "Which high mountain pass connects the Kashmir Valley with the Ladakh region?", o: ["Banihal Pass", "Zoji La Pass", "Khardung La", "Rohtang Pass"], a: 1 },
+        { q: "The Martand Sun Temple in Jammu and Kashmir was built by which ruler of the Karkota Dynasty?", o: ["Lalitaditya Muktapida", "Durlabh Vardhana", "Avantivarman", "Didda"], a: 0 },
+        { q: "Which area in Jammu division is famous for its high-quality Saffron cultivation, besides Pampore in Kashmir?", o: ["Kishtwar", "Bhaderwah", "Reasi", "Ramban"], a: 0 },
+        { q: "What is the official state animal of the Union Territory of Jammu and Kashmir?", o: ["Hangul (Kashmir Stag)", "Snow Leopard", "Markhor", "Black Bear"], a: 0 },
+        { q: "The Baglihar Hydroelectric Power Project is constructed across which of the following rivers?", o: ["Jhelum", "Chenab", "Indus", "Ravi"], a: 1 },
+        { q: "Which town in Kashmir is popularly known as the 'Apple Town' of Jammu and Kashmir?", o: ["Sopore", "Anantnag", "Baramulla", "Shopian"], a: 0 },
+        { q: "Who was the last ruling Maharaja of the Princely State of Jammu and Kashmir?", o: ["Maharaja Gulab Singh", "Maharaja Ranbir Singh", "Maharaja Hari Singh", "Maharaja Pratap Singh"], a: 2 },
+        { q: "The Uri Hydroelectric Project is located on which river in the Baramulla district?", o: ["Jhelum River", "Chenab River", "Sindh River", "Lidder River"], a: 0 },
+        { q: "Which lake is located at the foothills of Mount Haramukh and is considered highly sacred?", o: ["Gangabal Lake", "Manasbal Lake", "Dal Lake", "Wular Lake"], a: 0 },
+        { q: "The climate of Jammu division is predominantly of which type?", o: ["Subtropical", "Mediterranean", "Arctic", "Alpine"], a: 0 },
+        { q: "Which district in Jammu and Kashmir is known as the 'City of Temples'?", o: ["Jammu", "Kathua", "Udhampur", "Samba"], a: 0 },
+        { q: "In which year was the Instrument of Accession signed by Maharaja Hari Singh with India?", o: ["1947", "1948", "1950", "1956"], a: 0 },
+        { q: "Which wetland of Jammu and Kashmir is a designated Ramsar Site located near Jammu?", o: ["Surinsar-Mansar Lakes", "Hokersar", "Shallbugh", "Wular Lake"], a: 0 },
+        { q: "Who was appointed as the first Lieutenant Governor of the Union Territory of Jammu and Kashmir?", o: ["Girish Chandra Murmu", "Manoj Sinha", "Satya Pal Malik", "N. N. Vohra"], a: 0 },
+        { q: "The famous Vaishno Devi shrine is located on which mountain in the Reasi district?", o: ["Trikuta Mountain", "Haramukh Mountain", "Afarwat Mountain", "Amarnath Mountain"], a: 0 },
+        { q: "Which passes connect Kishtwar with the Ladakh region?", o: ["Umasi La", "Banihal Pass", "Zoji La", "Margan Pass"], a: 0 },
+        { q: "The Ranbir Canal, an important irrigation canal, takes its water from which river?", o: ["Chenab River", "Tawi River", "Ravi River", "Jhelum River"], a: 0 },
+        { q: "The Jasrota Wildlife Sanctuary is located in which district of Jammu and Kashmir?", o: ["Kathua", "Samba", "Jammu", "Udhampur"], a: 0 },
+        { q: "Which Mughal Emperor shifted the capital from Agra to Srinagar during summer months?", o: ["Jahangir", "Akbar", "Shah Jahan", "Humayun"], a: 0 },
+        { q: "The Gulmarg Biosphere Reserve is highly famous for sheltering which endangered animal?", o: ["Musk Deer", "Hangul", "Brown Bear", "Snow Leopard"], a: 0 },
+        { q: "Which ruler founded the city of Jammu?", o: ["Raja Jambu Lochan", "Raja Bahu Lochan", "Raja Mal Dev", "Maharaja Gulab Singh"], a: 0 },
+        { q: "The Dul Hasti Hydroelectric Plant is built on the river Chenab in which district?", o: ["Kishtwar", "Doda", "Ramban", "Reasi"], a: 0 },
+        { q: "The famous 'Chashme Shahi' spring in Srinagar was built around which year?", o: ["1632", "1586", "1745", "1819"], a: 0 },
+
+        // ======= SECTION 2: ACCOUNTANCY AND BOOK KEEPING - 30 Qs =======
+        { q: "The concept of 'Double Entry System' in accounting implies that every business transaction affects at least:", o: ["One ledger account", "Two ledger accounts", "Three ledger accounts", "All financial records"], a: 1 },
+        { q: "Which accounting concept dictates that a business will continue its operations indefinitely in the future?", o: ["Going Concern Concept", "Business Entity Concept", "Money Measurement Concept", "Dual Aspect Concept"], a: 0 },
+        { q: "The process of transferring journal entries into their respective ledger accounts is called:", o: ["Journalizing", "Posting", "Balancing", "Summarizing"], a: 1 },
+        { q: "Which financial statement shows the financial position of a business entity at a specific point in time?", o: ["Income Statement", "Cash Flow Statement", "Balance Sheet", "Trial Balance"], a: 2 },
+        { q: "According to the basic accounting equation, Assets are always equal to:", o: ["Liabilities + Capital", "Liabilities - Capital", "Capital - Liabilities", "Revenue - Expenses"], a: 0 },
+        { q: "The accounting principle that requires expenses to be recorded in the same period as the revenues they help to generate is the:", o: ["Matching Principle", "Revenue Recognition Principle", "Full Disclosure Principle", "Cost Principle"], a: 0 },
+        { q: "Which type of account is a Bank Account?", o: ["Real Account", "Personal Account", "Nominal Account", "Representative Account"], a: 1 },
+        { q: "Cash discount received from a creditor should be credited to which account?", o: ["Discount Allowed Account", "Discount Received Account", "Creditor's Account", "Cash Account"], a: 1 },
+        { q: "A Trial Balance is prepared primarily to check the:", o: ["Arithmetical accuracy of ledger accounts", "Financial position of business", "Net Profit or Loss", "Valuation of assets"], a: 0 },
+        { q: "Sales returns book is used to record the return of:", o: ["Goods sold on credit", "Goods sold for cash", "Assets sold on credit", "Defective office equipment"], a: 0 },
+        { q: "Which of the following is a non-cash expense?", o: ["Salaries", "Rent Paid", "Depreciation", "Insurance Premium"], a: 2 },
+        { q: "The balance of Petty Cash Book represents an:", o: ["Asset", "Liability", "Expense", "Income"], a: 0 },
+        { q: "Bank Reconciliation Statement is prepared by the:", o: ["Bank Manager", "Accountant of the Business", "Auditor", "Creditor"], a: 1 },
+        { q: "When money is withdrawn by the proprietor for personal use, it is debited to:", o: ["Capital Account", "Drawings Account", "Cash Account", "Expense Account"], a: 1 },
+        { q: "Which of the following errors is not disclosed by a Trial Balance?", o: ["Complete omission of a transaction", "Wrong totaling of Trial Balance", "Posting to wrong side of account", "Error in ledger balancing"], a: 0 },
+        { q: "Goodwill is an example of an:", o: ["Intangible Asset", "Tangible Asset", "Current Asset", "Fictitious Asset"], a: 0 },
+        { q: "Revenue expenditure is intended to benefit:", o: ["The current accounting period", "Multiple accounting years", "The future years indefinitely", "The past accounting period"], a: 0 },
+        { q: "The method of depreciation where the amount of depreciation remains constant every year is called:", o: ["Straight Line Method", "Diminishing Balance Method", "Annuity Method", "Sinking Fund Method"], a: 0 },
+        { q: "The system of accounting followed by most small local traders who do not maintain double entry is:", o: ["Single Entry System", "Accrual System", "Cash System", "Hybrid System"], a: 0 },
+        { q: "Prepaid Rent is classified as a/an:", o: ["Current Asset", "Current Liability", "Nominal Account", "Capital Expense"], a: 0 },
+        { q: "The recording of an asset at its original purchase cost rather than current market value is based on the:", o: ["Cost Concept", "Objectivity Concept", "Conservatism Concept", "Materiality Concept"], a: 0 },
+        { q: "Outstanding salaries are a type of:", o: ["Personal Account", "Real Account", "Nominal Account", "Fictitious Asset"], a: 0 },
+        { q: "A credit balance in the Cash Book indicates:", o: ["Bank Overdraft", "Cash in Hand", "Net Profit", "Net Loss"], a: 0 },
+        { q: "Which voucher is prepared for transactions involving no movement of cash or bank?", o: ["Transfer Voucher", "Debit Voucher", "Credit Voucher", "Receipt Voucher"], a: 0 },
+        { q: "The excess of debit side totals over credit side totals in a nominal account implies:", o: ["An Expense/Loss", "An Income/Gain", "An Asset", "A Liability"], a: 0 },
+        { q: "The periodic check of inventory/stock at the end of the financial term is crucial for:", o: ["Matching concept implementation", "Going concern confirmation", "Consistency validation", "Money measurement check"], a: 0 },
+        { q: "Which system keeps a tracking log of small cash payouts through an advance imprest money?", o: ["Petty Cash Imprest System", "Double entry ledger", "Single Entry Book", "Journal Day Book"], a: 0 },
+        { q: "An error made by recording Rs. 540 as Rs. 450 in both accounts is known as an error of:", o: ["Commission", "Omission", "Principle", "Compensating Error"], a: 0 },
+        { q: "The ledger account which accumulates reserves out of corporate profits is:", o: ["General Reserve Account", "Profit & Loss A/c", "Capital Account", "Suspense Account"], a: 0 },
+        { q: "When a customer returns goods, the seller issues a document called:", o: ["Credit Note", "Debit Note", "Invoice", "Receipt"], a: 0 },
+
+        // ======= SECTION 3: GENERAL ENGLISH - 20 Qs =======
+        { q: "Identify the antonym of the word 'PRUDENT' as frequently used in administrative vocabulary.", o: ["Cautious", "Wise", "Reckless", "Thrifty"], a: 2 },
+        { q: "Fill in the blank with the correct preposition: 'The officer was fully absorbed ______ his official verification report.'", o: ["at", "in", "with", "for"], a: 1 },
+        { q: "Choose the correct active voice for the sentence: 'The notification was published by the JKSSB board.'", o: ["The JKSSB board publishes the notification.", "The JKSSB board published the notification.", "The JKSSB board has published the notification.", "The JKSSB board was publishing the notification."], a: 1 },
+        { q: "Select the synonym for the word 'AMBIGUOUS'.", o: ["Clear", "Unclear", "Definite", "Rigid"], a: 1 },
+        { q: "Fill in the blank with the correct article: 'He is ______ honorable member of the verification committee.'", o: ["a", "an", "the", "No article required"], a: 1 },
+        { q: "Find the correctly spelt word from the options below:", o: ["Committee", "Comittee", "Commitee", "Comitee"], a: 0 },
+        { q: "Identify the part of speech of the underlined word: 'She walked *quickly* to the examination hall.'", o: ["Noun", "Adjective", "Adverb", "Verb"], a: 2 },
+        { q: "Complete the sentence with correct verb form: 'Neither the teacher nor the students ______ arrived yet.'", o: ["has", "have", "is", "was"], a: 1 },
+        { q: "Change into indirect speech: The candidate said, 'I have completed my test.'", o: ["The candidate said that he completed his test.", "The candidate said that he has completed his test.", "The candidate said that he had completed his test.", "The candidate said that I had completed my test."], a: 2 },
+        { q: "Choose the correct one-word substitution for: 'A person who looks at the bright side of things.'", o: ["Pessimist", "Optimist", "Altruist", "Atheist"], a: 1 },
+        { q: "Spot the error in the sentence: 'He is one of those men who does not lie.'", o: ["He is", "one of those men", "who does not", "lie"], a: 2 },
+        { q: "What is the meaning of the idiom 'To burn the midnight oil'?", o: ["To waste oil", "To work late into the night", "To wake up early", "To light a candle"], a: 1 },
+        { q: "Fill in the blank: 'If it rains, the exam ______ be postponed.'", o: ["would", "will", "should", "could"], a: 1 },
+        { q: "Identify the synonym of 'CANDID'.", o: ["Frank", "Deceitful", "Shy", "Arrogant"], a: 0 },
+        { q: "Choose the correct alternative: 'The climate of Jammu is hotter than ______.'", o: ["Kashmir", "that of Kashmir", "those of Kashmir", "Kashmir's climate"], a: 1 },
+        { q: "Fill in the blank: 'He has been studying in this college ______ three years.'", o: ["since", "for", "from", "during"], a: 1 },
+        { q: "Identify the antonym of 'BENEVOLENT'.", o: ["Kind", "Malevolent", "Generous", "Friendly"], a: 1 },
+        { q: "Select the correct plural form of 'Crisis'.", o: ["Crises", "Crisises", "Crisis", "Crisises"], a: 0 },
+        { q: "Fill in the blank: 'Hardly had I reached the center ______ the gates closed.'", o: ["than", "then", "when", "that"], a: 2 },
+        { q: "Choose the correct meaning of the idiom: 'A wild goose chase.'", o: ["A foolish and useless search", "An exciting race", "Hunting birds", "A wise strategy"], a: 0 },
+
+        // ======= SECTION 4: STATISTICS - 10 Qs =======
+        { q: "Which curve shows the inverse relationship between the rate of unemployment and the rate of inflation in an economy?", o: ["Lorenz Curve", "Phillips Curve", "Laffer Curve", "Kuznets Curve"], a: 1 },
+        { q: "Primary data can be collected through which of the following methods?", o: ["Direct personal interviews", "Published journals", "Government websites", "Books"], a: 0 },
+        { q: "The algebraic sum of deviations of a set of observations from their arithmetic mean is always:", o: ["Zero", "One", "Maximum", "Minimum"], a: 0 },
+        { q: "Which measure of central tendency is most affected by extreme values (outliers) in a dataset?", o: ["Mean", "Median", "Mode", "Geometric Mean"], a: 0 },
+        { q: "The relationship between Mean, Median, and Mode in a moderately asymmetrical distribution is given by:", o: ["Mode = 3 Median - 2 Mean", "Mean = 3 Median - 2 Mode", "Median = 3 Mode - 2 Mean", "Mode = 3 Mean - 2 Median"], a: 0 },
+        { q: "The square root of the variance of a dataset is known as its:", o: ["Standard Deviation", "Mean Deviation", "Range", "Quartile Deviation"], a: 0 },
+        { q: "Laspeyre's index formula assigns weight base on the quantities of the:", o: ["Base Year", "Current Year", "Average of both years", "None of these"], a: 0 },
+        { q: "A correlation coefficient value of -1 implies a:", o: ["Perfect negative correlation", "Perfect positive correlation", "No correlation", "Weak negative correlation"], a: 0 },
+        { q: "The probability of getting a sum of 7 when two fair dice are rolled simultaneously is:", o: ["1/6", "1/12", "1/36", "5/36"], a: 0 },
+        { q: "Which index number is termed as the 'Ideal Index Number' because it satisfies both time reversal and factor reversal tests?", o: ["Fisher's Index", "Paasche's Index", "Laspeyre's Index", "Bowley's Index"], a: 0 },
+
+        // ======= SECTION 5: MATHEMATICS - 10 Qs =======
+        { q: "If A and B are two sets such that n(A) = 35, n(B) = 45, and n(A U B) = 65, find n(A ∩ B).", o: ["15", "10", "20", "25"], a: 0 },
+        { q: "The sum of the first 20 natural numbers is:", o: ["210", "190", "200", "220"], a: 0 },
+        { q: "What is the value of log(1000) to the base 10?", o: ["3", "2", "4", "1"], a: 0 },
+        { q: "The derivative of x^3 with respect to x is:", o: ["3x^2", "x^2", "3x", "2x^3"], a: 0 },
+        { q: "What is the value of the determinant of a matrix whose two rows are identical?", o: ["0", "1", "-1", "Any real number"], a: 0 },
+        { q: "Find the general term of an Arithmetic Progression whose first term is 5 and common difference is 3.", o: ["3n + 2", "3n + 5", "5n + 3", "2n + 3"], a: 0 },
+        { q: "What is the probability of selecting a vowel from the letters of the English alphabet?", o: ["5/26", "21/26", "1/26", "1/5"], a: 0 },
+        { q: "The slope of a line parallel to the x-axis is always:", o: ["0", "1", "Undefined", "-1"], a: 0 },
+        { q: "The value of sin^2(theta) + cos^2(theta) is equal to:", o: ["1", "0", "-1", "2"], a: 0 },
+        { q: "If a matrix has 4 rows and 3 columns, the total number of elements in the matrix is:", o: ["12", "7", "1", "14"], a: 0 },
+
+        // ======= SECTION 6: GENERAL SCIENCE - 10 Qs =======
+        { q: "Which of the following vitamins is water-soluble?", o: ["Vitamin C", "Vitamin A", "Vitamin D", "Vitamin K"], a: 0 },
+        { q: "What is the chemical name of common baking soda?", o: ["Sodium Bicarbonate", "Sodium Carbonate", "Calcium Carbonate", "Sodium Chloride"], a: 0 },
+        { q: "Which organelle is universally known as the 'Powerhouse of the Cell'?", o: ["Mitochondria", "Nucleus", "Ribosome", "Golgi Bodies"], a: 0 },
+        { q: "What is the SI unit of electric current?", o: ["Ampere", "Volt", "Ohm", "Watt"], a: 0 },
+        { q: "The process of conversion of a solid directly into gas without passing through liquid state is called:", o: ["Sublimation", "Evaporation", "Condensation", "Melting"], a: 0 },
+        { q: "Which gas is primarily responsible for global warming as a greenhouse gas?", o: ["Carbon Dioxide", "Oxygen", "Nitrogen", "Argon"], a: 0 },
+        { q: "The main constituent of CNG (Compressed Natural Gas) is:", o: ["Methane", "Ethane", "Propane", "Butane"], a: 0 },
+        { q: "Which mirror is extensively used by dentists to see large images of teeth?", o: ["Concave Mirror", "Convex Mirror", "Plane Mirror", "Cylindrical Mirror"], a: 0 },
+        { q: "Which element is a liquid metal at standard room temperature conditions?", o: ["Mercury", "Bromine", "Gallium", "Sodium"], a: 0 },
+        { q: "Deficiency of Vitamin D in children leads to which of the following diseases?", o: ["Rickets", "Scurvy", "Beriberi", "Night Blindness"], a: 0 },
+
+        // ======= SECTION 7: MENTAL ABILITY / COMPUTER - 10 Qs =======
+        { q: "Find the missing number in the sequence: 2, 5, 10, 17, ?, 37", o: ["26", "24", "28", "30"], a: 0 },
+        { q: "If CLOCK is coded as KCOLC, then how will STEPS be coded?", o: ["SPETS", "SPTES", "SPEST", "PETSS"], a: 0 },
+        { q: "Pointing to a boy, Ramesh said, 'He is the son of my father's only son.' How is Ramesh related to that boy?", o: ["Father", "Brother", "Uncle", "Grandfather"], a: 0 },
+        { q: "Which type of unemployment is primarily found in the agricultural sector of Jammu and Kashmir due to seasonal crop cycles?", o: ["Structural Unemployment", "Disguised Unemployment", "Frictional Unemployment", "Cyclical Unemployment"], a: 1 },
+        { q: "Which of the following is considered the absolute 'brain' of any computer hardware system?", o: ["CPU", "RAM", "Hard Disk", "Motherboard"], a: 0 },
+        { q: "What does the network acronym 'URL' officially stand for?", o: ["Uniform Resource Locator", "Universal Resource Locator", "Uniform Resource Link", "Universal Retrieval List"], a: 0 },
+        { q: "Which of the following is an open-source Operating System widely used in servers?", o: ["Linux", "MS Word", "Google Chrome", "Windows 11"], a: 0 },
+        { q: "In MS Excel spreadsheet grids, an intersection point of a row and column is termed a:", o: ["Cell", "Formula Bar", "Workbook", "Document"], a: 0 },
+        { q: "Which shortcut key is used to copy selected content in Windows systems?", o: ["Ctrl + C", "Ctrl + V", "Ctrl + X", "Ctrl + Z"], a: 0 },
+        { q: "What is the full form of RAM in computer memory systems?", o: ["Random Access Memory", "Read Access Memory", "Run Action Memory", "Random Anti Memory"], a: 0 }
+    ];
+
+    let currentIdx = 0;
+    let userAnswers = new Array(questions.length).fill(null);
+    let questionVisited = new Array(questions.length).fill(false);
+    let totalTimeSeconds = 120 * 60; 
+    let timerInterval;
+
+    function toggleStartBtn() {
+        document.getElementById('start-btn').disabled = !document.getElementById('agree-chk').checked;
+    }
+
+    function startTest() {
+        document.getElementById('instruction-screen').style.display = 'none';
+        document.getElementById('test-screen').style.display = 'grid';
+        questionVisited = true;
+        renderPalette();
+        showQuestion();
+        
+        timerInterval = setInterval(() => {
+            if(totalTimeSeconds <= 0) {
+                clearInterval(timerInterval);
+                autoSubmit();
+            } else {
+            totalTimeSeconds--;
+            let mins = Math.floor(totalTimeSeconds / 60);
+            let secs = totalTimeSeconds % 60;
+            document.getElementById('time-left').innerText = `Time Left: ${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+    }, 1000);
+}
+
+function showQuestion() {
+    document.getElementById('question-number').innerText = `Question No. ${currentIdx + 1} of ${questions.length}`;
+    document.getElementById('question-text').innerText = questions[currentIdx].q;
+    
+    let optionsHtml = '';
+    questions[currentIdx].o.forEach((opt, idx) => {
+        let isChecked = userAnswers[currentIdx] === idx ? 'checked' : '';
+        optionsHtml += `
+            <label class="option-label">
+                <input type="radio" name="mcq-option" value="${idx}" ${isChecked} onchange="saveAnswer(${idx})">
+                <span>${opt}</span>
+            </label>
+        `;
+    });
+    document.getElementById('options-block').innerHTML = optionsHtml;
+    
+    document.querySelectorAll('.palette-btn').forEach(b => b.classList.remove('active'));
+    let actBtn = document.getElementById(`p-btn-${currentIdx}`);
+    if(actBtn) actBtn.classList.add('active');
+}
+
+function saveAnswer(selectedOptionIndex) {
+    userAnswers[currentIdx] = selectedOptionIndex;
+    renderPalette();
+}
+
+function nextQuestion() {
+    if(userAnswers[currentIdx] === null) {
+        document.getElementById(`p-btn-${currentIdx}`).classList.add('not-answered');
+    }
+    if(currentIdx < questions.length - 1) {
+        currentIdx++;
+        questionVisited[currentIdx] = true;
+        showQuestion();
+        renderPalette();
+    }
+}
+
+function prevQuestion() {
+    if(currentIdx > 0) {
+        currentIdx--;
+        showQuestion();
+        renderPalette();
+    }
+}
+
+function jumpToQuestion(index) {
+    currentIdx = index;
+    questionVisited[currentIdx] = true;
+    showQuestion();
+    renderPalette();
+}
+
+function renderPalette() {
+    let paletteHtml = '';
+    for(let i=0; i<questions.length; i++) {
+        let statusClass = '';
+        if(userAnswers[i] !== null) statusClass = 'answered';
+        else if(questionVisited[i]) statusClass = 'not-answered';
+        
+        paletteHtml += `<div id="p-btn-${i}" class="palette-btn ${statusClass}" onclick="jumpToQuestion(${i})">${i+1}</div>`;
+    }
+    document.getElementById('palette-box').innerHTML = paletteHtml;
+}
+
+function confirmSubmit() {
+    if(confirm("Are you sure you want to final submit your examination paper?")) {
+        processResult();
+    }
+}
+
+function autoSubmit() {
+    alert("Time limit reached! Your answer sheet is being automatically submitted.");
+    processResult();
+}
+
+function processResult() {
+    clearInterval(timerInterval);
+    let correctCount = 0;
+    let incorrectCount = 0;
+    let attemptedCount = 0;
+
+    userAnswers.forEach((ans, idx) => {
+        if(ans !== null) {
+            attemptedCount++;
+            if(ans === questions[idx].a) correctCount++;
+            else incorrectCount++;
+        }
+    });
+
+    let negativeMarks = incorrectCount * 0.25;
+    let finalScore = correctCount - negativeMarks;
+
+    document.getElementById('test-screen').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'block';
+    
+    document.getElementById('final-marks').innerText = `${finalScore.toFixed(2)} / ${questions.length}.00`;
+    document.getElementById('res-attempted').innerText = attemptedCount;
+    document.getElementById('res-correct').innerText = correctCount;
+    document.getElementById('res-incorrect').innerText = incorrectCount;
+    document.getElementById('res-negative').innerText = `-${negativeMarks.toFixed(2)}`;
+}
+</script>
+</body>
+</html>
