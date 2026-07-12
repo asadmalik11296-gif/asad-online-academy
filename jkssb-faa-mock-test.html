@@ -413,6 +413,43 @@ function processResult() {
     document.getElementById('res-correct').innerText = correctCount;
     document.getElementById('res-incorrect').innerText = incorrectCount;
     document.getElementById('res-negative').innerText = `-${negativeMarks.toFixed(2)}`;
+
+    // 🆕 यहाँ से आंसर की (Answer Key Expansion) नीचे जेनरेट होगी
+    let solutionHtml = `
+        <br><hr><br>
+        <h2 style="color: #0c54a3; margin-top:30px;">🎯 Detailed Answer Key & Solutions</h2>
+        <p style="color:#555; margin-bottom:20px;">Review your answers carefully against the official correct choices below:</p>
+        <div style="text-align: left; max-width: 800px; margin: 0 auto; background: #fafafa; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
+    `;
+
+    questions.forEach((qObj, index) => {
+        let userAnsIndex = userAnswers[index];
+        let correctAnsIndex = qObj.a;
+        let correctText = qObj.o[correctAnsIndex];
+        let userText = userAnsIndex !== null ? qObj.o[userAnsIndex] : `<span style="color:#999; font-style:italic;">Not Attempted</span>`;
+        
+        let statusStyle = '';
+        if (userAnsIndex === null) {
+            statusStyle = 'border-left: 4px solid #6c757d; background: #f8f9fa;';
+        } else if (userAnsIndex === correctAnsIndex) {
+            statusStyle = 'border-left: 4px solid #28a745; background: #e8f5e9;';
+        } else {
+            statusStyle = 'border-left: 4px solid #dc3545; background: #ffebee;';
+        }
+
+        solutionHtml += `
+            <div style="padding: 15px; margin-bottom: 15px; border-radius: 4px; ${statusStyle}">
+                <strong>Q${index + 1}. ${qObj.q}</strong><br>
+                <span style="display:inline-block; margin-top:5px; font-size:14px;">👉 <strong>Your Answer:</strong> ${userText}</span><br>
+                <span style="display:inline-block; font-size:14px; color:#28a745;">✅ <strong>Correct Answer:</strong> ${correctText}</span>
+            </div>
+        `;
+    });
+
+    solutionHtml += `</div>`;
+    
+    // इसे रिजल्ट वाले कार्ड के अंदर आखिरी में डाल देंगे
+    document.getElementById('result-screen').insertAdjacentHTML('beforeend', solutionHtml);
 }
 </script>
 </body>
