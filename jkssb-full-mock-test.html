@@ -12,38 +12,45 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JKSSB Central Mock Examination Portals Dashboard</title>
+    <title>JKSSB All Free Mock Tests Hub</title>
     <style>
-        :root {
-            --primary-navy: #1e293b;
-            --secondary-blue: #0284c7;
-            --accent-sky: #0ea5e9;
-            --bg-light: #f8fafc;
-            --text-dark: #0f172a;
-            --border-gray: #cbd5e1;
-        }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-        body { background-color: #f1f5f9; min-height: 100vh; display: flex; flex-direction: column; color: var(--text-dark); }
+        body { background-color: #f8fafc; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
         
-        header { background-color: var(--primary-navy); color: white; padding: 20px 40px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        header h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: 0.5px; }
-        header p { font-size: 0.95rem; color: #94a3b8; margin-top: 6px; }
+        /* Centralised clean responsive container matrix wrapper */
+        .hub-panel {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            width: 90%;
+            max-width: 650px;
+        }
 
-        .dashboard-container { max-width: 1000px; width: 90%; margin: 40px auto; flex: 1; }
-        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        
-        .mock-card { background: white; border: 1px solid var(--border-gray); border-radius: 12px; padding: 25px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; }
-        .mock-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-        
-        .card-meta { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--secondary-blue); margin-bottom: 8px; }
-        .card-title { font-size: 1.3rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 12px; }
-        .card-desc { font-size: 0.9rem; color: #475569; line-height: 1.5; margin-bottom: 20px; }
-        
-        .launch-btn { display: block; text-align: center; background-color: var(--secondary-blue); color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: background-color 0.2s; }
-        .launch-btn:hover { background-color: #0369a1; }
-        
-        .back-home { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #64748b; font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
-        .back-home:hover { color: var(--text-dark); }
+        /* Target exact buttons styling mapping your screen configurations */
+        .hero-buttons a {
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 15px;
+            padding: 14px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: white;
+            width: 85%;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .hero-buttons a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        }
+
+        /* Custom color layouts for differentiation profiles */
+        .btn-ahto { background-color: #0284c7; }
+        .btn-faa { background-color: #0f172a; }
+        .btn-supervisor { background-color: #16a34a; }
+        .btn-back { background-color: #64748b; margin-bottom: 10px; }
     </style>
   <!-- 💻 GOOGLE ADSENSE CODE INTEGRATION -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6086620349531765"
@@ -52,44 +59,25 @@
 </head>
 <body>
 
-    <header>
-        <h1>JKSSB Centralized Mock Assessment Panels</h1>
-        <p>Select your targeted recruitment exam module below to enter the live CBT simulator portal</p>
-    </header>
-
-    <div class="dashboard-container">
-        <a href="index.html" class="back-home">← Back to Main Portal</a>
-        
-        <div class="grid-layout">
-            <!-- 1. JKSSB AHTO Test Card -->
-            <div class="mock-card">
-                <div>
-                    <div class="card-meta">Handloom & Handicrafts</div>
-                    <div class="card-title">JKSSB AHTO Free Mock Test</div>
-                    <p class="card-desc">Assistant Handloom Training Officer dynamic model simulation with negative evaluation rules.</p>
-                </div>
-                <a href="jkssb-female-supervisor-mock-test.html?variant=ahto" class="launch-btn">Launch Simulator →</a>
-            </div>
-
-            <!-- 2. JKSSB FAA Test Card -->
-            <div class="mock-card">
-                <div>
-                    <div class="card-meta">Finance Department</div>
-                    <div class="card-title">JKSSB FAA Free Mock Test</div>
-                    <p class="card-desc">Finance Account Assistant mock matrix featuring localized accounts distribution benchmarks.</p>
-                </div>
-                <a href="jkssb-female-supervisor-mock-test.html?variant=faa" class="launch-btn">Launch Simulator →</a>
-            </div>
-
-            <!-- 3. JKSSB SUPERVISOR Test Card -->
-            <div class="mock-card">
-                <div>
-                    <div class="card-meta">Social Welfare</div>
-                    <div class="card-title">JKSSB SUPERVISOR Free Mock Test</div>
-                    <p class="card-desc">Complete 120-question target evaluation matching specialized Mission Poshan templates.</p>
-                </div>
-                <a href="jkssb-female-supervisor-mock-test.html?variant=supervisor" class="launch-btn">Launch Simulator →</a>
-            </div>
+    <div class="hub-panel">
+        <!-- Direct Mapping of your requested design matrix structures -->
+        <div class="hero-buttons" style="text-align: center; margin: 40px auto; max-width: 600px; padding: 20px;">
+            <h2 style="margin-bottom: 15px; font-size: 28px; color: #0f172a;">Prepare for JKSSB Exams</h2>
+            <p style="color: #64748b; font-size: 16px; margin-bottom: 25px;">Check your preparation level with our latest practice tests.</p>
+            
+            <!-- 1. Assistant Handloom Training Officer Portal link entry -->
+            <a href="ahto-mock-test.html?v=1.0" class="btn-ahto">🎯 JKSSB AHTO Free Mock Test</a>
+            
+            <!-- 2. Finance Account Assistant Panel link entry -->
+            <a href="jkssb-faa-mock-test.html?v=1.0" class="btn-faa">💼 JKSSB FAA Free Mock Test</a>
+            
+            <!-- 3. Female Social Welfare Supervisor Target Link Entry -->
+            <a href="jkssb-female-supervisor-mock-test.html?v=1.0" class="btn-supervisor">👩‍🎓 JKSSB FEMALE SUPERVISOR Free Mock Test</a>
+            
+            <hr style="margin: 25px auto; width: 85%; border: 0; border-top: 1px dashed #cbd5e1;">
+            
+            <!-- Return context anchor to primary index panel -->
+            <a href="index.html?v=1.0" class="btn-back" style="padding: 10px 25px; font-size: 0.85rem;">← Back to Main Homepage</a>
         </div>
     </div>
 
