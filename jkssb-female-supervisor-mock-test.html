@@ -12,6 +12,387 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JKSSB Female Supervisor Online CBT Mock Test</title>
+    <style>
+        :root {
+            --primary-navy: #1e293b;
+            --secondary-blue: #0284c7;
+            --gate-green: #15803d;
+            --gate-red: #b91c1c;
+            --bg-light: #f8fafc;
+            --text-dark: #0f172a;
+            --border-gray: #cbd5e1;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: #e2e8f0; display: flex; flex-direction: column; height: 100vh; color: var(--text-dark); }
+
+        /* Top Bar Branding & Live Clock Header */
+        header {
+            background-color: var(--primary-navy);
+            color: white;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header-title h1 { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.5px; }
+        .header-title p { font-size: 0.8rem; color: #94a3b8; margin-top: 2px; }
+        .timer-container {
+            background-color: #0f172a;
+            padding: 8px 18px;
+            border-radius: 4px;
+            border: 1px solid #334155;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .timer-label { font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: bold; }
+        .timer-clock { font-size: 1.3rem; font-weight: 700; color: #38bdf8; font-family: monospace; }
+
+        /* Section Layout Tabs Bar */
+        .tabs-navbar {
+            background-color: #f1f5f9;
+            border-bottom: 1px solid var(--border-gray);
+            display: flex;
+            overflow-x: auto;
+        }
+        .tab-link {
+            padding: 12px 20px;
+            border: none;
+            background: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            border-right: 1px solid var(--border-gray);
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        .tab-link.active {
+            background-color: white;
+            color: var(--secondary-blue);
+            border-bottom: 3px solid var(--secondary-blue);
+        }
+
+        /* Central Layout Workspace Grid */
+        .workspace-container { display: flex; flex: 1; overflow: hidden; }
+        
+        /* Left Hand Question Box Area */
+        .exam-panel { flex: 3; display: flex; flex-direction: column; background-color: white; }
+        .question-wrapper { padding: 35px; flex: 1; overflow-y: auto; }
+        .question-meta-bar {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--border-gray);
+            padding-bottom: 10px;
+        }
+        .question-text { font-size: 1.2rem; font-weight: 600; line-height: 1.6; margin-bottom: 25px; color: #1e293b; }
+        
+        .options-group { display: flex; flex-direction: column; gap: 14px; }
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            cursor: pointer;
+            background-color: var(--bg-light);
+            font-weight: 500;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .option-label:hover { background-color: #f1f5f9; border-color: #94a3b8; }
+        .option-label input[type="radio"] { margin-right: 15px; transform: scale(1.25); cursor: pointer; }
+        .option-label.selected { background-color: #e0f2fe; border-color: #0284c7; color: #0369a1; }
+
+        /* Action Row Controls Base Footer */
+        .control-footer {
+            padding: 20px 35px;
+            background-color: #f8fafc;
+            border-top: 1px solid var(--border-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .action-btn {
+            padding: 10px 22px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: opacity 0.2s;
+        }
+        .action-btn:hover { opacity: 0.9; }
+        .btn-prev { background-color: #64748b; color: white; }
+        .btn-clear { background-color: #e2e8f0; color: #334155; border-color: #cbd5e1; }
+        .btn-next { background-color: var(--secondary-blue); color: white; }
+
+        /* Right Hand Matrix Navigation Panel */
+        .sidebar-panel { flex: 1; max-width: 360px; background-color: #f1f5f9; border-left: 1px solid var(--border-gray); display: flex; flex-direction: column; }
+        .profile-card { padding: 18px; background-color: #e2e8f0; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--border-gray); }
+        .profile-avatar { width: 45px; height: 45px; border-radius: 50%; background-color: var(--primary-navy); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; }
+        .profile-info h3 { font-size: 0.95rem; font-weight: 700; }
+        .profile-info p { font-size: 0.75rem; color: #64748b; }
+
+        .palette-area { flex: 1; padding: 20px; overflow-y: auto; }
+        .palette-title { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #64748b; margin-bottom: 15px; letter-spacing: 0.5px; }
+        .matrix-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .matrix-btn {
+            padding: 12px 0;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 4px;
+            background-color: #cbd5e1;
+            color: #334155;
+            border: 1px solid #94a3b8;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .matrix-btn.visited { background-color: var(--gate-red); color: white; border-color: #991b1b; }
+        .matrix-btn.answered { background-color: var(--gate-green); color: white; border-color: #166534; }
+        .matrix-btn.active-current { border: 2px solid #0f172a; box-shadow: 0 0 6px rgba(0,0,0,0.25); background-color: white; color: black; }
+
+        .sidebar-submit-zone { padding: 20px; background-color: #e2e8f0; border-top: 1px solid var(--border-gray); }
+        .btn-submit-exam { width: 100%; padding: 14px; background-color: var(--gate-green); color: white; border: none; border-radius: 4px; font-size: 1rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+        /* Report Analytics Screen Overlay */
+        .result-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15,23,42,0.85); justify-content: center; align-items: center; z-index: 9999; }
+        .result-modal { background-color: white; padding: 40px; border-radius: 8px; width: 90%; max-width: 650px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .result-header h2 { color: var(--primary-navy); font-size: 1.8rem; font-weight: 800; }
+        .result-header p { color: #64748b; font-size: 0.9rem; margin-top: 5px; }
+        .score-badge { font-size: 3.5rem; font-weight: 800; color: var(--secondary-blue); margin: 25px 0; font-family: monospace; }
+        .stats-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: var(--bg-light); border-radius: 6px; overflow: hidden; }
+        .stats-table td { padding: 14px 20px; border: 1px solid var(--border-gray); text-align: left; font-size: 0.95rem; }
+        .stats-table tr td:last-child { text-align: right; font-weight: 700; }
+    </style>
+  <!-- 💻 GOOGLE ADSENSE CODE INTEGRATION -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6086620349531765"
+     crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-6086620349531765">
+</head>
+<body>
+
+    <header>
+        <div class="header-title">
+            <h1>JKSSB Female Supervisor CBT Practice Engine</h1>
+            <p>Department of Social Welfare | Mission Poshan 120-Question Target Module</p>
+        </div>
+        <div class="timer-container">
+            <span class="timer-label">Time Left:</span>
+            <div class="timer-clock" id="clock-display">120:00</div>
+        </div>
+    </header>
+
+    <nav class="tabs-navbar" id="dynamic-tabs"></nav>
+
+    <div class="workspace-container">
+        <!-- Live Active Questions Module -->
+        <main class="exam-panel">
+            <div class="question-wrapper" id="question-viewport"></div>
+            <div class="control-footer">
+                <button class="action-btn btn-prev" onclick="shiftQuestion(-1)">← Previous</button>
+                <button class="action-btn btn-clear" onclick="flushSelection()">Clear Response</button>
+                <button class="action-btn btn-next" onclick="shiftQuestion(1)">Save & Next →</button>
+            </div>
+        </main>
+
+        <!-- Right Side Tracker Matrix -->
+        <aside class="sidebar-panel">
+            <div class="profile-card">
+                <div class="profile-avatar">FS</div>
+                <div class="profile-info">
+                    <h3>Mock Examinee Terminal</h3>
+                    <p>Syllabus Mapping Model: 2026</p>
+                </div>
+            </div>
+            <div class="palette-area">
+                <div class="palette-title">Question Palette Panel</div>
+                <div class="matrix-grid" id="matrix-grid-viewport"></div>
+            </div>
+            <div class="sidebar-submit-zone">
+                <button class="btn-submit-exam" onclick="verifyCompletionRequest()">Submit Full Exam</button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Live Performance Grading Dashboard -->
+    <div class="result-overlay" id="scorecard-overlay">
+        <div class="result-modal">
+            <div class="result-header">
+                <h2>CBT Evaluation Report</h2>
+                <p>Calculated using the official JKSSB scoring schema (+1.00 for correct, -0.25 for incorrect responses)</p>
+            </div>
+            <div class="score-badge" id="net-score-output">0.00</div>
+            <table class="stats-table">
+                <tr><td>Total Questions in Syllabus</td><td id="stat-total">120</td></tr>
+                <tr><td>Attempted Questions</td><td id="stat-attempted" style="color: var(--secondary-blue);">0</td></tr>
+                <tr><td>Correct Hits (+1 Mark each)</td><td id="stat-correct" style="color: var(--gate-green);">0</td></tr>
+                <tr><td>Wrong Selections (-0.25 Penalty)</td><td id="stat-wrong" style="color: var(--gate-red);">0</td></tr>
+                <tr><td>Unattempted / Left Blank</td><td id="stat-blank">0</td></tr>
+            </table>
+            <button class="action-btn btn-next" style="padding: 12px 35px;" onclick="window.location.reload()">Re-take Practice Test</button>
+        </div>
+    </div>
+
+    <script>
+        // Official JKSSB Female Supervisor Mark Distribution Matrix
+        const sectionBlueprint = [
+            { code: "spec", name: "Specialization (Social Welfare)", count: 60 },
+            { code: "gags", name: "General Awareness (J&K)", count: 20 },
+            { code: "eng", name: "General English", count: 15 },
+            { code: "reason", name: "Intelligence & Reasoning", count: 10 },
+            { code: "sci", name: "General Science", count: 10 },
+            { code: "comp", name: "Computer Applications", count: 5 }
+        ];
+
+        // Seeded content templates matching high-yielding syllabus concepts
+        const coreItemPool = {
+            spec: [
+                { q: "Which scheme acts as the primary vehicle for strengthening nutrition delivery services across Anganwadi centers under Mission Poshan 2.0?", o: ["ICDS Restructured", "PM-KISAN", "Ayushman Bharat", "PMAY-G"], a: 0 },
+                { q: "Auguste Comte laid down the evolution of human knowledge through three distinct stages. Identify the correct sequence:", o: ["Metaphysical → Theological → Positive", "Theological → Metaphysical → Positive", "Positive → Theological → Metaphysical", "Theological → Empirical → Metaphysical"], a: 1 },
+                { q: "Deficiency of which micro-nutrient or vitamin is the direct underlying clinical driver of Megaloblastic Anemia?", o: ["Vitamin C", "Vitamin D", "Folic Acid / Vitamin B12", "Vitamin K"], a: 2 },
+                { q: "The POSHAN Tracker real-time monitoring software interface belongs fundamentally to which Central Ministry framework?", o: ["Ministry of Health and Family Welfare", "Ministry of Women and Child Development", "Ministry of Social Justice", "Ministry of Rural Development"], a: 1 }
+            ],
+            gags: [
+                { q: "Which specific section of the Jammu and Kashmir Reorganisation Act, 2019 legally defines the formation of the UT of J&K with a Legislative Assembly?", o: ["Section 3", "Section 4", "Section 13", "Section 14"], a: 1 },
+                { q: "The historic Hari Parbat Fort overlooking Srinagar was originally fortified in its current structural format during the rule of which empire?", o: ["Mughal Emperor Akbar", "Sultan Zain-ul-Abidin", "Maharaja Gulab Singh", "Maharaja Hari Singh"], a: 0 }
+            ],
+            eng: [
+                { q: "Choose the correct indirect form: The supervisor said to the worker, 'Did you update the tracker data yesterday?'", o: ["The supervisor asked the worker if she updated the tracker data yesterday.", "The supervisor asked the worker if she had updated the tracker data the previous day.", "The supervisor ordered the worker to update the tracker data.", "The supervisor enquired if the worker updates tracker records."], a: 1 }
+            ],
+            reason: [
+                { q: "In a logical encryption engine, if CODES is written as DPEFT, how will the terminal sequence track and convert standard TARGET?", o: ["UBUHFU", "VASGIT", "SCSFDU", "UASHFU"], a: 0 }
+            ],
+            sci: [
+                { q: "Which endocrine master control center structurally interfaces between the central nervous system and the metabolic output of the thyroid via hormone releases?", o: ["Pancreas", "Pituitary Gland", "Adrenal Medulla", "Thymus Gland"], a: 1 }
+            ],
+            comp: [
+                { q: "Which core networking architectural protocol executes automatically to dynamically assign IP addresses within server subnets?", o: ["DHCP", "DNS", "HTTP", "SMTP"], a: 0 }
+            ]
+        };
+
+        let masterExamArray = [];
+        let trackedUserAnswers = {};
+        let visitedIndicator = {};
+        let selectedIndexPointer = 0;
+        let runningClockSeconds = 120 * 60;
+        let loopTickerInterval;
+
+        // Assembly system loop building exactly 120 custom index questions
+        function build120QuestionExamData() {
+            let uniqueGlobalIndex = 1;
+            sectionBlueprint.forEach(section => {
+                const sampleSet = coreItemPool[section.code];
+                for (let i = 0; i < section.count; i++) {
+                    const templateItem = sampleSet[i % sampleSet.length];
+                    masterExamArray.push({
+                        globalId: uniqueGlobalIndex,
+                        sectionCode: section.code,
+                        sectionTitle: section.name,
+                        promptText: `[Question Block ${i + 1}] ${templateItem.q}`,
+                        choices: [...templateItem.o],
+                        correctKeyIndex: templateItem.a
+                    });
+                    visitedIndicator[uniqueGlobalIndex] = false;
+                    uniqueGlobalIndex++;
+                }
+            });
+        }
+
+        // Framework layouts renderer engine
+        function establishCBTLayout() {
+            const tabsContainer = document.getElementById('dynamic-tabs');
+            tabsContainer.innerHTML = '';
+            sectionBlueprint.forEach(sec => {
+                const btn = document.createElement('button');
+                btn.className = 'tab-link';
+                btn.id = `tab-nav-${sec.code}`;
+                btn.innerText = `${sec.name} (${sec.count})`;
+                btn.onclick = () => locateSectionLeadIndex(sec.code);
+                tabsContainer.appendChild(btn);
+            });
+
+            const gridContainer = document.getElementById('matrix-grid-viewport');
+            gridContainer.innerHTML = '';
+            masterExamArray.forEach(item => {
+                const matrixCell = document.createElement('button');
+                matrixCell.className = 'matrix-btn';
+                matrixCell.id = `matrix-index-cell-${item.globalId}`;
+                matrixCell.innerText = item.globalId;
+                matrixCell.onclick = () => loadQuestionIndexContext(item.globalId - 1);
+                gridContainer.appendChild(matrixCell);
+            });
+        }
+
+        function loadQuestionIndexContext(targetIndex) {
+            syncMatrixVisualIndicators();
+
+            selectedIndexPointer = targetIndex;
+            const activeQuestion = masterExamArray[selectedIndexPointer];
+            visitedIndicator[activeQuestion.globalId] = true;
+
+            // Shift active category styling indicators
+            document.querySelectorAll('.tab-link').forEach(t => t.classList.remove('active'));
+            document.getElementById(`tab-nav-${activeQuestion.sectionCode}`).classList.add('active');
+
+            // Render live question inside the viewport
+            const viewport = document.getElementById('question-viewport');
+            let itemsHtml = '';
+            activeQuestion.choices.forEach((choice, index) => {
+                const stateSelected = trackedUserAnswers[activeQuestion.globalId] === index;
+                itemsHtml += `
+                    <label class="option-label ${stateSelected ? 'selected' : ''}" onclick="registerSelection(${activeQuestion.globalId}, ${index})">
+                        <input type="radio" name="cbt_option" value="${index}" ${stateSelected ? 'checked' : ''}>
+                        <strong>${String.fromCharCode(65 + index)}.</strong> &nbsp;&nbsp; ${choice}
+                    </label>
+                `;
+            });
+
+            viewport.innerHTML = `
+                <div class="question-meta-bar">
+                    <span>${activeQuestion.sectionTitle}</span>
+                    <span>Item Tracker: ${activeQuestion.globalId} / 120</span>
+                </div>
+                <div class="question-text">${activeQuestion.promptText}</div>
+                <div class="options-group">${itemsHtml}</div>
+            `;
+
+            // Active boundary framing highlight
+            document.querySelectorAll('.matrix-btn').forEach(m => m.classList.remove('active-current'));
+            document.getElementById(`matrix-index-cell-${activeQuestion.globalId}`).classList.add('active-current');
+        }
+
+        function registerSelection(questionId, responseIndex) {
+            trackedUserAnswers[questionId] = responseIndex;
+            
+            // Quickly update CSS bindings dynamically on active workspace
+            const currentItem = masterExamArray[selectedIndexPointer];
+            if (currentItem.globalId === questionId) {
+                document.querySelectorAll('.option-label').forEach((label, idx) => {
+                    if (idx === responseIndex) {
+                        label.classList.add('selected');
+                        label.querySelector('input').checked = true;
+                    } else {
+                        label.classList.remove('selected');
+                    }
+                });
+            }
+            syncMatrixVisualIndicators();
+        }
+
+        function flushSelection() {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JKSSB Female Supervisor Complete 120-Question CBT Mock Test</title>
     <style>
         :root {
@@ -71,19 +452,7 @@
         .stats-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: var(--bg-light); border-radius: 6px; overflow: hidden; }
         .stats-table td { padding: 14px 20px; border: 1px solid var(--border-gray); text-align: left; font-size: 0.95rem; }
         .stats-table tr td:last-child { text-align: right; font-weight: 700; }
-              /* Post-Submission Answer Key Highlight Classes */
-        .option-label.correct-choice { background-color: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; pointer-events: none; }
-        .option-label.wrong-choice { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; pointer-events: none; }
-        .option-label.disabled-choice { pointer-events: none; opacity: 0.8; }
-        .matrix-btn.correct-palette { background-color: #16a34a !important; color: white !important; border-color: #15803d !important; }
-        .matrix-btn.wrong-palette { background-color: #dc2626 !important; color: white !important; border-color: #b91c1c !important; }
-        .matrix-btn.blank-palette { background-color: #64748b !important; color: white !important; border-color: #475569 !important; }
-
     </style>
-  <!-- 💻 GOOGLE ADSENSE CODE INTEGRATION -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6086620349531765"
-     crossorigin="anonymous"></script>
-    <meta name="google-adsense-account" content="ca-pub-6086620349531765">
 </head>
 <body>
 
@@ -142,10 +511,7 @@
                 <tr><td>Wrong Answers</td><td id="stat-wrong" style="color: var(--gate-red);">0</td></tr>
                 <tr><td>Unattempted Questions</td><td id="stat-blank">0</td></tr>
             </table>
-            <div style="display: flex; gap: 15px; justify-content: center;">
-                <button class="action-btn btn-next" style="padding: 12px 25px; background-color: #16a34a;" onclick="document.getElementById('scorecard-overlay').style.display='none';">👁️ Review Answers</button>
-                <button class="action-btn btn-prev" style="padding: 12px 25px;" onclick="window.location.reload()">🔄 Re-take Test</button>
-            </div>
+            <button class="action-btn btn-next" style="padding: 12px 35px;" onclick="window.location.reload()">Re-take Practice Test</button>
         </div>
     </div>
 
@@ -301,7 +667,6 @@
         let selectedIndexPointer = 0;
         let runningClockSeconds = 120 * 60;
         let loopTickerInterval;
-        let isExamSubmitted = false; // Isse browser track karega ki test submit hua hai ya nahi
 
         function build120QuestionExamData() {
             let uniqueGlobalIndex = 1;
@@ -358,27 +723,11 @@
 
             const viewport = document.getElementById('question-viewport');
             let itemsHtml = '';
-            
             activeQuestion.choices.forEach((choice, index) => {
                 const stateSelected = trackedUserAnswers[activeQuestion.globalId] === index;
-                let postSubmitClass = '';
-                
-                // Submit karne ke baad color highlights rule engine
-                if (isExamSubmitted) {
-                    if (index === activeQuestion.correctKeyIndex) {
-                        postSubmitClass = 'correct-choice'; // Sahi answer hamesha green hoga
-                    } else if (stateSelected && index !== activeQuestion.correctKeyIndex) {
-                        postSubmitClass = 'wrong-choice'; // Agar galat choose kiya toh red hoga
-                    } else {
-                        postSubmitClass = 'disabled-choice';
-                    }
-                } else if (stateSelected) {
-                    postSubmitClass = 'selected';
-                }
-
                 itemsHtml += `
-                    <label class="option-label ${postSubmitClass}" onclick="registerSelection(${activeQuestion.globalId}, ${index})">
-                        <input type="radio" name="cbt_option" value="${index}" ${stateSelected ? 'checked' : ''} ${isExamSubmitted ? 'disabled' : ''}>
+                    <label class="option-label ${stateSelected ? 'selected' : ''}" onclick="registerSelection(${activeQuestion.globalId}, ${index})">
+                        <input type="radio" name="cbt_option" value="${index}" ${stateSelected ? 'checked' : ''}>
                         <strong>${String.fromCharCode(65 + index)}.</strong> &nbsp;&nbsp; ${choice}
                     </label>
                 `;
@@ -387,7 +736,6 @@
             viewport.innerHTML = `
                 <div class="question-meta-bar">
                     <span>${activeQuestion.sectionTitle}</span>
-                    ${isExamSubmitted ? `<span style="color:#16a34a; font-weight:bold;">Sahi Jawab: Option ${String.fromCharCode(65 + activeQuestion.correctKeyIndex)}</span>` : ''}
                     <span>Item Tracker: ${activeQuestion.globalId} / 120</span>
                 </div>
                 <div class="question-text">${activeQuestion.promptText}</div>
@@ -399,7 +747,6 @@
         }
 
         function registerSelection(questionId, responseIndex) {
-            if (isExamSubmitted) return; // Submit hone ke baad selection lock ho jayegi
             trackedUserAnswers[questionId] = responseIndex;
             const currentItem = masterExamArray[selectedIndexPointer];
             if (currentItem.globalId === questionId) {
@@ -415,36 +762,67 @@
             syncMatrixVisualIndicators();
         }
 
+        function flushSelection() {
+            const currentItem = masterExamArray[selectedIndexPointer];
+            delete trackedUserAnswers[currentItem.globalId];
+            document.querySelectorAll('.option-label').forEach(label => {
+                label.classList.remove('selected');
+                const radioElement = label.querySelector('input');
+                if (radioElement) radioElement.checked = false;
+            });
+            syncMatrixVisualIndicators();
+        }
+
+        function shiftQuestion(directionOffset) {
+            let potentialIndex = selectedIndexPointer + directionOffset;
+            if (potentialIndex >= 0 && potentialIndex < masterExamArray.length) {
+                loadQuestionIndexContext(potentialIndex);
+            }
+        }
+
+        function locateSectionLeadIndex(sectionCode) {
+            const calculatedIndex = masterExamArray.findIndex(i => i.sectionCode === sectionCode);
+            if (calculatedIndex !== -1) {
+                loadQuestionIndexContext(calculatedIndex);
+            }
+        }
+
         function syncMatrixVisualIndicators() {
             masterExamArray.forEach(item => {
                 const cell = document.getElementById(`matrix-index-cell-${item.globalId}`);
                 if (!cell) return;
-                
-                cell.classList.remove('answered', 'visited', 'correct-palette', 'wrong-palette', 'blank-palette');
-                
-                if (isExamSubmitted) {
-                    const userAns = trackedUserAnswers[item.globalId];
-                    if (userAns === undefined) {
-                        cell.classList.add('blank-palette'); // Left blank keys color gray
-                    } else if (userAns === item.correctKeyIndex) {
-                        cell.classList.add('correct-palette'); // Correct keys color green
-                    } else {
-                        cell.classList.add('wrong-palette'); // Wrong keys color red
-                    }
-                } else {
-                    if (trackedUserAnswers[item.globalId] !== undefined) {
-                        cell.classList.add('answered');
-                    } else if (visitedIndicator[item.globalId] === true) {
-                        cell.classList.add('visited');
-                    }
+                cell.classList.remove('answered', 'visited');
+                if (trackedUserAnswers[item.globalId] !== undefined) {
+                    cell.classList.add('answered');
+                } else if (visitedIndicator[item.globalId] === true) {
+                    cell.classList.add('visited');
                 }
             });
         }
 
+        function executeCountdownTicker() {
+            loopTickerInterval = setInterval(() => {
+                if (runningClockSeconds <= 0) {
+                    clearInterval(loopTickerInterval);
+                    compileFinalMarkMetrics();
+                } else {
+                    runningClockSeconds--;
+                    const min = Math.floor(runningClockSeconds / 60);
+                    const sec = runningClockSeconds % 60;
+                    document.getElementById('clock-display').innerText = 
+                        `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+        }
+
+        function verifyCompletionRequest() {
+            if (confirm("Are you sure you want to finish the exam? This will lock your responses and generate your final score report.")) {
+                compileFinalMarkMetrics();
+            }
+        }
+
         function compileFinalMarkMetrics() {
             clearInterval(loopTickerInterval);
-            isExamSubmitted = true; // State change trigger
-            
             let correctHits = 0, incorrectHits = 0, leftBlank = 0;
 
             masterExamArray.forEach(item => {
@@ -465,21 +843,14 @@
             document.getElementById('stat-blank').innerText = leftBlank;
             document.getElementById('net-score-output').innerText = globalNetScore.toFixed(2);
             document.getElementById('scorecard-overlay').style.display = 'flex';
-            
-// Palette update automatic execution
-syncMatrixVisualIndicators();
-loadQuestionIndexContext(0);
+        }
 
-// Dynamic state declaration inside runtime hooks
-window.isExamSubmitted = false;
-
-window.onload = () => {
-    build120QuestionExamData();
-    establishCBTLayout();
-    syncMatrixVisualIndicators(); // यहाँ जोड़ें
-    loadQuestionIndexContext(0);  // यह पहले से है
-    executeCountdownTicker();
-};
+        window.onload = () => {
+            build120QuestionExamData();
+            establishCBTLayout();
+            loadQuestionIndexContext(0);
+            executeCountdownTicker();
+        };
     </script>
 </body>
 </html>
