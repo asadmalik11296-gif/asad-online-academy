@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GQKGDNH2PF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GQKGDNH2PF');
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css?v=1.0">
+<script src="script.js?v=1.0"></script>
+    <title>JKSSB Junior Assistant Online Typing Test</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --bg-color: #f8f9fa;
+        }
+        
+        .typing-wrapper {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 25px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .typing-header {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .stat-box {
+            background: var(--bg-color);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .stat-box span {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .text-display {
+            font-size: 18px;
+            line-height: 1.6;
+            padding: 15px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            height: 120px;
+            overflow-y: auto;
+            border-left: 5px solid var(--primary-color);
+            user-select: none;
+            white-space: pre-wrap;
+        }
+
+        .text-display span {
+            position: relative;
+        }
+
+        .char-correct {
+            color: var(--success-color);
+            background-color: #e6f4ea;
+        }
+
+        .char-incorrect {
+            color: var(--danger-color);
+            background-color: #fce8e6;
+            text-decoration: underline;
+        }
+
+        .char-current {
+            background-color: #d2e3fc;
+            border-left: 2px solid #1a73e8;
+        }
+
+        .typing-area {
+            width: 100%;
+            height: 100px;
+            padding: 12px;
+            font-size: 18px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            resize: none;
+            outline: none;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+
+        .typing-area:focus {
+            border-color: var(--primary-color);
+        }
+
+        .control-btns {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-start { background: var(--success-color); color: white; }
+        .btn-reset { background: #6c757d; color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .result-modal {
+            display: none;
+            background: #e1f5fe;
+            border: 2px solid #0288d1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: #01579b;
+        }
+    </style>
+  <!-- 💻 GOOGLE ADSENSE CODE INTEGRATION -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6086620349531765"
+     crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-6086620349531765">
+
+  ,
+  <script src="https://quge5.com/88/tag.min.js" data-zone="259703" async data-cfasync="false"></script>
+  
+</head>
+<body>
+
+<div class="typing-wrapper">
+    <div class="typing-header">
+        <h2>JKSSB Junior Assistant Typing Test</h2>
+        <p style="color: #666; margin: 0;">Target: 35 WPM | 90% Accuracy</p>
+    </div>
+
+    <div class="stats-container">
+        <div class="stat-box">Time Left <span id="timer">10:00</span></div>
+        <div class="stat-box">Net WPM <span id="wpm">0</span></div>
+        <div class="stat-box">Accuracy <span id="accuracy">100%</span></div>
+    </div>
+
+    <div id="text-display" class="text-display">Click 'Start Test' to load paragraph...</div>
+
+    <textarea id="typing-textarea" class="typing-area" placeholder="Start typing here when test begins..." disabled></textarea>
+
+    <div class="control-btns">
+        <button id="start-btn" class="btn btn-start">Start Test</button>
+        <button id="reset-btn" class="btn btn-reset" disabled>Reset</button>
+    </div>
+
+    <div id="result-box" class="result-modal"></div>
+</div>
+
+<script>
+// JKSSB Specific Paragraphs (J&K History, Polity & General English)
+const paragraphs = [
+    "The Jammu and Kashmir Services Selection Board is constitutionally mandated to carry out recruitment for various decentralized posts in the government departments. Candidates appearing for the Junior Assistant exam must demonstrate high proficiency in computer operations and data entry speeds.",
+    "The winter capital of the union territory is Jammu, while Srinagar serves as the summer capital. The region is famous for its breathtaking landscapes, historical monuments, and rich cultural heritage that attracts millions of tourists from all across the globe every single year.",
+    "Official correspondence requires clear and concise drafting skills. Junior Assistants are responsible for maintaining files, processing documents, and ensuring that administrative workflows operate smoothly within the strict regulations guidelines prescribed by the administration.",
+    "To qualify the skill test, an aspirant needs a minimum typing speed of thirty-five words per minute. Accuracy is calculated strictly based on the number of correct words typed within the stipulated time frame of exactly ten minutes."
+];
+
+let timeLeft = 600; // 10 Minutes (600 seconds)
+let timerInterval = null;
+let isTestRunning = false;
+let currentParagraph = "";
+
+const textDisplay = document.getElementById('text-display');
+const typingArea = document.getElementById('typing-textarea');
+const startBtn = document.getElementById('start-btn');
+const resetBtn = document.getElementById('reset-btn');
+const timerEl = document.getElementById('timer');
+const wpmEl = document.getElementById('wpm');
+const accuracyEl = document.getElementById('accuracy');
+const resultBox = document.getElementById('result-box');
+
+// Format Time (MM:SS)
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
+
+// Initialize Test
+function startTest() {
+    // ⬇️ MONETAG POPUNDER TRIGGER: User clicks start
+    // Trigger your monetag smartlink or popunder code here if needed
+    
+    isTestRunning = true;
+    timeLeft = 600;
+    typingArea.value = "";
+    typingArea.disabled = false;
+    startBtn.disabled = true;
+    resetBtn.disabled = false;
+    resultBox.style.display = "none";
+    
+    // Select Random Paragraph
+    currentParagraph = paragraphs[Math.floor(Math.random() * paragraphs.length)];
+    
+    // Render text with spans for tracking
+    textDisplay.innerHTML = currentParagraph.split('').map((char, index) => {
+        return `<span id="char-${index}">${char}</span>`;
+    }).join('');
+    
+    // Highlight first character
+    document.getElementById('char-0').classList.add('char-current');
+    
+    typingArea.focus();
+    
+    // Start Timer
+    timerInterval = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft--;
+            timerEl.innerText = formatTime(timeLeft);
+            updateStats();
+        } else {
+            endTest();
+        }
+    }, 1000);
+}
+
+// Track input and colorize
+typingArea.addEventListener('input', () => {
+    if (!isTestRunning) return;
+    
+    const typedText = typingArea.value;
+    const currentParagraphChars = currentParagraph.split('');
+    
+    currentParagraphChars.forEach((char, index) => {
+        const charSpan = document.getElementById(`char-${index}`);
+        if (!charSpan) return;
+        
+        if (index < typedText.length) {
+            if (typedText[index] === char) {
+                charSpan.className = "char-correct";
+            } else {
+                charSpan.className = "char-incorrect";
+            }
+        } else if (index === typedText.length) {
+            charSpan.className = "char-current";
+            // Auto Scroll text display if paragraph is long
+            charSpan.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        } else {
+            charSpan.className = "";
+        }
+    });
+    
+    updateStats();
+    
+    // Auto end if paragraph is completely typed before time
+    if (typedText.length >= currentParagraph.length) {
+        endTest();
+    }
+});
+
+// Calculate WPM and Accuracy
+function updateStats() {
+    const typedText = typingArea.value;
+    if(typedText.length === 0) return;
+
+    const timePassed = (600 - timeLeft) / 60; // in minutes
+    
+    // JKSSB Standard WPM formula: (Total Characters / 5) / Time Passed
+    const grossWpm = timePassed > 0 ? (typedText.length / 5) / timePassed : 0;
+    
+    // Count Errors
+    let errors = 0;
+    for(let i = 0; i < typedText.length; i++) {
+        if(typedText[i] !== currentParagraph[i]) {
+            errors++;
+        }
+    }
+    
+    const netWpm = Math.max(0, Math.round(grossWpm - (errors / (timePassed || 1))));
+    const accuracy = Math.round(((typedText.length - errors) / typedText.length) * 100);
+    
+    wpmEl.innerText = netWpm;
+    accuracyEl.innerText = accuracy + "%";
+}
+
+// End Test
+function endTest() {
+    clearInterval(timerInterval);
+    isTestRunning = false;
+    typingArea.disabled = true;
+    startBtn.disabled = false;
+    
+    const finalWpm = wpmEl.innerText;
+    const finalAccuracy = accuracyEl.innerText.replace('%', '');
+    
+    resultBox.style.display = "block";
+    
+    // JKSSB Eligibility Check
+    if(parseInt(finalWpm) >= 35 && parseInt(finalAccuracy) >= 90) {
+        resultBox.innerHTML = `🎉 TEST PASSED! <br> Your Speed: ${finalWpm} WPM | Accuracy: ${finalAccuracy}% <br> <span style="color:green;">Eligible for JKSSB Junior Assistant!</span>`;
+    } else {
+        resultBox.innerHTML = `❌ TEST FAILED! <br> Your Speed: ${finalWpm} WPM | Accuracy: ${finalAccuracy}% <br> <span style="color:red;">Requires min 35 WPM & 90% Accuracy. Keep Practicing!</span>`;
+    }
+}
+
+// Reset Test
+function resetTest() {
+    clearInterval(timerInterval);
+    isTestRunning = false;
+    timeLeft = 600;
+    timerEl.innerText = "10:00";
+    wpmEl.innerText = "0";
+    accuracyEl.innerText = "100%";
+    typingArea.value = "";
+    typingArea.disabled = true;
+    textDisplay.innerHTML = "Click 'Start Test' to load paragraph...";
+    startBtn.disabled = false;
+    resetBtn.disabled = true;
+    resultBox.style.display = "none";
+}
+
+startBtn.addEventListener('click', startTest);
+resetBtn.addEventListener('click', resetTest);
+</script>
+
+</body>
+</html>
