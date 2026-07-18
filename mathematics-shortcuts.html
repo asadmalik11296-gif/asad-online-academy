@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GQKGDNH2PF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GQKGDNH2PF');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <!-- YE DONO LINES ADD KARO -->
+    <link rel="stylesheet" href="style.css?v=1.0">
+    <script src="script.js?v=1.0"></script>
+    <title>Complete Mathematics Guide - JKSSB STUDIES</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        nav {
+            background-color: #1e3a8a;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: inline-block;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            background-color: #3b82f6;
+            border-radius: 5px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+        }
+
+        .toc {
+            background: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .toc h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+            columns: 2;
+        }
+
+        .toc li {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .toc li:before {
+            content: "▶ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-left: -15px;
+        }
+
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section h2 {
+            color: #1e3a8a;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #667eea;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .formula-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .formula-box strong {
+            color: #1e3a8a;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .example {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .example h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .solution {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .solution h4 {
+            color: #155724;
+            margin-bottom: 10px;
+        }
+
+        .practice-section {
+            background: #e7f3ff;
+            border-left: 4px solid #0066cc;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .practice-section h3 {
+            color: #0066cc;
+        }
+
+        .practice-question {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .practice-question p {
+            margin: 5px 0;
+        }
+
+        .answer {
+            background: #f0f0f0;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .answer:hover {
+            background: #e0e0e0;
+        }
+
+        .answer-content {
+            display: none;
+            margin-top: 10px;
+            background: #d4edda;
+            padding: 10px;
+            border-radius: 3px;
+            color: #155724;
+        }
+
+        .answer-content.show {
+            display: block;
+        }
+
+        .shortcut {
+            background: #fff9e6;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .shortcut strong {
+            color: #e65100;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .toc ul {
+                columns: 1;
+            }
+
+            nav a {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+        }
+    </style>
+      <!-- 💻 GOOGLE ADSENSE CODE INTEGRATION -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6086620349531765"
+     crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-6086620349531765">
+
+    <script src="https://quge5.com/88/tag.min.js" data-zone="259703" async data-cfasync="false"></script>
+
+    <!-- Anti AdBlock Integration Script -->
+<script src="/e26c86083b.php" async></script>
+</head>
+<body>
+    <nav>
+        <a href="index.html">← Home</a>
+        <a href="free-resources.html">← Back to Resources</a>
+    </nav>
+
+    <div class="container">
+        <a href="free-resources.html" class="back-link">← Back to Free Resources</a>
+
+        <div class="header">
+            <h1>🔢 Complete Mathematics Guide</h1>
+            <p>Master all mathematics topics with shortcuts for JKSSB & Competitive Exams</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h2>📑 Topics Covered</h2>
+            <ul>
+                <li><a href="#number">1. Number System</a></li>
+                <li><a href="#lcm">2. LCM & HCF</a></li>
+                <li><a href="#percentage">3. Percentage</a></li>
+                <li><a href="#profit">4. Profit & Loss</a></li>
+                <li><a href="#interest">5. Simple & Compound Interest</a></li>
+                <li><a href="#time">6. Time & Work</a></li>
+                <li><a href="#speed">7. Time, Speed & Distance</a></li>
+                <li><a href="#ratio">8. Ratio & Proportion</a></li>
+                <li><a href="#average">9. Average</a></li>
+                <li><a href="#algebra">10. Algebra Basics</a></li>
+            </ul>
+        </div>
+
+        <!-- 1. Number System -->
+        <div class="section" id="number">
+            <h2>1. 🔢 Number System</h2>
+
+            <h3>📌 Types of Numbers</h3>
+            <div class="formula-box">
+                <strong>Natural Numbers:</strong> 1, 2, 3, 4, ... (Positive integers)
+                <strong>Whole Numbers:</strong> 0, 1, 2, 3, ... (Natural + 0)
+                <strong>Integers:</strong> ..., -2, -1, 0, 1, 2, ... (Positive, negative, zero)
+                <strong>Prime Numbers:</strong> 2, 3, 5, 7, 11, 13, ... (Divisible only by 1 and itself)
+                <strong>Composite Numbers:</strong> 4, 6, 8, 9, 10, ... (Has more than 2 factors)
+            </div>
+
+            <h3>🎯 Quick Tricks</h3>
+            <div class="shortcut">
+                <strong>Divisibility Rules:</strong>
+                <p>• Divisible by 2: Last digit is even</p>
+                <p>• Divisible by 3: Sum of digits is divisible by 3</p>
+                <p>• Divisible by 5: Last digit is 0 or 5</p>
+                <p>• Divisible by 9: Sum of digits is divisible by 9</p>
+                <p>• Divisible by 11: Alternating sum of digits is divisible by 11</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>Is 1234 divisible by 3?</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>Sum of digits = 1+2+3+4 = 10</p>
+                    <p>10 is not divisible by 3</p>
+                    <p><strong>Answer: NO</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> Is 5432 divisible by 11?</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: YES</strong></p>
+                        <p>Alternating sum = 5-4+3-2 = 2 (Not divisible by 11)</p>
+                        <p>Actually: 5-4+3-2 = 2, so NO</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. LCM & HCF -->
+        <div class="section" id="lcm">
+            <h2>2. 📊 LCM & HCF</h2>
+
+            <h3>📌 Definitions</h3>
+            <div class="formula-box">
+                <strong>HCF (Highest Common Factor):</strong> Largest number that divides both numbers
+                <strong>LCM (Least Common Multiple):</strong> Smallest number divisible by both numbers
+                <strong>Formula:</strong> HCF × LCM = Product of two numbers
+            </div>
+
+            <h3>🎯 Finding LCM & HCF</h3>
+            <div class="shortcut">
+                <strong>Prime Factorization Method:</strong>
+                <p>• For HCF: Take common factors with lowest power</p>
+                <p>• For LCM: Take all factors with highest power</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>Find LCM and HCF of 12 and 18</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>12 = 2² × 3</p>
+                    <p>18 = 2 × 3²</p>
+                    <p>HCF = 2 × 3 = 6</p>
+                    <p>LCM = 2² × 3² = 36</p>
+                    <p><strong>Verify: 6 × 36 = 216 = 12 × 18 ✓</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> Find HCF of 24 and 36</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: 12</strong></p>
+                        <p>24 = 2³ × 3, 36 = 2² × 3²</p>
+                        <p>HCF = 2² × 3 = 12</p>
+                    </div>
+                </div>
+                <div class="practice-question">
+                    <p><strong>Q2:</strong> Find LCM of 15 and 20</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: 60</strong></p>
+                        <p>15 = 3 × 5, 20 = 2² × 5</p>
+                        <p>LCM = 2² × 3 × 5 = 60</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Percentage -->
+        <div class="section" id="percentage">
+            <h2>3. 📈 Percentage</h2>
+
+            <h3>📌 Basic Formula</h3>
+            <div class="formula-box">
+                <strong>Percentage = (Part / Whole) × 100</strong>
+                <strong>Part = (Percentage / 100) × Whole</strong>
+                <strong>Whole = (Part × 100) / Percentage</strong>
+            </div>
+
+            <h3>🎯 Percentage Change</h3>
+            <div class="shortcut">
+                <strong>Percentage Increase = ((New - Old) / Old) × 100</strong>
+                <strong>Percentage Decrease = ((Old - New) / Old) × 100</strong>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>If price increases from 100 to 120, what is the percentage increase?</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>Percentage Increase = ((120 - 100) / 100) × 100 = 20%</p>
+                    <p><strong>Answer: 20%</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> What is 25% of 200?</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: 50</strong></p>
+                        <p>(25/100) × 200 = 50</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Profit & Loss -->
+        <div class="section" id="profit">
+            <h2>4. 💰 Profit & Loss</h2>
+
+            <h3>📌 Basic Formulas</h3>
+            <div class="formula-box">
+                <strong>Profit = Selling Price - Cost Price</strong>
+                <strong>Loss = Cost Price - Selling Price</strong>
+                <strong>Profit % = (Profit / CP) × 100</strong>
+                <strong>Loss % = (Loss / CP) × 100</strong>
+                <strong>SP = CP + Profit</strong>
+            </div>
+
+            <h3>🎯 Quick Shortcuts</h3>
+            <div class="shortcut">
+                <strong>If profit is 20%: SP = CP × 1.20</strong>
+                <strong>If loss is 20%: SP = CP × 0.80</strong>
+                <strong>Marked Price (MP) - Discount = Selling Price</strong>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>CP = 100, Profit = 20%. Find SP.</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>SP = CP × (1 + 20/100) = 100 × 1.20 = 120</p>
+                    <p><strong>Answer: 120</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> CP = 500, SP = 600. Find profit %</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: 20%</strong></p>
+                        <p>Profit = 600 - 500 = 100</p>
+                        <p>Profit % = (100/500) × 100 = 20%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Simple & Compound Interest -->
+        <div class="section" id="interest">
+            <h2>5. 🏦 Simple & Compound Interest</h2>
+
+            <h3>📌 Formulas</h3>
+            <div class="formula-box">
+                <strong>Simple Interest = (P × R × T) / 100</strong>
+                <strong>Amount = P + SI</strong>
+                <strong>Compound Interest = P(1 + R/100)^T - P</strong>
+                <strong>Amount = P(1 + R/100)^T</strong>
+            </div>
+
+            <h3>🎯 Where:</h3>
+            <div class="shortcut">
+                <p>P = Principal (initial amount)</p>
+                <p>R = Rate of interest (% per annum)</p>
+                <p>T = Time (in years)</p>
+                <p>SI = Simple Interest</p>
+                <p>CI = Compound Interest</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>P = 1000, R = 10%, T = 2 years. Find SI and Amount.</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>SI = (1000 × 10 × 2) / 100 = 200</p>
+                    <p>Amount = 1000 + 200 = 1200</p>
+                    <p><strong>Answer: SI = 200, Amount = 1200</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> P = 5000, R = 5%, T = 3. Find CI</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: 788.13</strong></p>
+                        <p>Amount = 5000(1.05)³ = 5788.13</p>
+                        <p>CI = 5788.13 - 5000 = 788.13</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Time & Work -->
+        <div class="section" id="time">
+            <h2>6. ⏱️ Time & Work</h2>
+
+            <h3>📌 Basic Concept</h3>
+            <div class="formula-box">
+                <strong>Work = Rate × Time</strong>
+                <strong>If A does work in 'a' days, A's 1 day work = 1/a</strong>
+                <strong>If A and B work together: Combined work = 1/a + 1/b</strong>
+            </div>
+
+            <h3>🎯 Quick Method</h3>
+            <div class="shortcut">
+                <strong>If A completes work in 5 days and B in 10 days:</strong>
+                <p>A's work per day = 1/5</p>
+                <p>B's work per day = 1/10</p>
+                <p>Combined work per day = 1/5 + 1/10 = 3/10</p>
+                <p>Time to complete together = 10/3 days</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>A completes work in 6 days, B in 12 days. How long together?</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>A's work/day = 1/6, B's work/day = 1/12</p>
+                    <p>Combined = 1/6 + 1/12 = 3/12 = 1/4</p>
+                    <p>Time = 4 days</p>
+                    <p><strong>Answer: 4 days</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> A does work in 8 days, B in 16 days. Together?</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: 5.33 days (or 16/3 days)</strong></p>
+                        <p>Combined = 1/8 + 1/16 = 3/16</p>
+                        <p>Time = 16/3 days</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Time, Speed & Distance -->
+        <div class="section" id="speed">
+            <h2>7. 🚗 Time, Speed & Distance</h2>
+
+            <h3>📌 Basic Formula</h3>
+            <div class="formula-box">
+                <strong>Distance = Speed × Time</strong>
+                <strong>Speed = Distance / Time</strong>
+                <strong>Time = Distance / Speed</strong>
+            </div>
+
+            <h3>🎯 Unit Conversion</h3>
+            <div class="shortcut">
+                <strong>km/h to m/s: Multiply by 5/18</strong>
+                <strong>m/s to km/h: Multiply by 18/5</strong>
+                <strong>Example: 72 km/h = 72 × 5/18 = 20 m/s</strong>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>A car travels 300 km in 5 hours. Find speed.</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>Speed = Distance / Time = 300 / 5 = 60 km/h</p>
+                    <p><strong>Answer: 60 km/h</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> Speed = 45 km/h, Time = 2 hours. Distance?</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: 90 km</strong></p>
+                        <p>Distance = 45 × 2 = 90 km</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Ratio & Proportion -->
+        <div class="section" id="ratio">
+            <h2>8. ⚖️ Ratio & Proportion</h2>
+
+            <h3>📌 Definitions</h3>
+            <div class="formula-box">
+                <strong>Ratio:</strong> Comparison of two quantities (a:b)
+                <strong>Proportion:</strong> Equality of two ratios (a:b = c:d)
+                <strong>If a:b = c:d, then a×d = b×c (Cross multiplication)</strong>
+            </div>
+
+            <h3>🎯 Quick Tricks</h3>
+            <div class="shortcut">
+                <strong>If ratio is 2:3 and total is 50:</strong>
+                <p>First part = (2/(2+3)) × 50 = 20</p>
+                <p>Second part = (3/(2+3)) × 50 = 30</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>Divide 120 in ratio 3:5</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>First part = (3/8) × 120 = 45</p>
+                    <p>Second part = (5/8) × 120 = 75</p>
+                    <p><strong>Answer: 45 and 75</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> If 2:3 = x:15, find x</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: 10</strong></p>
+                        <p>2 × 15 = 3 × x</p>
+                        <p>30 = 3x, x = 10</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. Average -->
+        <div class="section" id="average">
+            <h2>9. 📊 Average</h2>
+
+            <h3>📌 Formula</h3>
+            <div class="formula-box">
+                <strong>Average = Sum of all values / Number of values</strong>
+                <strong>Sum = Average × Number of values</strong>
+            </div>
+
+            <h3>🎯 Quick Tricks</h3>
+            <div class="shortcut">
+                <strong>Average of consecutive numbers = (First + Last) / 2</strong>
+                <strong>Average of 1 to n = (n+1) / 2</strong>
+                <strong>Average of 1 to 100 = 50.5</strong>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>Average of 10, 20, 30, 40, 50</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>Sum = 10+20+30+40+50 = 150</p>
+                    <p>Average = 150 / 5 = 30</p>
+                    <p><strong>Answer: 30</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> Average of 5 numbers is 20. What is their sum?</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: 100</strong></p>
+                        <p>Sum = 20 × 5 = 100</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. Algebra Basics -->
+        <div class="section" id="algebra">
+            <h2>10. 📐 Algebra Basics</h2>
+
+            <h3>📌 Important Formulas</h3>
+            <div class="formula-box">
+                <strong>(a + b)² = a² + 2ab + b²</strong>
+                <strong>(a - b)² = a² - 2ab + b²</strong>
+                <strong>(a + b)(a - b) = a² - b²</strong>
+                <strong>(a + b)³ = a³ + 3a²b + 3ab² + b³</strong>
+                <strong>a³ + b³ = (a + b)(a² - ab + b²)</strong>
+                <strong>a³ - b³ = (a - b)(a² + ab + b²)</strong>
+            </div>
+
+            <h3>🎯 Solving Linear Equations</h3>
+            <div class="shortcut">
+                <strong>General form: ax + b = c</strong>
+                <p>Solution: x = (c - b) / a</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>Solve: 2x + 5 = 15</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>2x = 15 - 5 = 10</p>
+                    <p>x = 10 / 2 = 5</p>
+                    <p><strong>Answer: x = 5</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> Expand (a + 3)²</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: a² + 6a + 9</strong></p>
+                        <p>(a + 3)² = a² + 2(a)(3) + 3² = a² + 6a + 9</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 JKSSB STUDIES | Complete Mathematics Guide for Competitive Exams</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleAnswer(element) {
+            const answerContent = element.nextElementSibling;
+            if (answerContent && answerContent.classList.contains('answer-content')) {
+                answerContent.classList.toggle('show');
+                element.textContent = answerContent.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+            }
+        }
+    </script>
+</body>
+</html>
