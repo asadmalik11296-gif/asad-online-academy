@@ -8,7 +8,7 @@
     <title>JKSSB All Free Mock Tests Hub</title>
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GQKGDNH2PF"></script>
+    <script async src="https://googletagmanager.com"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -17,8 +17,8 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css?v=1.7">
-    <script src="script.js?v=1.7"></script>
+    <link rel="stylesheet" href="style.css?v=1.8">
+    <script src="script.js?v=1.8"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
         body { background-color: #f8fafc; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
@@ -42,7 +42,6 @@
             border-radius: 30px;
             font-weight: 600;
             font-size: 0.95rem;
-            color: #ffffff !important; /* Force text to be white for colored buttons */
             width: 85%;
             text-align: center;
             transition: transform 0.2s, box-shadow 0.2s;
@@ -52,13 +51,18 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
+        /* Colored buttons text color logic */
+        .btn-ahto, .btn-faa, .btn-supervisor, .btn-jkpsi, .btn-back {
+            color: #ffffff !important;
+        }
+
         /* Custom color layouts for differentiation profiles */
         .btn-ahto { background-color: #0284c7; }
         .btn-faa { background-color: #0f172a; }
         .btn-supervisor { background-color: #16a34a; }
         .btn-jkpsi { background-color: #16a34b; }
         
-        /* 🩺 Staff Nurse White Button Style */
+        /* 🩺 Staff Nurse White Button Style (FIXED TEXT COLOR HERE) */
         .btn-staffnurse { 
             background-color: #ffffff !important; 
             color: #334155 !important; 
@@ -72,7 +76,7 @@
         .btn-back { background-color: #64748b; margin-bottom: 10px; }
     </style>
     <!-- 💻 GOOGLE ADSENSE CODE INTEGRATION -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6086620349531765" crossorigin="anonymous"></script>
+    <script async src="https://googlesyndication.com" crossorigin="anonymous"></script>
     <meta name="google-adsense-account" content="ca-pub-6086620349531765">
 </head>
 <body>
@@ -91,10 +95,10 @@
             <!-- 3. Female Social Welfare Supervisor Target Link Entry -->
             <a href="jkssb-female-supervisor-mock-test.html" onclick="this.href='jkssb-female-supervisor-mock-test.html?cb=' + new Date().getTime();" class="btn-supervisor">👩‍🎓 JKSSB SUPERVISOR Free Mock Test</a>
 
-            <!-- 4. Staff Nurse Target Link Entry -->
-            <a href="jkssb-staff-nurse-full-mock-test.html" onclick="this.href='jkssb-staff-nurse-full-mock-test.html?cb=' + new Date().getTime();" class="btn-staffnurse">👩‍🎓 JKSSB STAFF NURSE Free Mock Test</a>
+            <!-- 4. Staff Nurse Target Link Entry (Fixed Text Visibility) -->
+            <a href="jkssb-staff-nurse-full-mock-test.html" onclick="this.href='jkssb-staff-nurse-full-mock-test.html?cb=' + new Date().getTime();" class="btn-staffnurse">🩺 JKSSB STAFF NURSE Free Mock Test</a>
             
-            <!-- 5. JKPSI Corrected Button Link Entry (Fixed Text Color and Cache Parameter) -->
+            <!-- 5. JKPSI Corrected Button Link Entry -->
             <a href="jkssb-jkpsi-full-mock-test.html" onclick="this.href='jkssb-jkpsi-full-mock-test.html?cb=' + new Date().getTime();" class="btn-jkpsi">🚨 JKSSB JKPSI Free Mock Test</a>
 
             <hr style="margin: 25px auto; width: 85%; border: 0; border-top: 1px dashed #cbd5e1;">
