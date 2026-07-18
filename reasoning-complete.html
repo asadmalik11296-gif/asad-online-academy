@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GQKGDNH2PF"></script>
+<script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <!-- YE DONO LINES ADD KARO -->
+    <link rel="stylesheet" href="style.css?v=1.0">
+    <script src="script.js?v=1.0"></script>
+    <title>Complete Reasoning Guide - JKSSB STUDIES</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        nav {
+            background-color: #1e3a8a;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: inline-block;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            background-color: #3b82f6;
+            border-radius: 5px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+        }
+
+        .toc {
+            background: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .toc h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+            columns: 2;
+        }
+
+        .toc li {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .toc li:before {
+            content: "▶ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-left: -15px;
+        }
+
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section h2 {
+            color: #1e3a8a;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #667eea;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .trick-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .trick-box strong {
+            color: #1e3a8a;
+        }
+
+        .example {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .example h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .solution {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .solution h4 {
+            color: #155724;
+            margin-bottom: 10px;
+        }
+
+        .practice-section {
+            background: #e7f3ff;
+            border-left: 4px solid #0066cc;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .practice-section h3 {
+            color: #0066cc;
+        }
+
+        .practice-question {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .practice-question p {
+            margin: 5px 0;
+        }
+
+        .answer {
+            background: #f0f0f0;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .answer:hover {
+            background: #e0e0e0;
+        }
+
+        .answer-content {
+            display: none;
+            margin-top: 10px;
+            background: #d4edda;
+            padding: 10px;
+            border-radius: 3px;
+            color: #155724;
+        }
+
+        .answer-content.show {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .toc ul {
+                columns: 1;
+            }
+
+            nav a {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+        }
+    </style>
+      </style>
+    <!-- 💻 GOOGLE ADSENSE CODE INTEGRATION -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6086620349531765"
+     crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-6086620349531765">
+
+    <script src="https://quge5.com/88/tag.min.js" data-zone="259703" async data-cfasync="false"></script>
+</head>
+<body>
+    <nav>
+        <a href="index.html">← Home</a>
+        <a href="free-resources.html">← Back to Resources</a>
+    </nav>
+
+    <div class="container">
+        <a href="free-resources.html" class="back-link">← Back to Free Resources</a>
+
+        <div class="header">
+            <h1>🧩 Complete Reasoning Guide</h1>
+            <p>Master all reasoning topics for JKSSB, JKPSC & Competitive Exams</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h2>📑 Topics Covered</h2>
+            <ul>
+                <li><a href="#coding">1. Coding-Decoding</a></li>
+                <li><a href="#syllogism">2. Syllogism</a></li>
+                <li><a href="#blood">3. Blood Relations</a></li>
+                <li><a href="#direction">4. Direction Sense</a></li>
+                <li><a href="#analogy">5. Analogy</a></li>
+                <li><a href="#classification">6. Classification</a></li>
+                <li><a href="#series">7. Series</a></li>
+                <li><a href="#oddone">8. Odd One Out</a></li>
+                <li><a href="#statement">9. Statement & Conclusion</a></li>
+                <li><a href="#logical">10. Logical Deduction</a></li>
+            </ul>
+        </div>
+
+        <!-- 1. Coding-Decoding -->
+        <div class="section" id="coding">
+            <h2>1. 🔐 Coding-Decoding</h2>
+
+            <h3>📌 Definition</h3>
+            <p>Coding-Decoding involves finding patterns in how letters or numbers are transformed. Identify the rule and apply it to find the answer.</p>
+
+            <h3>🎯 Trick 1: Position-Based Coding (Shift Cipher)</h3>
+            <div class="trick-box">
+                <strong>Rule:</strong> Each letter is replaced by the letter at a fixed distance from it in the alphabet.
+                <p style="margin-top: 10px;"><strong>Method:</strong> A=1, B=2, C=3... Z=26</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>If HELLO is coded as IFMMP, code WORLD.</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>H→I (+1), E→F (+1), L→M (+1), L→M (+1), O→P (+1)</p>
+                    <p>Pattern: +1 shift</p>
+                    <p>W→X, O→P, R→S, L→M, D→E</p>
+                    <p><strong>Answer: XPSME</strong></p>
+                </div>
+            </div>
+
+            <h3>🎯 Trick 2: Reverse Alphabet (A↔Z)</h3>
+            <div class="trick-box">
+                <strong>Formula:</strong> New Position = 27 - Original Position
+                <p style="margin-top: 10px;">A↔Z, B↔Y, C↔X, D↔W, etc.</p>
+            </div>
+
+            <h3>🎯 Trick 3: Number-Based Coding</h3>
+            <div class="trick-box">
+                <strong>Rule:</strong> Letters replaced by numbers (A=1, B=2, ... Z=26)
+            </div>
+
+            <h3>🎯 Trick 4: Keyboard Coding</h3>
+            <div class="trick-box">
+                <strong>Rule:</strong> Letters replaced by adjacent keys on keyboard
+                <p style="margin-top: 10px;">Example: A→S, B→V, C→X</p>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> If APPLE is coded as BQQMF, code ORANGE.</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: PSBOHF</strong></p>
+                        <p>Each letter shifts by +1</p>
+                    </div>
+                </div>
+                <div class="practice-question">
+                    <p><strong>Q2:</strong> If BOOK = 2-15-15-11, what is DOOR?</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: 4-15-15-18</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Syllogism -->
+        <div class="section" id="syllogism">
+            <h2>2. 🎯 Syllogism</h2>
+
+            <h3>📌 Definition</h3>
+            <p>Two premises lead to a conclusion. Determine if the conclusion is valid based on the given statements.</p>
+
+            <h3>🎯 Types of Statements</h3>
+            <div class="trick-box">
+                <p><strong>1. Universal Affirmative (A):</strong> All A are B</p>
+                <p><strong>2. Universal Negative (E):</strong> No A are B</p>
+                <p><strong>3. Particular Affirmative (I):</strong> Some A are B</p>
+                <p><strong>4. Particular Negative (O):</strong> Some A are not B</p>
+            </div>
+
+            <h3>🎯 Rules of Syllogism</h3>
+            <div class="trick-box">
+                <p>1. Middle term must be distributed at least once</p>
+                <p>2. No term can be distributed in conclusion if not in premise</p>
+                <p>3. From two negative premises, no conclusion</p>
+                <p>4. If one premise is negative, conclusion must be negative</p>
+                <p>5. From two particular premises, no conclusion</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p><strong>Premise 1:</strong> All dogs are animals</p>
+                <p><strong>Premise 2:</strong> All animals need food</p>
+                <p><strong>Conclusion:</strong> All dogs need food</p>
+                <div class="solution">
+                    <h4>Answer: TRUE</h4>
+                    <p>Logically valid - follows all rules</p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> All teachers are educated. Some educated are doctors. Conclusion: Some teachers are doctors.</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: NOT NECESSARILY TRUE</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Blood Relations -->
+        <div class="section" id="blood">
+            <h2>3. 👨‍👩‍👧 Blood Relations</h2>
+
+            <h3>📌 Definition</h3>
+            <p>Identify family relationships based on given information.</p>
+
+            <h3>🎯 Quick Reference</h3>
+            <div class="trick-box">
+                <p><strong>Paternal Side:</strong> Father's father = Grandfather, Father's mother = Grandmother, Father's brother = Uncle, Father's sister = Aunt</p>
+                <p style="margin-top: 10px;"><strong>Maternal Side:</strong> Mother's brother = Uncle, Mother's sister = Aunt, Mother's father = Grandfather, Mother's mother = Grandmother</p>
+                <p style="margin-top: 10px;"><strong>Siblings:</strong> Brother's wife = Sister-in-law, Sister's husband = Brother-in-law</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>A is mother of B. C is father of A. What is B to C?</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>A = mother of B → B is child of A</p>
+                    <p>C = father of A → A is child of C</p>
+                    <p><strong>Answer: C is grandfather of B</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> Pointing to a man, a woman said, "His mother is my mother's only daughter." Relationship?</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: The man is her son</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Direction Sense -->
+        <div class="section" id="direction">
+            <h2>4. 🧭 Direction Sense</h2>
+
+            <h3>📌 Definition</h3>
+            <p>Track movements and determine final positions and directions.</p>
+
+            <h3>🎯 Standard Directions</h3>
+            <div class="trick-box">
+                <p>North (N) = Up, South (S) = Down, East (E) = Right, West (W) = Left</p>
+                <p style="margin-top: 10px;">NE = Up-Right, NW = Up-Left, SE = Down-Right, SW = Down-Left</p>
+            </div>
+
+            <h3>🎯 Distance Formula</h3>
+            <div class="trick-box">
+                <strong>Pythagoras Theorem:</strong> Distance = √(x² + y²)
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>A man goes 10 km North, 5 km East, 10 km South. Where is he?</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>North and South cancel out. Only 5 km East remains.</p>
+                    <p><strong>Answer: 5 km East of starting point</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> A goes 4 km East, then 3 km North. Shortest distance?</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: 5 km</strong></p>
+                        <p>√(4² + 3²) = √25 = 5 km</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Analogy -->
+        <div class="section" id="analogy">
+            <h2>5. 🔗 Analogy (समानता)</h2>
+
+            <h3>📌 Definition</h3>
+            <p>Find the relationship between two pairs of words and apply the same relationship to find the missing word.</p>
+
+            <h3>🎯 Common Relationships</h3>
+            <div class="trick-box">
+                <p><strong>1. Synonym:</strong> Happy : Joyful</p>
+                <p><strong>2. Antonym:</strong> Hot : Cold</p>
+                <p><strong>3. Part-to-Whole:</strong> Finger : Hand</p>
+                <p><strong>4. Cause-Effect:</strong> Fire : Smoke</p>
+                <p><strong>5. Object-Purpose:</strong> Knife : Cut</p>
+                <p><strong>6. Category:</strong> Rose : Flower</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>Doctor : Hospital :: Teacher : ?</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>Doctor works in Hospital, similarly Teacher works in School</p>
+                    <p><strong>Answer: School</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> Lion : Roar :: Dog : ?</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: Bark</strong></p>
+                    </div>
+                </div>
+                <div class="practice-question">
+                    <p><strong>Q2:</strong> Pen : Write :: Knife : ?</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: Cut</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Classification -->
+        <div class="section" id="classification">
+            <h2>6. 📂 Classification (वर्गीकरण)</h2>
+
+            <h3>📌 Definition</h3>
+            <p>Find the odd one out or group items based on common characteristics.</p>
+
+            <h3>🎯 Common Classification Types</h3>
+            <div class="trick-box">
+                <p><strong>1. By Category:</strong> Apple, Mango, Carrot (Carrot is vegetable)</p>
+                <p><strong>2. By Property:</strong> 2, 4, 6, 9 (9 is odd)</p>
+                <p><strong>3. By Function:</strong> Chair, Table, Bed, Pen (Pen is for writing)</p>
+                <p><strong>4. By Origin:</strong> Tiger, Lion, Cow, Eagle (Cow is domestic)</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>Which is odd? Rose, Jasmine, Sunflower, Carrot</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>Rose, Jasmine, Sunflower are flowers. Carrot is a vegetable.</p>
+                    <p><strong>Answer: Carrot</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> Which is odd? 5, 10, 15, 22</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: 22</strong></p>
+                        <p>5, 10, 15 are multiples of 5. 22 is not.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Series -->
+        <div class="section" id="series">
+            <h2>7. 📊 Series (श्रृंखला)</h2>
+
+            <h3>📌 Definition</h3>
+            <p>Find the pattern in a sequence and complete it.</p>
+
+            <h3>🎯 Common Series Types</h3>
+            <div class="trick-box">
+                <p><strong>1. Arithmetic:</strong> 2, 4, 6, 8, 10 (difference = 2)</p>
+                <p><strong>2. Geometric:</strong> 2, 4, 8, 16, 32 (multiply by 2)</p>
+                <p><strong>3. Fibonacci:</strong> 1, 1, 2, 3, 5, 8 (sum of previous two)</p>
+                <p><strong>4. Square/Cube:</strong> 1, 4, 9, 16, 25 (1², 2², 3², 4², 5²)</p>
+                <p><strong>5. Letter Series:</strong> A, C, E, G, I (skip one letter)</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>2, 4, 8, 16, ?</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>Each number is multiplied by 2</p>
+                    <p>16 × 2 = 32</p>
+                    <p><strong>Answer: 32</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> 1, 1, 2, 3, 5, 8, ?</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: 13</strong></p>
+                        <p>Fibonacci series: 5 + 8 = 13</p>
+                    </div>
+                </div>
+                <div class="practice-question">
+                    <p><strong>Q2:</strong> 1, 4, 9, 16, 25, ?</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: 36</strong></p>
+                        <p>Perfect squares: 6² = 36</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Odd One Out -->
+        <div class="section" id="oddone">
+            <h2>8. ❌ Odd One Out</h2>
+
+            <h3>📌 Definition</h3>
+            <p>Identify the item that doesn't belong with others.</p>
+
+            <h3>🎯 Strategy</h3>
+            <div class="trick-box">
+                <p>1. Look for common characteristics</p>
+                <p>2. Check category, type, property, function</p>
+                <p>3. Find what makes one different</p>
+                <p>4. Verify your answer</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p>Sparrow, Eagle, Penguin, Fish</p>
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    <p>Sparrow, Eagle, Penguin are birds. Fish is not a bird.</p>
+                    <p><strong>Answer: Fish</strong></p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> Delhi, Mumbai, Chennai, India</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: India</strong></p>
+                        <p>Delhi, Mumbai, Chennai are cities. India is a country.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. Statement & Conclusion -->
+        <div class="section" id="statement">
+            <h2>9. 📝 Statement & Conclusion</h2>
+
+            <h3>📌 Definition</h3>
+            <p>Read a statement and determine if the given conclusions logically follow.</p>
+
+            <h3>🎯 Key Points</h3>
+            <div class="trick-box">
+                <p>1. Only use information given in the statement</p>
+                <p>2. Don't assume facts not mentioned</p>
+                <p>3. Check if conclusion is definitely true, probably true, or false</p>
+                <p>4. Look for keywords: "All", "Some", "No", "Only"</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p><strong>Statement:</strong> All flowers are plants.</p>
+                <p><strong>Conclusion:</strong> All plants are flowers.</p>
+                <div class="solution">
+                    <h4>Answer: FALSE</h4>
+                    <p>Just because all flowers are plants doesn't mean all plants are flowers.</p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> Statement: All doctors are educated. Conclusion: All educated people are doctors.</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: FALSE</strong></p>
+                        <p>Not all educated people are doctors.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. Logical Deduction -->
+        <div class="section" id="logical">
+            <h2>10. 🧠 Logical Deduction</h2>
+
+            <h3>📌 Definition</h3>
+            <p>Use logical reasoning to deduce conclusions from given premises.</p>
+
+            <h3>🎯 Common Logical Patterns</h3>
+            <div class="trick-box">
+                <p><strong>1. If-Then Logic:</strong> If A then B. A is true. Therefore B is true.</p>
+                <p><strong>2. Either-Or:</strong> Either A or B. A is false. Therefore B is true.</p>
+                <p><strong>3. Negation:</strong> Not A is true. Therefore A is false.</p>
+            </div>
+
+            <div class="example">
+                <h4>Example:</h4>
+                <p><strong>Statement 1:</strong> If it rains, the ground will be wet.</p>
+                <p><strong>Statement 2:</strong> It rained yesterday.</p>
+                <p><strong>Conclusion:</strong> The ground was wet yesterday.</p>
+                <div class="solution">
+                    <h4>Answer: TRUE</h4>
+                    <p>Logically valid deduction.</p>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3>✍️ Practice Questions</h3>
+                <div class="practice-question">
+                    <p><strong>Q1:</strong> If all A are B, and all B are C, then all A are C.</p>
+                    <div class="answer" onclick="toggleAnswer(this)">Show Answer</div>
+                    <div class="answer-content">
+                        <p><strong>Answer: TRUE</strong></p>
+                        <p>Valid logical deduction (Transitive property)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 JKSSB STUDIES | Complete Reasoning Guide for Competitive Exams</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleAnswer(element) {
+            const answerContent = element.nextElementSibling;
+            if (answerContent && answerContent.classList.contains('answer-content')) {
+                answerContent.classList.toggle('show');
+                element.textContent = answerContent.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+            }
+        }
+    </script>
+</body>
+</html>
